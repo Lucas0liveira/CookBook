@@ -16,7 +16,7 @@ export default function Home() {
     {
         return (
             <>
-                <Navbar variant="dark" fixed="top" expand="lg">
+                <Navbar variant="dark" expand="lg">
                     <Navbar.Brand href="/">
                         <img src={logoImg} alt="" />
                     </Navbar.Brand>
@@ -50,8 +50,6 @@ export default function Home() {
                         </Form>
                     </Navbar.Collapse>
                 </Navbar>
-
-
 
                 <div class="container" id="submit">
                     <h2 class="title-section">As mais bem avaliadas</h2>

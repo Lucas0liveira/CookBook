@@ -3,7 +3,7 @@ body {
 }
 
 .container {
-    height: fit-content;
+    height: auto;
     min-height: 200vh;
     width: 100vw;
     padding-top: 15px;
@@ -69,7 +69,7 @@ body {
     border-radius: 10px;
 }
 
-.btn-flat#submit{
+.btn-flat#submitnav{
     background-color: rgb(255, 8, 8);
     width: 80%;
     margin-top: 8px;
@@ -106,3 +106,4 @@ body {
 .form-control .placeHolder {
     color: #ff0000;
  }
+
