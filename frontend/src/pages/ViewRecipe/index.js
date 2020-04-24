@@ -22,7 +22,7 @@ export default function ViewRecipe() {
         return (
             <>
                 <Navbar variant="dark" fixed="top" expand="lg">
-                    <Navbar.Brand href="#home">
+                    <Navbar.Brand href="/">
                         <img src={logoImg} alt="" />
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -34,7 +34,7 @@ export default function ViewRecipe() {
                                 <FaSearch size={20} color="#FF0000" fontWeight="bolder" />
                             </Button>
 
-                            <Nav.Link href="#home" >Início</Nav.Link>
+                            <Nav.Link href="/" >Início</Nav.Link>
                             <NavDropdown title="Receitas" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1" variant="dark">Asiática</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">Brasileira</NavDropdown.Item>
@@ -65,7 +65,6 @@ export default function ViewRecipe() {
                         <Row>
                             <Col>
                                 <Card>
-
                                     <Card.Img src={hamburguer} alt="" />
                                     <Form>
                                         <Form.File
@@ -77,7 +76,6 @@ export default function ViewRecipe() {
                                         />
                                     </Form>
                                 </Card>
-
                                 <Button variant="flat" id="save">Salvar <FaBookmark size={20} color="#FFF" fontWeight="bolder" /> </Button>
                             </Col>
                             <Col>
@@ -89,14 +87,10 @@ export default function ViewRecipe() {
                                 </Row>
                                 <Row>
 
-                                    <Badge pill variant="secondary">
-                                        15
-                        </Badge>{' '}
+                                    <Badge pill variant="secondary"> 15 </Badge>{' '}
 
 
-                                    <Badge pill variant="secondary">
-                                        Min
-                        </Badge>{' '}
+                                    <Badge pill variant="secondary"> Min  </Badge>{' '}
 
                                     <FaClock size={20} color="#FF0000" fontWeight="bolder" />
 
