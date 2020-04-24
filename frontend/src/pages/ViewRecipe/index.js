@@ -42,7 +42,7 @@ export default function ViewRecipe() {
                                 <NavDropdown.Item href="#action/3.4">Pratos rápidas</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.5">Low Carb</NavDropdown.Item>
                             </NavDropdown>
-                            <Button id="submitnav" variant="flat">
+                            <Button id="submitnav" variant="flat" href="http://localhost:3000/recipe/submit">
                                 Submeter receita
                             </Button>
                         </Nav>
