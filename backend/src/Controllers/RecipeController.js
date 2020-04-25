@@ -79,5 +79,18 @@ module.exports = {
 
         await connection('recipes').where('id', id).delete()
         return response.status(204).send()
+    },
+
+    async edit(request, response) {
+        const { id, name, description, prepare, image, video } = request.body
+
+        await connection('recipe').where('id', id).update({
+            name: name,
+            description: description,
+            prepare: prepare,
+            image: image,
+            video: video
+        })
+
     }
 }

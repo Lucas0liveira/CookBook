@@ -5,7 +5,7 @@ module.exports = {
     //função que adiciona um nov usuario ao banco
     async create(request, response) {
         //necessita de nome email e senha
-        const { name, email, password, professional } = request.body
+        const { name, email, password } = request.body
 
 
         try {
@@ -13,29 +13,33 @@ module.exports = {
             await connection('users').insert({
                 name,
                 email,
-                password,
-                professional
+                password
             })
-
-            //busca id do usuario
-            const id = await connection('users').select('id').where({
-                email: email,
-                password: password
-            }).first()
-
-
-
         } catch (e) {
-            //caso haja algum erro é retornado uma mensagem informando que não foi possivel adiconar o usuario
-            return response.json({ erro: "não foi possivel registrar o usuario" })
+            return response.json({ error: 'erro ao criar usuario' })
         }
 
-        //TODO read later
+
+        //busca id do usuario
+        const id = await connection('users').select('id').where({
+            email: email,
+            password: password
+        }).first()
+
+        try {
+            //cria a pasta read later para o usuario
+            const user_id = id.id
+            const folder_name = "read later"
+            await connection('folders').insert({
+                folder_name,
+                user_id
+            })
+        } catch (e) {
+            return response.json({ error: 'não foi possivel adicionar a pasta folder para o usuario criado', id })
+        }
 
         //caso não haja problemas é retornado o id no novo usuário
-        return response.json({ id })
-
-
+        return response.json(id)
     },
 
     //função que realia o loguin de um usuario

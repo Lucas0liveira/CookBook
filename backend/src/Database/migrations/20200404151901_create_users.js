@@ -4,7 +4,6 @@ exports.up = function(knex) {
         table.string('name').notNullable()
         table.string('email').notNullable()
         table.string('password').notNullable().unique()
-        table.boolean('professional').notNullable()
     })
 
 };

@@ -5,10 +5,13 @@ const CategoryController = require('./Controllers/CategoryController')
 const FolderController = require('./Controllers/FolderController')
 const CommentsController = require('./Controllers/CommentsController')
 const RecipeController = require('./Controllers/RecipeController')
+const InitializeDatabase = require('./Controllers/InitializeDatabase')
 
+//inicia o banco com as categorias
+routes.get('/startup', InitializeDatabase.databaseStart)
 
 //lista de rotas reacianoada a loguin e usuários
-routes.post('/signin', UserController.create)
+routes.post('/singin', UserController.create)
 routes.post('/login', UserController.login)
 routes.get('/users', UserController.index)
 
