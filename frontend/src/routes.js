@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import SubmitRecipe from './pages/SubmitRecipe'
 import Template from './pages/Template'
 import Login from './pages/Login'
+import ViewRecipe from './pages/ViewRecipe'
 
 //switch garante que apenas uma rota sera chamada por momento
 //exact faz com que entre no rota só se for exatamente essa a url
@@ -14,9 +15,10 @@ export default function Routes() {
         <BrowserRouter>
             <Switch>
                 <Route path="/" exact component={Home}></Route>
-                <Route path="/recipes" component={SubmitRecipe}></Route>
+                <Route path="/recipe/submit" component={SubmitRecipe}></Route>
                 <Route path="/template" component={Template}></Route>
                 <Route path="/login" component={Login}></Route>
+                <Route path="/recipe" component={ViewRecipe}></Route>
             </Switch>
         </BrowserRouter>
     )

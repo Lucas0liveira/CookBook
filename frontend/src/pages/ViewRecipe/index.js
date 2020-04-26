@@ -42,7 +42,7 @@ export default function ViewRecipe() {
                                 <NavDropdown.Item href="#action/3.4">Pratos rápidas</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.5">Low Carb</NavDropdown.Item>
                             </NavDropdown>
-                            <Button id="submitnav" variant="flat">
+                            <Button id="submitnav" variant="flat" href="http://localhost:3000/recipe/submit">
                                 Submeter receita
                             </Button>
                         </Nav>
@@ -65,7 +65,6 @@ export default function ViewRecipe() {
                         <Row>
                             <Col>
                                 <Card>
-
                                     <Card.Img src={hamburguer} alt="" />
                                     <Form>
                                         <Form.File
@@ -77,7 +76,6 @@ export default function ViewRecipe() {
                                         />
                                     </Form>
                                 </Card>
-
                                 <Button variant="flat" id="save">Salvar <FaBookmark size={20} color="#FFF" fontWeight="bolder" /> </Button>
                             </Col>
                             <Col>
@@ -89,14 +87,10 @@ export default function ViewRecipe() {
                                 </Row>
                                 <Row>
 
-                                    <Badge pill variant="secondary">
-                                        15
-                        </Badge>{' '}
+                                    <Badge pill variant="secondary"> 15 </Badge>{' '}
 
 
-                                    <Badge pill variant="secondary">
-                                        Min
-                        </Badge>{' '}
+                                    <Badge pill variant="secondary"> Min  </Badge>{' '}
 
                                     <FaClock size={20} color="#FF0000" fontWeight="bolder" />
 
