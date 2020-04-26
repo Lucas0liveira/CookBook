@@ -15,7 +15,7 @@ module.exports = {
             return response.json({ id })
         } catch (err) {
             //caso haja algum erro será enviada uma mensagem de erro
-            return response.json({ error: "Não foi possivel criar pasta" })
+            return response.json({ error: "Não foi possível criar pasta" })
         }
     },
 
@@ -32,7 +32,7 @@ module.exports = {
 
         //deleta a pasta com o id que foi passado
         await connection('folders').where('id', id).delete()
-        return response.status(204).send(s)
+        return response.status(204).send()
     },
 
     //função para adicionar uma receita a uma pasta
@@ -50,7 +50,7 @@ module.exports = {
             return response.json({ id })
         } catch (err) {
             //caso haja um erro uma mensagem é enviada comunicamdo que não foi possivel adicionar a receia a pasta
-            return response.json({ error: "Não foi possivel adicionar a receita na pasta" })
+            return response.json({ error: "Não foi possível adicionar a receita na pasta" })
         }
 
     },
