@@ -3,9 +3,11 @@ body {
 }
 
 .container {
-    height: 200vh;
+    height: auto;
+    min-height: 200vh;
     width: 100vw;
     padding-top: 15px;
+    padding-bottom: 15px;
     margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
@@ -17,9 +19,30 @@ body {
     background-size: contain;
 }
 
+.container#submit{
+    height: 55%;
+    width: 90%;
+    padding-top: 15px;
+    margin-top: 60%;
+    margin-bottom: 10%;
+    border-radius: 10px;
+    background-image: none;
+    background-color: #ffffff;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+    box-shadow: 0 14px 28px rgba(255, 255, 255, 0.25), 0 10px 10px rgba(255, 255, 255, 0.22);
+}
+
 .btn-flat {
     background-color: red;
     color: white;
+}
+
+.btn-flat#submitnav{
+    margin-left: 350px;
+    width: 100%;
+    border-radius: 10px;
 }
 
 .btn-flat#login {
@@ -31,6 +54,37 @@ body {
 .btn-flat#search{
     width: 50px;
   background-color: white;
+}
+
+.btn-flat#add{
+    background-color: white;
+    margin-left: 150px;
+    border-radius: 100px;
+}
+
+.btn-flat#save{
+    background-color: rgb(255, 8, 8);
+    margin-top: 8px;
+    margin-left: 210px;
+    border-radius: 10px;
+}
+
+.btn-flat#submitnav{
+    background-color: rgb(255, 8, 8);
+    width: 80%;
+    margin-top: 8px;
+    margin-left: 70px;
+    border-radius: 10px;
+}
+
+.title-section{
+    font-weight: 380;
+    margin-top: 8%;
+    margin-bottom: 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   color: black;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -52,3 +106,4 @@ body {
 .form-control .placeHolder {
     color: #ff0000;
  }
+
