@@ -8,6 +8,8 @@ CookBook é um catálogo de receitas com aspectos de rede social. A ideia é que
 
 No CookBook é possível encontrar receitas publicadas por outros usuários e salvá-las em seu próprio Livro de Receitas. É possível também publicar suas receitas e salvar livros de outros usuários.
 
+Documentação e Informações sobre o projeto em https://www.notion.so/Prog-Web-Assignment-4748a9279ed448ca9c4697c34af8c43d
+
 
 
 ## Pré-requisitos
