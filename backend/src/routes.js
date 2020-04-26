@@ -27,7 +27,7 @@ routes.post('/folders', FolderController.create)
 routes.get('/folders', FolderController.index)
 routes.delete('/folders/:id', FolderController.delete)
 routes.post('/folder/add', FolderController.recipeOnFolder)
-routes.get('/recipies/folder', FolderController.recipeOfFolder)
+routes.get('/recipes/folder', FolderController.recipeOfFolder)
 
 //lista de rotas para categorias
 routes.post('/categories', CategoryController.create)
@@ -37,7 +37,6 @@ routes.delete('/categories/:id', CategoryController.delete)
 //lista de rotas para comentarios
 routes.post('/comments', CommentsController.addComment)
 routes.get('/comments/:id', CommentsController.getComments)
-routes.post('/folder_content', FolderController.recipeOnFolder)
 
 
 module.exports = routes
