@@ -66,6 +66,7 @@ module.exports = {
     },
 
     //função que retorna receitas fintradas por uma caregoria
+    //TODO refatorar para suportar novo modelo de receita
     async filtered(request, response) {
         const { category } = request.params
 
@@ -77,11 +78,8 @@ module.exports = {
     async delete(request, response) {
         const { id } = request.params
 
-        try {
-            await connection('recipes').where('id', id).delete()
-        } catch (e) {
-            return response.json({ erro: 'não foi possível remover a receita' })
-        }
+        await connection('ingredients').where('recipe_id', id).del()
+        await connection('recipes').where('id', id).del()
         return response.status(204).send()
     },
 
@@ -101,5 +99,40 @@ module.exports = {
         }
         return response.json(id)
 
+    },
+
+    //TODO refatorar para acomodar novo modelo de receita
+    async recipesByStars(request, response) {
+        let count = await connection('recipes').count('id')
+        count = Object.values(count[0])
+
+        let aux = []
+        for (i = 1; i <= count; i++) {
+            let thisRecipe = await connection('recipes')
+                .select('*')
+                .where('id', i)
+
+            let ingredients = await connection('ingredients')
+                .select('quantity', 'measure', 'ingredient')
+                .where('recipe_id', i)
+
+            aux.push(thisRecipe.concat(ingredients))
+        }
+        const recipes = aux
+        return response.json(recipes)
+    },
+
+    async rating(request, response) {
+        const { id, nStars } = request.body
+
+        const oldRating = await connection('recipes').select('rating').where('id', id)
+        const newRating = oldRating.rating + nStars
+
+        try {
+            await connection('recipes').where('id', id).update('rating', newRating)
+            return response.status(204).send()
+        } catch (e) {
+            return response.json({ error: 'não foi possivel realizar essa operação' })
+        }
     }
 }

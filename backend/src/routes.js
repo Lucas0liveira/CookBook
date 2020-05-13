@@ -11,32 +11,38 @@ const InitializeDatabase = require('./Controllers/InitializeDatabase')
 routes.get('/startup', InitializeDatabase.databaseStart)
 
 //lista de rotas reacianoada a loguin e usuários
+routes.get('/users', UserController.index)
 routes.post('/singin', UserController.create)
 routes.post('/login', UserController.login)
-routes.get('/users', UserController.index)
+routes.post('/user/follow', UserController.follow)
 
 //lista de rotas para receitas
-routes.post('/recipes', RecipeController.create)
 routes.get('/recipes', RecipeController.index)
-routes.post('/recipes/edit', RecipeController.edit)
-routes.delete('/recipes/:id', RecipeController.delete)
 routes.get('/recipes/:category', RecipeController.filtered)
+//routes.get('recipes/stars', RecipeController.recipesByStars)
+routes.post('/recipes', RecipeController.create)
+routes.post('/recipes/edit', RecipeController.edit)
+routes.post('recipes/rating', RecipeController.rating)
+routes.delete('/recipes/:id', RecipeController.delete)
 
 //lista de rotas para pastas
-routes.post('/folders', FolderController.create)
 routes.get('/folders', FolderController.index)
+routes.get('/folders/recipes', FolderController.recipeOfFolder)
+routes.get('/folders/:id', FolderController.getUsersFolders)
+routes.post('/folders/add', FolderController.recipeOnFolder)
+routes.post('/folders', FolderController.create)
 routes.delete('/folders/:id', FolderController.delete)
-routes.post('/folder/add', FolderController.recipeOnFolder)
-routes.get('/recipes/folder', FolderController.recipeOfFolder)
+routes.delete('folders/recipe', FolderController.deleteRecipe)
 
 //lista de rotas para categorias
-routes.post('/categories', CategoryController.create)
 routes.get('/categories', CategoryController.index)
+routes.post('/categories', CategoryController.create)
 routes.delete('/categories/:id', CategoryController.delete)
 
 //lista de rotas para comentarios
-routes.post('/comments', CommentsController.addComment)
-routes.get('/comments/:id', CommentsController.getComments)
+routes.get('/comments', CommentsController.getComments)
+routes.post('/comments', CommentsController.newComment)
+routes.delete('/comments', CommentsController.delComment)
 
 
 module.exports = routes

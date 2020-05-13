@@ -46,7 +46,7 @@ module.exports = {
     async login(request, response) {
         //requer email e senha para o loguin
         const { email, password } = request.body
-            //procura pelo par email e senha no banco
+        //procura pelo par email e senha no banco
         const id = await connection('users').select('id').where({
             email: email,
             password: password
@@ -56,7 +56,7 @@ module.exports = {
         if (id != null)
             return response.json(id)
         else
-        //caso contrario é enviado uma mensagem informando que o usuario não foi encontrado
+            //caso contrario é enviado uma mensagem informando que o usuario não foi encontrado
             return response.json({ erro: "usuario não encontrado" })
     },
 
@@ -64,6 +64,19 @@ module.exports = {
     async index(request, response) {
         const usuarios = await connection('users').select('*')
         return response.json(usuarios)
+    },
+
+    async follow(request, response) {
+        const { follow_id, followed_id } = require.body
+        try {
+            await connection('follow_list').insert({
+                follow_id,
+                followed_id
+            })
+            return response.status(204).send()
+        } catch (e) {
+            return response.json({ error: 'não foi possivel realizar essa operação' })
+        }
     }
 
 

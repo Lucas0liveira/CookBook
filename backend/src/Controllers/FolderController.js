@@ -8,14 +8,14 @@ module.exports = {
         try {
             // adiciona ao banco uma nova pasta com o nome e o id do usuario
             const [id] = await connection('folders').insert({
-                    name,
-                    user_id
-                })
-                //caso não ocorra nenhum problema será retornado o id da nova pasta
+                name,
+                user_id
+            })
+            //caso não ocorra nenhum problema será retornado o id da nova pasta
             return response.json({ id })
         } catch (err) {
             //caso haja algum erro será enviada uma mensagem de erro
-            return response.json({ error: "Não foi possível criar pasta" })
+            return response.json({ error: 'Não foi possível criar pasta' })
         }
     },
 
@@ -30,8 +30,8 @@ module.exports = {
         //precisa do id da pasta a ser deletada
         const { id } = request.parms
 
-        //deleta a pasta com o id que foi passado
-        await connection('folders').where('id', id).delete()
+        await connection('folder_content').where('folder_id').del()
+        await connection('folders').where('id', id).del()
         return response.status(204).send()
     },
 
@@ -43,16 +43,15 @@ module.exports = {
         try {
             //adiciona ao banco de dados a correlação entre a receita e a nova pasta
             const [id] = await connection('folder_content').insert({
-                    folder_id,
-                    recipe_id
-                })
-                //caso não haja problemas é retornado o id da correlação entre a pasta e a receita
+                folder_id,
+                recipe_id
+            })
+            //caso não haja problemas é retornado o id da correlação entre a pasta e a receita
             return response.json({ id })
         } catch (err) {
             //caso haja um erro uma mensagem é enviada comunicamdo que não foi possivel adicionar a receia a pasta
-            return response.json({ error: "Não foi possível adicionar a receita na pasta" })
+            return response.json({ error: 'Não foi possível adicionar a receita na pasta' })
         }
-
     },
 
     //função que busca todas as receitas que estão em uma pasta
@@ -61,10 +60,29 @@ module.exports = {
         const { folder_id } = request.body
 
         // busca no banco pelas receitas em uma pasta
-        const recepies = await connection('folder_content').select('recipe_id').where('folder_id', folder_id)
+        const recepies = await connection('folder_content')
+            .select('recipe_id')
+            .where('folder_id', folder_id)
             .join('recipes', 'id', '=', 'recipe_id')
 
         //retorna uma lista de receitas da pasta
         return response.json(recepies)
+    },
+    async getUsersFolders(request, response) {
+        const { id } = request.parms
+
+        const folders = await connection('folders').select('*').where('user_id', id)
+        return response.json(folders)
+    },
+
+    async deleteRecipe(request, response) {
+        const { folder_id, recipe_id } = request.body
+
+        await connection('folder_content').where({
+            folder_id: folder_id,
+            recipe_id: recipe_id
+        }).del()
+
+        return response.status(204).send()
     }
-}
+} 
