@@ -8,13 +8,15 @@ module.exports = {
 
         try {
             //nova receita é adiciaonada ao banco
+            const rating = 0
             const [id] = await connection('recipes').insert({
                 name,
                 description,
                 prepare,
                 image,
                 video,
-                category_id
+                category_id,
+                rating
             })
             const recipe_id = id
 
@@ -41,47 +43,32 @@ module.exports = {
     //função que retorna todas as receitas do banco
     async index(request, response) {
 
-        try {
-            let count = await connection('recipes').count('id')
-            count = Object.values(count[0])
-
-            let aux = []
-            for (i = 1; i <= count; i++) {
-                let thisRecipe = await connection('recipes')
-                    .select('*')
-                    .where('id', i)
-
-                let ingredients = await connection('ingredients')
-                    .select('quantity', 'measure', 'ingredient')
-                    .where('recipe_id', i)
-
-                aux.push(thisRecipe.concat(ingredients))
-            }
-            const recipes = aux
-            return response.json(recipes)
-        } catch (err) {
-            return response.json({ err: "Banco vazio" })
+        let recipes = await connection('recipes').select('*').orderBy('name')
+        let aux = []
+        for (i = 0; i < recipes.length; i++) {
+            aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])
         }
-
+        return response.json(aux)
     },
 
     //função que retorna receitas fintradas por uma caregoria
     async filtered(request, response) {
         const { category } = request.params
 
-        const categories = await connection('recipes').select('*').where('category_id', category)
-        return response.json(categories)
+        let recipes = await connection('recipes').select('*').orderBy('name').where('category_id', category)
+        let aux = []
+        for (i = 0; i < recipes.length; i++) {
+            aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])
+        }
+        return response.json(aux)
     },
 
     //função que deleta uma receita do banco
     async delete(request, response) {
         const { id } = request.params
 
-        try {
-            await connection('recipes').where('id', id).delete()
-        } catch (e) {
-            return response.json({ erro: 'não foi possível remover a receita' })
-        }
+        await connection('ingredients').where('recipe_id', id).del()
+        await connection('recipes').where('id', id).del()
         return response.status(204).send()
     },
 
@@ -101,5 +88,30 @@ module.exports = {
         }
         return response.json(id)
 
+    },
+
+    async recipesByStars(request, response) {
+        let recipes = await connection('recipes').select('*').orderBy('rating')
+        let aux = []
+        for (i = 0; i < recipes.length; i++) {
+            aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])
+        }
+        return response.json(aux)
+    },
+
+    async rating(request, response) {
+        const { id, nStars } = request.body
+
+        let oldRating = await connection('recipes').select('rating').where('id', id)
+        oldRating = Object.values(oldRating[0])
+        const newRating = Number(oldRating) + Number(nStars)
+        console.log(oldRating)
+        console.log(newRating)
+        try {
+            await connection('recipes').where('id', id).update('rating', newRating)
+            return response.status(204).send()
+        } catch (e) {
+            return response.json({ error: 'não foi possivel realizar essa operação' })
+        }
     }
 }
