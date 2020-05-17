@@ -8,13 +8,15 @@ module.exports = {
 
         try {
             //nova receita é adiciaonada ao banco
+            const rating = 0
             const [id] = await connection('recipes').insert({
                 name,
                 description,
                 prepare,
                 image,
                 video,
-                category_id
+                category_id,
+                rating
             })
             const recipe_id = id
 
@@ -41,37 +43,24 @@ module.exports = {
     //função que retorna todas as receitas do banco
     async index(request, response) {
 
-        try {
-            let count = await connection('recipes').count('id')
-            count = Object.values(count[0])
-
-            let aux = []
-            for (i = 1; i <= count; i++) {
-                let thisRecipe = await connection('recipes')
-                    .select('*')
-                    .where('id', i)
-
-                let ingredients = await connection('ingredients')
-                    .select('quantity', 'measure', 'ingredient')
-                    .where('recipe_id', i)
-
-                aux.push(thisRecipe.concat(ingredients))
-            }
-            const recipes = aux
-            return response.json(recipes)
-        } catch (err) {
-            return response.json({ err: "Banco vazio" })
+        let recipes = await connection('recipes').select('*').orderBy('name')
+        let aux = []
+        for (i = 0; i < recipes.length; i++) {
+            aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])
         }
-
+        return response.json(aux)
     },
 
     //função que retorna receitas fintradas por uma caregoria
-    //TODO refatorar para suportar novo modelo de receita
     async filtered(request, response) {
         const { category } = request.params
 
-        const categories = await connection('recipes').select('*').where('category_id', category)
-        return response.json(categories)
+        let recipes = await connection('recipes').select('*').orderBy('name').where('category_id', category)
+        let aux = []
+        for (i = 0; i < recipes.length; i++) {
+            aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])
+        }
+        return response.json(aux)
     },
 
     //função que deleta uma receita do banco
@@ -101,33 +90,23 @@ module.exports = {
 
     },
 
-    //TODO refatorar para acomodar novo modelo de receita
     async recipesByStars(request, response) {
-        let count = await connection('recipes').count('id')
-        count = Object.values(count[0])
-
+        let recipes = await connection('recipes').select('*').orderBy('rating')
         let aux = []
-        for (i = 1; i <= count; i++) {
-            let thisRecipe = await connection('recipes')
-                .select('*')
-                .where('id', i)
-
-            let ingredients = await connection('ingredients')
-                .select('quantity', 'measure', 'ingredient')
-                .where('recipe_id', i)
-
-            aux.push(thisRecipe.concat(ingredients))
+        for (i = 0; i < recipes.length; i++) {
+            aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])
         }
-        const recipes = aux
-        return response.json(recipes)
+        return response.json(aux)
     },
 
     async rating(request, response) {
         const { id, nStars } = request.body
 
-        const oldRating = await connection('recipes').select('rating').where('id', id)
-        const newRating = oldRating.rating + nStars
-
+        let oldRating = await connection('recipes').select('rating').where('id', id)
+        oldRating = Object.values(oldRating[0])
+        const newRating = Number(oldRating) + Number(nStars)
+        console.log(oldRating)
+        console.log(newRating)
         try {
             await connection('recipes').where('id', id).update('rating', newRating)
             return response.status(204).send()

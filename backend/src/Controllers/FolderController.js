@@ -2,20 +2,27 @@ const connection = require('../Database/conection')
 
 module.exports = {
     async create(request, response) {
-        const { name } = request.body
-        const user_id = require.headers.authorization
+        const user_id = request.headers.authorization
+        const { folder_name } = request.body
 
-        try {
-            // adiciona ao banco uma nova pasta com o nome e o id do usuario
-            const [id] = await connection('folders').insert({
-                name,
-                user_id
-            })
-            //caso não ocorra nenhum problema será retornado o id da nova pasta
-            return response.json({ id })
-        } catch (err) {
-            //caso haja algum erro será enviada uma mensagem de erro
-            return response.json({ error: 'Não foi possível criar pasta' })
+        const verifica = await connection('folders').select('*').where({
+            user_id: user_id,
+            folder_name: folder_name
+        }).first()
+
+        if (verifica == null) {
+            try {
+                const [id] = await connection('folders').insert({
+                    folder_name,
+                    user_id
+                })
+                //caso não ocorra nenhum problema será retornado o id da nova pasta
+                return response.json({ id })
+            } catch (e) {
+                return response.json({ erro: "não foi possivel criar a pasta" })
+            }
+        } else {
+            return response.json({ erro: "Pasta com o mesmo nome já existe" })
         }
     },
 
@@ -61,13 +68,14 @@ module.exports = {
 
         // busca no banco pelas receitas em uma pasta
         const recepies = await connection('folder_content')
-            .select('recipe_id')
+            .select('recipes.id')
             .where('folder_id', folder_id)
-            .join('recipes', 'id', '=', 'recipe_id')
+            .join('recipes', 'recipes.id', '=', 'folder_content.recipe_id')
 
         //retorna uma lista de receitas da pasta
         return response.json(recepies)
     },
+
     async getUsersFolders(request, response) {
         const { id } = request.parms
 
@@ -84,5 +92,40 @@ module.exports = {
         }).del()
 
         return response.status(204).send()
+    },
+
+    async addToReadLater(request, response) {
+        const user_id = request.headers.authorization
+
+        const { recipe_id } = request.body
+
+        const f_id = await connection('folders').select('id').where({
+            user_id: user_id,
+            folder_name: "read later"
+        }).first()
+
+        const folder_id = f_id.id
+
+        //adiciona ao banco de dados a correlação entre a receita e a nova pasta
+        const [id] = await connection('folder_content').insert({
+            folder_id,
+            recipe_id
+        })
+        //caso não haja problemas é retornado o id da correlação entre a pasta e a receita
+        return response.json({ id })
+    },
+
+    async changeFolder(request, response) {
+        const { newFolder_id, folder_id, recipe_id } = request.body
+
+        try {
+            await connection('folder_content').where({
+                folder_id: folder_id,
+                recipe_id: recipe_id
+            }).update('folder_id', newFolder_id)
+            return response.status(204).send()
+        } catch (e) {
+            return response.json({ erro: "não foi possivel muder a pasta" })
+        }
     }
 } 

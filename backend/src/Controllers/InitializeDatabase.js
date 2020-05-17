@@ -3,10 +3,10 @@ const connection = require('../Database/conection')
 module.exports = {
     async databaseStart(request, response) {
 
-        var names = ["Asiátia", "Brasileira", "Mexicana"]
+        var names = ["Asiátia", "Brasileira", "Mexicana", "Outra"]
 
         try {
-            names.forEach(async function(name) {
+            names.forEach(async function (name) {
                 await connection('categories').insert({
                     name
                 })
@@ -14,7 +14,7 @@ module.exports = {
         } catch (e) {
             return response.json({ error: 'banco já iniciado' })
         }
-        return response.json({ OK: true })
+        return response.status(204).send()
     }
 
 }

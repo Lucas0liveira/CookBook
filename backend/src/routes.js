@@ -12,17 +12,23 @@ routes.get('/startup', InitializeDatabase.databaseStart)
 
 //lista de rotas reacianoada a loguin e usuários
 routes.get('/users', UserController.index)
+routes.get('/users/follow', UserController.followIndex)
+routes.get('/users/nFollowers/:follow_id', UserController.getNFolowers)
+routes.get('/users/nFollows/:followed_id', UserController.getNFolowed)
+routes.get('/users/followers/:follow_id', UserController.getFollowers)
+routes.get('/users/follows/:followed_id', UserController.getFollowed)
 routes.post('/singin', UserController.create)
 routes.post('/login', UserController.login)
-routes.post('/user/follow', UserController.follow)
+routes.post('/users/follow', UserController.follow)
+routes.delete('users/unfollow', UserController.unfollow)
 
 //lista de rotas para receitas
 routes.get('/recipes', RecipeController.index)
 routes.get('/recipes/:category', RecipeController.filtered)
-//routes.get('recipes/stars', RecipeController.recipesByStars)
+routes.get('/recipes/stars', RecipeController.recipesByStars)
 routes.post('/recipes', RecipeController.create)
 routes.post('/recipes/edit', RecipeController.edit)
-routes.post('recipes/rating', RecipeController.rating)
+routes.post('/recipes/rating', RecipeController.rating)
 routes.delete('/recipes/:id', RecipeController.delete)
 
 //lista de rotas para pastas
@@ -31,8 +37,10 @@ routes.get('/folders/recipes', FolderController.recipeOfFolder)
 routes.get('/folders/:id', FolderController.getUsersFolders)
 routes.post('/folders/add', FolderController.recipeOnFolder)
 routes.post('/folders', FolderController.create)
+routes.post('/folders/readLater', FolderController.addToReadLater)
+routes.post('/folders/change', FolderController.changeFolder)
 routes.delete('/folders/:id', FolderController.delete)
-routes.delete('folders/recipe', FolderController.deleteRecipe)
+routes.delete('/folders/recipe', FolderController.deleteRecipe)
 
 //lista de rotas para categorias
 routes.get('/categories', CategoryController.index)

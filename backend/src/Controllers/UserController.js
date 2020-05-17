@@ -1,5 +1,4 @@
 const connection = require('../database/conection')
-const crypto = require('crypto')
 
 module.exports = {
     //função que adiciona um nov usuario ao banco
@@ -66,8 +65,13 @@ module.exports = {
         return response.json(usuarios)
     },
 
+    async followIndex(request, response) {
+        const follow_list = await connection('follow_list').select('*')
+        return response.json(follow_list)
+    },
+
     async follow(request, response) {
-        const { follow_id, followed_id } = require.body
+        const { follow_id, followed_id } = request.body
         try {
             await connection('follow_list').insert({
                 follow_id,
@@ -77,7 +81,51 @@ module.exports = {
         } catch (e) {
             return response.json({ error: 'não foi possivel realizar essa operação' })
         }
+    },
+
+    async getNFolowers(request, response) {
+        const { follow_id } = request.params
+        const nFollowers = await connection('follow_list').count('id', { as: 'nFollowers' }).where('follow_id', follow_id)
+        return response.json(nFollowers)
+    },
+
+    async getNFolowed(request, response) {
+        const { followed_id } = request.params
+        const nFollowers = await connection('follow_list').count('id', { as: 'nFollows' }).where('followed_id', followed_id)
+        return response.json(nFollowers)
+    },
+
+    async getFollowers(request, response) {
+        const { follow_id } = request.params
+        const followers_id = await connection('follow_list').select('followed_id').where('follow_id', follow_id)
+        followers = []
+        for (i = 0; i < followers_id.length; i++) {
+            const user = await connection('users').select('*').where('id', followers_id[i].followed_id)
+            followers.push(user)
+        }
+        return response.json(followers)
+    },
+
+    async getFollowed(request, response) {
+        const { followed_id } = request.params
+        const follows_id = await connection('follow_list').select('follow_id').where('followed_id', followed_id)
+        follows = []
+        for (i = 0; i < follows_id.length; i++) {
+            const user = await connection('users').select('*').where('id', follows_id[i].follow_id)
+            follows.push(user)
+        }
+        return response.json(follows)
+    },
+
+    async unfollow(request, response) {
+        const user_id = request.headers.authorization
+        const { followed_id } = request.body
+
+        await connection('follow_list').where({
+            follow_id: user_id,
+            followed_id: followed_id
+        }).del()
+
+        return response.status(204).send()
     }
-
-
 }
