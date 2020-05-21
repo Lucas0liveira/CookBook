@@ -31,7 +31,7 @@ export default function Login() {
         return (
             <>
                 <Navbar variant="dark" expand="lg">
-                    <Navbar.Brand href="#home">
+                    <Navbar.Brand href="/">
                         <img src={logoImg} alt="" />
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -43,7 +43,7 @@ export default function Login() {
                                 <FaSearch size={20} color="#FF0000" fontWeight="bolder" />
                             </Button>
 
-                            <Nav.Link href="#home" >Início</Nav.Link>
+                            <Nav.Link href="/" >Início</Nav.Link>
                             <NavDropdown title="Receitas" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1" variant="dark">Asiática</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">Brasileira</NavDropdown.Item>
@@ -54,10 +54,10 @@ export default function Login() {
 
                         </Nav>
                         <Form inline>
-                            <Button id="login" variant="flat">
+                            <Button  href="/login" id="login" variant="flat">
                                 Login
                             </Button>
-                            <Button id="login" variant="flat">
+                            <Button  href="/register" id="login" variant="flat">
                                 Cadastro
                             </Button>
 

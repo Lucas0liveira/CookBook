@@ -10,7 +10,7 @@ const InitializeDatabase = require('./Controllers/InitializeDatabase')
 //inicia o banco com as categorias
 routes.get('/startup', InitializeDatabase.databaseStart)
 
-//lista de rotas reacianoada a loguin e usuários
+//lista de rotas reacianoada a login e usuários
 routes.get('/users', UserController.index)
 routes.get('/users/follow', UserController.followIndex)
 routes.get('/users/nFollowers/:follow_id', UserController.getNFolowers)
