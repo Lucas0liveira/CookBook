@@ -5,14 +5,15 @@ import logoImg from '../../assets/img/logo-white.png'
 import bg from '../../assets/img/food-background.jpg'
 import { BrowserRouter as Router } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa'
+
+
 import api from '../../services/api';
 
-
-
 export default function Register() {
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
+    const [password, setPassword] = useState('');
 
     const history = useHistory();
 
@@ -22,18 +23,22 @@ export default function Register() {
         const data = {
             name,
             email,
-            senha,
-        };
+            password, 
+        }; 
+        try {
+            const response = await api.post('singin', data)
+            alert (`Seu ID de acesso: ${response.data.id}`)
+            history.push('/');
+        } catch (error) {
+            alert('Erro ao registrar a conta, tente novamente.'+ '    '+ error.message)
+        }
         
-        const response = await api.post('singin', data)
-        alert (`Seu ID de acesso: ${response.data.id}`)
-        history.push('/');
     }
 
     {
         return (
             <>
-                <Navbar variant="dark" expand="lg">
+                <Navbar variant="dark" fixed = "top" expand="lg">
                     <Navbar.Brand href="/">
                         <img src={logoImg} alt="" />
                     </Navbar.Brand>
@@ -57,7 +62,7 @@ export default function Register() {
 
                         </Nav>
                         <Form inline>
-                            <Button  href="/login" id="login" variant="flat">
+                            <Button href="/login" id="login" variant="flat">
                                 Login
                             </Button>
                             <Button  href="/register" id="login" variant="flat">
@@ -67,28 +72,50 @@ export default function Register() {
                         </Form>
                     </Navbar.Collapse>
                 </Navbar>
-                
-                <div class='container'id='submit'><Form onSubmit={handleRegister}>
+
+                <div class='container'id='submit'>
+                    
+                    <Form onSubmit={handleRegister}>
+                                                
                         <Form.Group controlId="formGroupNome">
                         <Form.Label>Nome completo</Form.Label>
-                        <Form.Control type="Nome" placeholder="Nome completo" />
+                        <Form.Control 
+                        type="Nome Completo" 
+                        placeholder="Insira seu nome completo" 
+                        value={name}
+                        onChange={e=>setName(e.target.value)}
+                        />
                         </Form.Group>
+
                         <Form.Group controlId="formGroupemail">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" placeholder="Email" />
+                        <Form.Control 
+                        type="Email" 
+                        placeholder="Insira seu email" 
+                        value={email}
+                        onChange={e=>setEmail(e.target.value)}
+                        />
                         </Form.Group>
+                        
                         <Form.Group controlId="formGroupSenha">
                         <Form.Label>Senha</Form.Label>
-                        <Form.Control type="Senha" placeholder="Senha" />
+                        <Form.Control 
+                        type="Senha" 
+                        placeholder="Insira sua senha" 
+                        value={password}
+                        onChange={e=>setPassword(e.target.value)}
+                        />
                         </Form.Group>
-                        <Button  href="/login" id= "vermais" variant="flat" type="Cadastrar">
+
+                        <Button id= "vermais" variant="flat" type="submit">
                         Cadastrar
                         </Button>
+
                     </Form>
+
                 </div>
+
             </>
         )
     }
 }
-
-

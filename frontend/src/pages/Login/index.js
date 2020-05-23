@@ -6,24 +6,29 @@ import bg from '../../assets/img/food-background.jpg'
 import { BrowserRouter as Router } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa'
 
+
 import api from '../../services/api';
 
-
-
 export default function Login() {
+
     const [email, setEmail] = useState('');
-    const [senha , setSenha] = useState('');
+    const [password , setPassword] = useState('');
+    const history = useHistory();
 
     async function handleLogin(e){
         e.preventDefault();
-        
 
         try {
-            const response = await api.post('login', {email},{senha});
-            console.log(response.data.name);
+            const response = await api.post('login', {email},{password});
+            console.log(response.data.id);
+
+            // localStorage.setItem('name', name);
+
+            history.post('/profile')
 
         } catch (error) {
-            alert('Falha no login, tente novamente.')
+            // alert('Falha no login, tente novamente.')
+            alert('Erro ao registrar a conta, tente novamente.'+ '          '+ error.message)
         }
 
     }
@@ -31,8 +36,8 @@ export default function Login() {
     {
         return (
             <>
-                <Navbar variant="dark" expand="lg">
-                    <Navbar.Brand href="/">
+                    <Navbar variant="dark" fixed = "top" expand="lg">
+                        <Navbar.Brand href="/">
                         <img src={logoImg} alt="" />
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -55,7 +60,7 @@ export default function Login() {
 
                         </Nav>
                         <Form inline>
-                            <Button  href="/login" id="login" variant="flat">
+                            <Button href="/login" id="login" variant="flat">
                                 Login
                             </Button>
                             <Button  href="/register" id="login" variant="flat">
@@ -66,28 +71,39 @@ export default function Login() {
                     </Navbar.Collapse>
                 </Navbar>
 
+
                 <div class='container'id='submit'>
                     <Form onSubmit={handleLogin}>
                         <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" placeholder="Insira seu e-mail" />
+                        <Form.Control 
+                        type="email" 
+                        placeholder="Insira seu e-mail" 
+                        value={email}
+                        onChange={e=>setEmail(e.target.value)}
+                         />
                         <Form.Text className="text-muted">
                         Nós nunca vamos compartilhar seu email com ninguém.
                         </Form.Text>
-                    </Form.Group>
-                    <Form.Group controlId="formBasicPassword">
+                        </Form.Group>
+                        <Form.Group controlId="formBasicPassword">
                         <Form.Label>Senha</Form.Label>
-                        <Form.Control type="password" placeholder="Insira sua senha" />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicCheckbox">
+                        <Form.Control 
+                        type="password" 
+                        placeholder="Insira sua senha" 
+                        value={password}
+                        onChange={e=>setPassword(e.target.value)}
+                        />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicCheckbox">
                         <Form.Check type="checkbox" label="Mantenha-me logado" />
-                    </Form.Group>
-                    <Button  href="/" id= "vermais" variant="flat" type="Entrar">
+                        </Form.Group>
+                        <Button   id= "vermais" variant="flat" type="submit">
                         Entrar
-                    </Button>
+                        </Button>
                     </Form>
                 </div>
-                
+
             </>
         )
     }
