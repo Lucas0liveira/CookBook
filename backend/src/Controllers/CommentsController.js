@@ -1,24 +1,35 @@
 const connection = require('../database/conection')
 module.exports = {
 
-    async addComment(request, response) {
-        const { recipe_id, comment } = request.body
-
+    async newComment(request, response) {
+        const { recipe_id, user_id, comment } = request.body
         try {
-            await connection('comments').insert({
+            await connection('comment_list').insert({
                 recipe_id,
+                user_id,
                 comment
             })
+            return response.status(204).send()
         } catch (e) {
-            return response.json({ error: 'não foi possivel adicionar o comentario' })
+            return response.json({ error: 'não foi possivel realizar essa operação' })
         }
     },
 
-    async getComments(request, response) {
-        const { recipe_id } = request.params
-        const comments = await connection('comments').select('*').where('recipe_id', recipe_id)
+    async getComments(response, request) {
+        const { recipe_id } = request.body
+
+        const comments = await connection('comment_list').select('*').where('recipe_id', recipe_id)
         return response.json(comments)
+    },
+
+    async delComment(response, request) {
+        const { recipe_id, user_id } = request.body
+
+        await connection('comment_list').where({
+            recipe_id: recipe_id,
+            user_id: user_id
+        }).del()
+
+        return response.status(204).send()
     }
-
-
 }

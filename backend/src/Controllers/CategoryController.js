@@ -10,7 +10,7 @@ module.exports = {
         try {
             //nova categoria é adicionada ao banco
             const [id] = await connection('categories').insert({ name })
-                //o novo id da categoria é retornado caso a incerção seja bem sucedida
+            //o novo id da categoria é retornado caso a incerção seja bem sucedida
             return response.json({ id })
 
         } catch (error) {
@@ -31,7 +31,7 @@ module.exports = {
         const { id } = request.params
 
         //remoção da categoria no banco
-        await connection('categories').where('id', id).delete()
+        await connection('categories').where('id', id).del()
         return response.status(204).send()
     }
 }

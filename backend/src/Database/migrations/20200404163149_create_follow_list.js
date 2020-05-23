@@ -1,8 +1,8 @@
-exports.up = function(knex) {
-    return knex.schema.createTable('follow_list', function(table) {
+exports.up = function (knex) {
+    return knex.schema.createTable('follow_list', function (table) {
         table.increments()
-        table.string('follow_id').notNullable()
-        table.string('followed_id').notNullable()
+        table.integer('follow_id').notNullable()
+        table.integer('followed_id').notNullable()
 
         table.foreign('follow_id').references('id').inTable('users')
         table.foreign('followed_id').references('id').inTable('users')
@@ -11,6 +11,6 @@ exports.up = function(knex) {
 
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
     return knex.schema.dropTable('follow_list')
 };

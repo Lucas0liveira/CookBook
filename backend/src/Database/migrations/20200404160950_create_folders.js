@@ -1,7 +1,7 @@
-exports.up = function(knex) {
-    return knex.schema.createTable('folders', function(table) {
+exports.up = function (knex) {
+    return knex.schema.createTable('folders', function (table) {
         table.increments()
-        table.string('name').notNullable()
+        table.string('folder_name').notNullable()
         table.integer('user_id').notNullable()
 
         table.foreign('user_id').references('id').inTable('users')
@@ -9,7 +9,7 @@ exports.up = function(knex) {
 
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
     return knex.schema.dropTable('folders')
 
 };
