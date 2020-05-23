@@ -51,7 +51,7 @@ module.exports = {
             password: password
         }).first()
 
-        //caso alguma correlação seja encontrada é devolvido o id do usuario que possiu a exata combinação de email e senha
+        //caso lguma correlação seja encontrada é devolvido o id do usuario que possiu a exata combinação de email e senha
         if (id != null)
             return response.json(id)
         else
