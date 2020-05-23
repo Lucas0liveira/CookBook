@@ -15,6 +15,7 @@
         "d": "^1.0.1",
         "express": "^4.17.1",
         "knex": "^0.20.13",
+        "node-pre-gyp": "^0.14.0",
         "sqlite3": "^4.1.1"
     },
     "devDependencies": {

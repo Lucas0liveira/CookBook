@@ -9,6 +9,8 @@ exports.up = function (knex) {
         table.string('image').notNullable()
         table.string('video').notNullable()
         table.integer('category_id').notNullable()
+        table.integer('prepTime').notNullable()
+        table.string('prepUnit').notNullable()
         table.integer('rating')
 
         table.foreign('category_id').references('id').inTable('categories')
