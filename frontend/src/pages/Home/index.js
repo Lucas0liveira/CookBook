@@ -10,7 +10,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa'
 
 
-
+// falta a implementao correta das receitas
 
 export default function Home() {
     {

@@ -16,6 +16,7 @@ export default function Login() {
 
     async function handleLogin(e){
         e.preventDefault();
+        
 
         try {
             const response = await api.post('login', {email},{senha});

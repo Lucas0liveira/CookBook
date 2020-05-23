@@ -29,7 +29,7 @@ export default function Register() {
         alert (`Seu ID de acesso: ${response.data.id}`)
         history.push('/');
     }
-    
+
     {
         return (
             <>
