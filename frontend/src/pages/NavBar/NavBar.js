@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react'
 import { Navbar, NavDropdown, Brand, Nav, Form, FormControl, Button, Image, Card, Container, Row, Col, CardDeck, Media, Badge } from 'react-bootstrap/'
 import logoImg from '../../assets/img/logo-white.png'
@@ -33,10 +32,10 @@ export default function NavBar(login) {
 
                     </Nav>
                     <Form inline>
-                        <Button id="login" variant="flat">
+                        <Button href="/login" id="login" variant="flat">
                             Login
                 </Button>
-                        <Button id="login" variant="flat">
+                        <Button href="/register" id="login" variant="flat">
                             Cadastro
                 </Button>
 
