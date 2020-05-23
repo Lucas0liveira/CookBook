@@ -64,7 +64,7 @@ module.exports = {
         const usuarios = await connection('users').select('*')
         return response.json(usuarios)
     },
-
+// Correção
     async followIndex(request, response) {
         const follow_list = await connection('follow_list').select('*')
         return response.json(follow_list)

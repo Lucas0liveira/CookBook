@@ -30,7 +30,7 @@ export default function Register() {
             alert (`Seu ID de acesso: ${response.data.id}`)
             history.push('/');
         } catch (error) {
-            alert('Erro ao registrar a conta, tente novamente.'+ '    '+ error.message)
+            alert('Erro ao registrar a conta, tente novamente.'+ '          '+ error.message)
         }
         
     }
@@ -76,7 +76,7 @@ export default function Register() {
                 <div class='container'id='submit'>
                     
                     <Form onSubmit={handleRegister}>
-                                                
+                                {/* Integração                 */}
                         <Form.Group controlId="formGroupNome">
                         <Form.Label>Nome completo</Form.Label>
                         <Form.Control 

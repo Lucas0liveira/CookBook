@@ -23,6 +23,7 @@ export default function Login() {
             console.log(response.data.id);
 
             // localStorage.setItem('name', name);
+            // erros na verificação 
 
             history.post('/profile')
 

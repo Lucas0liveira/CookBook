@@ -1,6 +1,9 @@
 import React from 'react';
 import Routes from './routes'
 
+
+// Correção aplicada
+
 function App() {
   return (
 
