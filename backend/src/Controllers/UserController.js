@@ -127,5 +127,16 @@ module.exports = {
         }).del()
 
         return response.status(204).send()
+    },
+
+    async getUser(request, response) {
+        const { id } = request.params
+
+        const user = await connection('users').select('*').where('id', id).first()
+
+        if (user != null) {
+            return response.json(user)
+        }
+        return response.json({ error: "usuário não encontrado" })
     }
 }

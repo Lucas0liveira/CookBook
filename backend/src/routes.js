@@ -12,6 +12,7 @@ routes.get('/startup', InitializeDatabase.databaseStart)
 
 //lista de rotas reacianoada a loguin e usuários
 routes.get('/users', UserController.index)
+routes.get('/users/:id', UserController.getUser)
 routes.get('/users/follow', UserController.followIndex)
 routes.get('/users/nFollowers/:follow_id', UserController.getNFolowers)
 routes.get('/users/nFollows/:followed_id', UserController.getNFolowed)
