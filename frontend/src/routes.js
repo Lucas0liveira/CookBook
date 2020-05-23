@@ -19,7 +19,7 @@ export default function Routes() {
                 <Route path="/recipe/submit" component={SubmitRecipe}></Route>
                 <Route path="/template" component={Template}></Route>
                 <Route path="/login" component={Login}></Route>
-                <Route path="/recipe" component={ViewRecipe}></Route>
+                <Route path="/recipe/:id" component={ViewRecipe}></Route>
                 <Route path="/register" component={Register}></Route>
             </Switch>
         </BrowserRouter>

@@ -32,7 +32,7 @@ export default function ViewRecipe() {
     if (!recipe[0]) {
         return (<span>Loading...</span>)
     } else {
-        console.log(recipe[1])
+        console.log(recipe)
     }
 
     return (

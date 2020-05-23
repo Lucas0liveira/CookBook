@@ -51,6 +51,15 @@ module.exports = {
         return response.json(aux)
     },
 
+    async getRecipe(request, response) {
+        const id = request.params
+        let recipes = await connection('recipes').select('*').where('id', id.id)
+        let aux = []
+        aux.push(recipes)
+        aux.push(await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', id.id))
+        return response.json(aux)
+    },
+
     //função que retorna receitas fintradas por uma caregoria
     async filtered(request, response) {
         const { category } = request.params
