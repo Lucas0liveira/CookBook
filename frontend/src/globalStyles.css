@@ -130,6 +130,7 @@ a {
     margin-left: 150px;
     border-radius: 100px;
 }
+
 .btn-flat#addFolder{
     background-color: white;
     margin-left: 90%;
@@ -142,6 +143,16 @@ a {
     margin-left: 67%;
     border-radius: 100px;
     margin-right: 2%;
+}
+.btn-flat#subEdit{
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+}
+.btn-flat#More{
+    background-color: white;
+    margin-left: 10%;
+    border-radius: 100px;
 }
 .btn-flat#save{
     background-color: rgb(255, 8, 8);
@@ -213,4 +224,8 @@ a {
 
 .card:hover{
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.espaco-entre-linhas{
+    margin-top: 8%;
 }
