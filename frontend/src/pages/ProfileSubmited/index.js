@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { Navbar, NavDropdown, Brand, Nav, Form, FormControl, Button, Image, Card, Container, Row, Col, CardDeck, Media, Badge } from 'react-bootstrap/'
+import { Navbar, NavDropdown, Brand, Nav, Form, FormControl, Button, Image, Card, Container, Row, Col, CardDeck, Media, Badge, OverlayTrigger, Popover} from 'react-bootstrap/'
 import logoImg from '../../assets/img/logo-white.png'
 import sushi from '../../assets/img/sushi.jpg'
 import pizza from '../../assets/img/pizza.jpg'
@@ -10,6 +10,11 @@ import bg from '../../assets/img/food-background.jpg'
 import { BrowserRouter as Router } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa'
 import { FaPlusCircle } from 'react-icons/fa'
+import { FaClock } from 'react-icons/fa'
+import { FaPen } from 'react-icons/fa'
+import { FaEllipsisV } from 'react-icons/fa'
+import { FaTrash } from 'react-icons/fa'
+
 
 
 
@@ -46,6 +51,7 @@ export default function ProfileSubmited() {
                     </Navbar.Collapse>
                 </Navbar>
 
+
                 <Row>
                         <Image className = "foto"
                               width={150}
@@ -60,6 +66,9 @@ export default function ProfileSubmited() {
                             <h5 class = "title-section-profile">Nome Completo</h5>
                         </Col>
                         <Col>
+                            <Button variant = "flat" id = "Edit" >
+                                <FaPen size={20} color="#FF0000" fontWeight="bolder" />
+                            </Button>
                         </Col>
                     </Row>
             
@@ -72,15 +81,158 @@ export default function ProfileSubmited() {
                             </Nav.Item>
                         </Nav>
 
+                        <Row>
+                            <Col></Col>
+                            <Col>
+                                <Card>
+                                    <Card.Img
+                                     width={300}
+                                     height={180} 
+                                    src={hamburguer} alt="" />
+                                </Card>
+                            </Col>
+                            <Col>
+                                <Row>
+                                    <h3>Nome da receita</h3>
+                                        {['right'].map((placement) => (
+                                            <>
+                                            <OverlayTrigger
+                                                trigger="click"
+                                                key={placement}
+                                                placement={placement}
+                                                overlay={
+                                                <Popover id={`popover-positioned-${placement}`}>
+                                                    <Popover.Title as="h3">{}</Popover.Title>
+                                                    <Popover.Content>
+                                                    <Button variant = "flat" id = "subEdit" >
+                                                        Editar
+                                                        <FaPen size={10} color="#FF0000" fontWeight="bolder" />
+                                                    </Button>
+                                                    </Popover.Content>
+                                                    <Popover.Content>
+                                                    <Button variant = "flat" id = "subEdit" >
+                                                         Excluir
+                                                        <FaTrash size={10} color="#FF0000" fontWeight="bolder" />
+                                                    </Button>
+                                                    </Popover.Content>
+                                                    <Popover.Content>
+                                                    <Button variant = "flat" >
+                                                         Cancelar
+                                                    </Button>
+                                                    </Popover.Content>
+                                                </Popover>
+                                                }
+                                            >
+                                                <Button variant="flat" id="More">
+                                                <FaEllipsisV size={20} color="#FF0000" fontWeight="bolder" />
+                                                </Button>
+                                            </OverlayTrigger>{' '}
+                                            </>
+                                        ))}              
+                                </Row>
 
+                                <Row>
+                                    <h5>Tempo de preparo</h5>
+                                </Row>
+                                <Row>
+                                    <Badge pill variant="secondary">
+                                        15
+                                    </Badge>{' '}                
+                                    <Badge pill variant="secondary">
+                                        Min
+                                    </Badge>{' '}     
+                                    <FaClock size={20} color="#FF0000" fontWeight="bolder" />
+                                </Row>
+                                <Row>
+                                    <h7>Hamburguer caseiro com cebola crispy no pão brioche amanteigado.</h7>
+                                </Row>
+                                <Row>
+                                <Button block variant = "flat">
+                                    Ver mais
+                                </Button>
+                                </Row>
+                            </Col>
+                            <Col></Col>
 
+                        </Row>
 
+                        <br></br>
+
+                        <Row>
+                            <Col></Col>
+                            <Col>
+                                <Card>
+                                    <Card.Img
+                                     width={300}
+                                     height={180} 
+                                    src={hamburguer} alt="" />
+                                </Card>
+                            </Col>
+                            <Col>
+                                <Row>
+                                    <h3>Nome da receita</h3>
+                                        {['right'].map((placement) => (
+                                            <>
+                                            <OverlayTrigger
+                                                trigger="click"
+                                                key={placement}
+                                                placement={placement}
+                                                overlay={
+                                                <Popover id={`popover-positioned-${placement}`}>
+                                                    <Popover.Title as="h3">{}</Popover.Title>
+                                                    <Popover.Content>
+                                                    <Button variant = "flat" id = "subEdit" >
+                                                        Editar
+                                                        <FaPen size={10} color="#FF0000" fontWeight="bolder" />
+                                                    </Button>
+                                                    </Popover.Content>
+                                                    <Popover.Content>
+                                                    <Button variant = "flat" id = "subEdit" >
+                                                         Excluir
+                                                        <FaTrash size={10} color="#FF0000" fontWeight="bolder" />
+                                                    </Button>
+                                                    </Popover.Content>
+                                                    <Popover.Content>
+                                                    <Button variant = "flat" >
+                                                         Cancelar
+                                                    </Button>
+                                                    </Popover.Content>
+                                                </Popover>
+                                                }
+                                            >
+                                                <Button variant="flat" id="More">
+                                                <FaEllipsisV size={20} color="#FF0000" fontWeight="bolder" />
+                                                </Button>
+                                            </OverlayTrigger>{' '}
+                                            </>
+                                        ))}              
+                                </Row>
+
+                                <Row>
+                                    <h5>Tempo de preparo</h5>
+                                </Row>
+                                <Row>
+                                    <Badge pill variant="secondary">
+                                        15
+                                    </Badge>{' '}                
+                                    <Badge pill variant="secondary">
+                                        Min
+                                    </Badge>{' '}     
+                                    <FaClock size={20} color="#FF0000" fontWeight="bolder" />
+                                </Row>
+                                <Row>
+                                    <h7>Hamburguer caseiro com cebola crispy no pão brioche amanteigado.</h7>
+                                </Row>
+                                <Row>
+                                <Button block variant = "flat">
+                                    Ver mais
+                                </Button>
+                                </Row>
+                            </Col>
+                            <Col></Col>
+
+                        </Row>
                         
-
-
-
-
-
     </>
 
             
