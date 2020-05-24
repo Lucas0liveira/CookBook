@@ -45,7 +45,7 @@ export default function NavBar(login) {
         )
     } else {
         return (
-            <Navbar variant="dark" expand="lg">
+            <Navbar variant="dark" fixed="top" expand="lg">
                 <Navbar.Brand href="/">
                     <img src={logoImg} alt="" />
                 </Navbar.Brand>

@@ -17,6 +17,54 @@ import Nbar from '../NavBar/NavBar'
 
 
 export default function SubmitRecipe() {
+    var ingredientCount = 0
+    const [name, setName] = useState('')
+    const [prepTime, setPrepTime] = useState('')
+    const [prepUnit, setPrepUnit] = useState('')
+    const [description, setDescription] = useState('')
+    const [ingredients, setIngredients] = useState([])
+    const [prepare, setPrepare] = useState('')
+
+    function handleRecipe(e) {
+        e.preventDefault()
+
+    }
+
+
+    function addIngredient() {
+
+        let aux = []
+        aux.push(<span>Clique em + para adicionar mais ingredientes.</span>)
+        for (var i = 0; i < ingredientCount; i++) {
+            aux.push(<Row>
+                <Col>
+                    <Form.Control placeholder="Escreva..." />
+                </Col>
+                <Col>
+                    <Form.Control as="select" size="sm" custom>
+                        <option>Colher</option>
+                        <option>Xícara</option>
+                        <option>Gramas</option>
+                        <option>Kilogramas</option>
+                        <option>Miligramas</option>
+                        <option>Litro</option>
+                        <option>Mililitros</option>
+                    </Form.Control>
+                </Col>
+                <Col>
+                    <Form.Control placeholder="Escreva..." />
+                </Col>
+            </Row>)
+        }
+        console.log(aux)
+        return aux
+    }
+
+    function increaseCount() {
+        ingredientCount++
+        console.log(ingredientCount)
+    }
+
     {
         return (
             <>
@@ -100,13 +148,14 @@ export default function SubmitRecipe() {
                                 <Form.Control placeholder="Escreva..." />
                             </Col>
                         </Row>
+                        {}
                         <Row>
                             <Col>
                             </Col>
                             <Col>
                             </Col>
                             <Col>
-                                <Button variant="flat" id="add" >
+                                <Button variant="flat" id="add" onClick={increaseCount}>
                                     <FaPlusCircle size={30} color="#FF0000" fontWeight="bolder" />
                                 </Button>
                             </Col>
