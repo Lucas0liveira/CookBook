@@ -25,6 +25,7 @@ routes.delete('users/unfollow', UserController.unfollow)
 
 //lista de rotas para receitas
 routes.get('/recipes', RecipeController.index)
+routes.get('/recipes/show/:id', RecipeController.getRecipe)
 routes.get('/recipes/:category', RecipeController.filtered)
 routes.get('/recipes/stars', RecipeController.recipesByStars)
 routes.post('/recipes', RecipeController.create)

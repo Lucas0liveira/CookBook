@@ -4,11 +4,11 @@ module.exports = {
 
     //função para criar uma nova receita
     async create(request, response) {
-        const { name, description, qtt, msr, ingr, prepare, image, video, category_id } = request.body
+        const { name, description, qtt, msr, ingr, prepare, image, video, category_id, prepTime, prepUnit } = request.body
 
         try {
             //nova receita é adiciaonada ao banco
-            const rating = 0
+            const rating = 1
             const [id] = await connection('recipes').insert({
                 name,
                 description,
@@ -16,6 +16,8 @@ module.exports = {
                 image,
                 video,
                 category_id,
+                prepTime,
+                prepUnit,
                 rating
             })
             const recipe_id = id
@@ -42,8 +44,7 @@ module.exports = {
 
     //função que retorna todas as receitas do banco
     async index(request, response) {
-
-        let recipes = await connection('recipes').select('*').orderBy('name')
+        let recipes = await connection('recipes').select('*').orderBy("id", "desc")
         let aux = []
         for (i = 0; i < recipes.length; i++) {
             aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])
@@ -51,7 +52,7 @@ module.exports = {
         return response.json(aux)
     },
 
-    async getRecipe(request, response) {
+    async indexOne(request, response) {
         const id = request.params
         let recipes = await connection('recipes').select('*').where('id', id.id)
         let aux = []
@@ -99,8 +100,8 @@ module.exports = {
 
     },
 
-    async recipesByStars(request, response) {
-        let recipes = await connection('recipes').select('*').orderBy('rating')
+    async indexByStars(request, response) {
+        let recipes = await connection('recipes').select('*').orderBy("rating")
         let aux = []
         for (i = 0; i < recipes.length; i++) {
             aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])
