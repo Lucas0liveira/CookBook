@@ -4,7 +4,10 @@ module.exports = {
 
     //função para criar uma nova receita
     async create(request, response) {
-        const { name, description, qtt, msr, ingr, prepare, image, video, category_id } = request.body
+        const { name, description, qtt, msr, ingr, prepare, prepTime, prepUnit, image, video, category_id } = request.body
+
+        const corte = "https://www.youtube.com/watch?v="
+        const videourl = "https://www.youtube.com/embed/" + video.substring(video.indexOf(corte) + corte.length)
 
         try {
             //nova receita é adiciaonada ao banco
@@ -13,8 +16,10 @@ module.exports = {
                 name,
                 description,
                 prepare,
+                prepTime,
+                prepUnit,
                 image,
-                video,
+                videourl,
                 category_id,
                 rating
             })

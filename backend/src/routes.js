@@ -21,7 +21,7 @@ routes.get('/users/follows/:followed_id', UserController.getFollowed)
 routes.post('/singin', UserController.create)
 routes.post('/login', UserController.login)
 routes.post('/users/follow', UserController.follow)
-routes.delete('users/unfollow', UserController.unfollow)
+routes.delete('/users/unfollow/:followed_id', UserController.unfollow)
 
 //lista de rotas para receitas
 routes.get('/recipes', RecipeController.index)
