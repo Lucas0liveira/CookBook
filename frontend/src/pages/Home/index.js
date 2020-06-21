@@ -45,7 +45,7 @@ export default function Home() {
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            <Button id="vermais" block variant="flat" href={"/recipe/" + recipe[0].id}> Ver mais </Button>
+                            <Link id="vermais" block variant="flat" to={"/recipe/" + recipe[0].id}> Ver mais </Link>
                         </Card.Footer>
                     </Card>)
                 ))
@@ -65,7 +65,7 @@ export default function Home() {
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            <Button id="vermais" block variant="flat" href={"/recipe/" + recipe[0].id}> Ver mais </Button>
+                            <Link id="vermais" block variant="flat" to={"/recipe/" + recipe[0].id}> Ver mais </Link>
                         </Card.Footer>
                     </Card>
                 ))}

@@ -50,7 +50,8 @@ routes.post('/categories', CategoryController.create)
 routes.delete('/categories/:id', CategoryController.delete)
 
 //lista de rotas para comentarios
-routes.get('/comments', CommentsController.getComments)
+routes.get('/comments/index', CommentsController.index)
+routes.get('/comments/:recipe_id', CommentsController.getComments)
 routes.post('/comments', CommentsController.newComment)
 routes.delete('/comments', CommentsController.delComment)
 

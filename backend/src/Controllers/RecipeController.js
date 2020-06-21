@@ -40,7 +40,6 @@ module.exports = {
             return response.json({ id })
 
         } catch (err) {
-            console.log(err)
             return response.json({ err: "Não foi possível adicionar receita" })
         }
     },
@@ -118,9 +117,7 @@ module.exports = {
 
         let oldRating = await connection('recipes').select('rating').where('id', id)
         oldRating = Object.values(oldRating[0])
-        const newRating = Number(oldRating) + Number(nStars)
-        console.log(oldRating)
-        console.log(newRating)
+        const newRating = (Number(oldRating) + Number(nStars)) / 2
         try {
             await connection('recipes').where('id', id).update('rating', newRating)
             return response.status(204).send()

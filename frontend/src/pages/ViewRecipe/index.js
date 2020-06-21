@@ -23,12 +23,16 @@ export default function ViewRecipe() {
 
     const id = useParams().id
     const [recipe, setRecipe] = useState([])
+    const [comments, setComment] = useState([])
 
     useEffect(() => {
         api.get('/recipes/show/' + id).then(response => {
             setRecipe(response.data)
         })
-    })
+        api.get('/comments/' + id).then(response => {
+            setComment(response.data)
+        })
+    }, [])
     if (!recipe[0]) {
         return (<span>Loading...</span>)
     } else {
@@ -45,6 +49,7 @@ export default function ViewRecipe() {
                             <Card>
                                 <Card.Img src={recipe[0][0].image} alt="" />
                             </Card>
+                            <iframe width="560" height="315" src={recipe[0][0].videourl} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             <Button variant="flat" id="save">Salvar <FaBookmark size={20} color="#FFF" fontWeight="bolder" /> </Button>
                         </Col>
                         <Col>
@@ -66,6 +71,10 @@ export default function ViewRecipe() {
                                 </Badge>{' '}
 
                                 <FaClock size={20} color="#FF0000" fontWeight="bolder" />
+
+                                <Badge pill variant="secondary">
+                                    Avaliação: {recipe[0][0].rating}/5
+                                </Badge>
 
                             </Row>
                             <Row>
@@ -132,62 +141,21 @@ export default function ViewRecipe() {
 
 
                     <ul className="list-unstyled">
-                        <Media as="li">
-                            <img
-                                width={64}
-                                height={64}
-                                className="mr-3"
-                                src={salmao}
-                                alt="Generic placeholder"
-                            />
-                            <Media.Body>
-                                <h5>List-based media object</h5>
-                                <p>
-                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                                    ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
-                                    tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
-                                    fringilla. Donec lacinia congue felis in faucibus.
-                        </p>
-                            </Media.Body>
-                        </Media>
-
-                        <Media as="li">
-                            <img
-                                width={64}
-                                height={64}
-                                className="mr-3"
-                                src={salmao}
-                                alt="Generic placeholder"
-                            />
-                            <Media.Body>
-                                <h5>List-based media object</h5>
-                                <p>
-                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                                    ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
-                                    tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
-                                    fringilla. Donec lacinia congue felis in faucibus.
-                        </p>
-                            </Media.Body>
-                        </Media>
-
-                        <Media as="li">
-                            <img
-                                width={64}
-                                height={64}
-                                className="mr-3"
-                                src={salmao}
-                                alt="Generic placeholder"
-                            />
-                            <Media.Body>
-                                <h5>List-based media object</h5>
-                                <p>
-                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                                    ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
-                                    tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
-                                    fringilla. Donec lacinia congue felis in faucibus.
-                        </p>
-                            </Media.Body>
-                        </Media>
+                        {comments.map(comments => (
+                            <Media as="li">
+                                <img
+                                    width={64}
+                                    height={64}
+                                    className="mr-3"
+                                    src={salmao}
+                                    alt="Generic placeholder"
+                                />
+                                <Media.Body>
+                                    <h5>{comments.name}</h5>
+                                    <p>{comments.comment}</p>
+                                </Media.Body>
+                            </Media>
+                        ))}
                     </ul>
 
 
