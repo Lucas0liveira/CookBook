@@ -4,7 +4,7 @@ module.exports = {
 
     //função para criar uma nova receita
     async create(request, response) {
-        const { name, description, qtt, msr, ingr, prepare, image, video, category_id } = request.body
+        const { name, description, qtt, msr, ingr, prepare, image, video, category_id, prepTime, prepUnit} = request.body
 
         try {
             //nova receita é adiciaonada ao banco
@@ -16,6 +16,8 @@ module.exports = {
                 image,
                 video,
                 category_id,
+                prepTime, 
+                prepUnit,
                 rating
             })
             const recipe_id = id
