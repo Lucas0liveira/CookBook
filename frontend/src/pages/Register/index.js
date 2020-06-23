@@ -27,11 +27,11 @@ export default function Register() {
             password,
         };
         try {
-            const response = await api.post('singin', data)
+            const response = await api.post('/singin', data)
             alert (`Seu ID de acesso: ${response.data.id}`)
             history.push('/login');
         } catch (error) {
-            alert('Erro ao registrar a conta, tente novamente.'+ '          '+ error.message)
+            alert('Erro ao registrar a conta, tente novamente:\n' + error.message)
         }
 
     }
