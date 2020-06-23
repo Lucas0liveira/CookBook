@@ -25,7 +25,7 @@ export default function SubmitRecipe() {
     const [msr, setMeasures] = useState([])
     const [ingr, setIngredients] = useState([])
     const [prepare, setPrepare] = useState('')
-    const [image, setImage] = useState('')
+    const [image, setImage] = useState('https://images.pexels.com/photos/1907642/pexels-photo-1907642.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260')
     const [video, setVideo] = useState('')
     const [category_id, setCategory] = useState('')
     const [prepTime, setPrepTime] = useState('')
@@ -47,6 +47,12 @@ export default function SubmitRecipe() {
         } catch (error) {
             alert('Erro ao registrar uma nova receita:\n' + error.message)
         }
+    }
+
+    function handleImage(e){
+        const img = e.target.files[0]
+        setImage( URL.createObjectURL(e.target.files[0])
+          )
     }
 
     function handleIngredientSlots(e) {
@@ -108,8 +114,7 @@ export default function SubmitRecipe() {
                                     <Card>
                                         <Card.Img
                                             src={image}
-                                            alt=""
-                                            onChange={e => setImage(e.target.files[0])} />
+                                            alt="" />
                                         <Form>
                                             <Form.File
                                                 id="custom-file-translate-scss"
@@ -117,7 +122,8 @@ export default function SubmitRecipe() {
                                                 data-browse="Buscar"
                                                 lang="en"
                                                 custom
-                                                type="file"
+                                                type="file"                                           
+                                                onChange={handleImage}
                                             // defaultValue="https://images.pexels.com/photos/1907642/pexels-photo-1907642.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
 
                                             />
