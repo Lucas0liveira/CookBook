@@ -28,7 +28,7 @@ export default function SubmitRecipe() {
     const [image, setImage] = useState('https://images.pexels.com/photos/1907642/pexels-photo-1907642.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260')
     const [video, setVideo] = useState('')
     const [category_id, setCategory] = useState('')
-    const [prepTime, setPrepTime] = useState('')
+    const [prepTime, setPrepTime] = useState('15')
     const [prepUnit, setPrepUnit] = useState('Minuto(s)')
     const [ingredientSlots, setIngredietSlots] = useState([])
 
@@ -49,35 +49,46 @@ export default function SubmitRecipe() {
         }
     }
 
-    function handleImage(e){
+    function handleImage(e) {
         const img = e.target.files[0]
-        setImage( URL.createObjectURL(e.target.files[0])
-          )
+        setImage(URL.createObjectURL(e.target.files[0])
+        )
     }
 
     function handleIngredientSlots(e) {
         const item =
-            <FormGroup>
-                <Row>
-                    <Col>
-                        <Form.Control placeholder="Escreva..." />
-                    </Col>
-                    <Col>
-                        <Form.Control as="select" size="sm" custom>
-                            <option>Colher</option>
-                            <option>Xícara</option>
-                            <option>Gramas</option>
-                            <option>Kilogramas</option>
-                            <option>Miligramas</option>
-                            <option>Litro</option>
-                            <option>Mililitros</option>
-                        </Form.Control>
-                    </Col>
-                    <Col>
-                        <Form.Control placeholder="Escreva..." />
-                    </Col>
-                </Row>
-            </FormGroup>
+            <Row>
+                <Col>
+                    <Form.Control
+                        placeholder="Escreva..."
+                        required
+                        onBlur={handleQuantities} />
+                </Col>
+                <Col>
+                    <Form.Control
+                        as="select"
+                        size="sm"
+                        custom
+                        required
+                        defaultValue="Unidade"
+                        onBlur={handleMeasures} >
+                        <option>Unidade(s)</option>
+                        <option>Colher(s)</option>
+                        <option>Xícara(s)</option>
+                        <option>Gramas(s)</option>
+                        <option>Kilogramas(s)</option>
+                        <option>Miligramas(s)</option>
+                        <option>Litro(s)</option>
+                        <option>Mililitros(s)</option>
+                    </Form.Control>
+                </Col>
+                <Col>
+                    <Form.Control
+                        placeholder="Escreva..."
+                        required
+                        onBlur={handleIngredients} />
+                </Col>
+            </Row>
 
 
         setIngredietSlots(ingredientSlots => [...ingredientSlots, item])
@@ -122,10 +133,8 @@ export default function SubmitRecipe() {
                                                 data-browse="Buscar"
                                                 lang="en"
                                                 custom
-                                                type="file"                                           
+                                                type="file"
                                                 onChange={handleImage}
-                                            // defaultValue="https://images.pexels.com/photos/1907642/pexels-photo-1907642.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-
                                             />
                                         </Form>
                                     </Card>
@@ -133,15 +142,24 @@ export default function SubmitRecipe() {
                                 <Col>
                                     <Row>
                                         <Form.Label>Informe o nome da sua receita</Form.Label>
-                                        <Form.Control size="lg"
+                                        <Form.Control
+                                            size="lg"
                                             type="text"
+                                            required
                                             placeholder="Escreva..."
                                             value={name}
                                             onChange={e => setName(e.target.value)} />
                                     </Row>
                                     <Row>
                                         <Form.Label>Informe a categoria da sua receita</Form.Label>
-                                        <Form.Control size="sm" type="text" placeholder="Escreva..." />
+                                        <Form.Control 
+                                            as="select"
+                                            size="sm"
+                                            required
+                                            placeholder="Escolha uma categoria"
+                                            value={category_id}
+                                        />
+                                        <option></option>
                                     </Row>
                                     <Row>
                                         <Form.Label>Informe o tempo de preparo</Form.Label>
@@ -152,6 +170,7 @@ export default function SubmitRecipe() {
                                                 as="select"
                                                 size="sm"
                                                 custom
+                                                required
                                                 defaultValue="15"
                                                 value={prepTime}
                                                 onChange={e => setPrepTime(e.target.value)} >
@@ -172,6 +191,7 @@ export default function SubmitRecipe() {
                                             as="textarea"
                                             rows="2"
                                             placeholder="Escreva..."
+                                            required
                                             value={description}
                                             onChange={e => setDescription(e.target.value)} />
                                     </Row>
@@ -198,66 +218,9 @@ export default function SubmitRecipe() {
                                 </Col>
                             </Row>
 
-                            {/* <Row>
-                                <Col>
-                                    <Form.Control
-                                        placeholder="Escreva..."
-                                        onBlur={handleQuantities} />
-                                </Col>
-                                <Col>
-                                    <Form.Control
-                                        as="select"
-                                        size="sm"
-                                        custom
-                                        defaultValue="Unidade"
-                                        onBlur={handleMeasures} >
-                                        <option>Unidade(s)</option>
-                                        <option>Colher(s)</option>
-                                        <option>Xícara(s)</option>
-                                        <option>Gramas(s)</option>
-                                        <option>Kilogramas(s)</option>
-                                        <option>Miligramas(s)</option>
-                                        <option>Litro(s)</option>
-                                        <option>Mililitros(s)</option>
-                                    </Form.Control>
-                                </Col>
-                                <Col>
-                                    <Form.Control
-                                        placeholder="Escreva..."
-                                        onBlur={handleIngredients} />
-                                </Col>
-                            </Row> */}
 
                             {ingredientSlots.map(item =>
-                                <Row>
-                                    <Col>
-                                        <Form.Control
-                                            placeholder="Escreva..."
-                                            onBlur={handleQuantities} />
-                                    </Col>
-                                    <Col>
-                                        <Form.Control
-                                            as="select"
-                                            size="sm"
-                                            custom
-                                            defaultValue="Unidade"
-                                            onBlur={handleMeasures} >
-                                            <option>Unidade(s)</option>
-                                            <option>Colher(s)</option>
-                                            <option>Xícara(s)</option>
-                                            <option>Gramas(s)</option>
-                                            <option>Kilogramas(s)</option>
-                                            <option>Miligramas(s)</option>
-                                            <option>Litro(s)</option>
-                                            <option>Mililitros(s)</option>
-                                        </Form.Control>
-                                    </Col>
-                                    <Col>
-                                        <Form.Control
-                                            placeholder="Escreva..."
-                                            onBlur={handleIngredients} />
-                                    </Col>
-                                </Row>
+                                <div> {item} </div>
                             )}
 
                             <Row>
@@ -277,6 +240,7 @@ export default function SubmitRecipe() {
                                     as="textarea"
                                     rows="10"
                                     placeholder="Escreva..."
+                                    required
                                     value={prepare}
                                     onChange={e => setPrepare(e.target.value)} />
                             </Row>
