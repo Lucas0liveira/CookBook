@@ -74,10 +74,11 @@ export default function Register() {
                                 onChange={e => setPassword(e.target.value)}
                             />
                         </Form.Group>
-
-                        <Button id="vermais" variant="flat" type="submit">
-                            Cadastrar
-                        </Button>
+                        <Link>
+                            <Button id="vermais" variant="flat" type="submit">
+                                Cadastrar
+                            </Button>
+                        </Link>
 
                     </Form>
 

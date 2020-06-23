@@ -3,6 +3,7 @@ import { Navbar, NavDropdown, Brand, Nav, Form, FormControl, Button, Image, Card
 import logoImg from '../../assets/img/logo-white.png'
 import { FaSearch } from 'react-icons/fa'
 import salmao from '../../assets/img/bg-salmao.png'
+import { Link } from 'react-router-dom'
 
 
 export default function NavBar(login) {
@@ -17,28 +18,32 @@ export default function NavBar(login) {
                     <Nav className="mr-auto">
 
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button id="search" variant="flat">
-                            <FaSearch size={20} color="#FF0000" fontWeight="bolder" />
-                        </Button>
-
+                            <Link>
+                                <Button id="search" variant="flat">
+                                    <FaSearch size={20} color="#FF0000" fontWeight="bolder" />
+                                </Button>
+                            </Link>
                         <Nav.Link href="/" >Início</Nav.Link>
-                        <NavDropdown title="Receitas" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1" variant="dark">Asiática</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Brasileira</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Mexicana</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.4">Pratos rápidas</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.5">Low Carb</NavDropdown.Item>
+                            <NavDropdown title="Receitas" id="basic-nav-dropdown">
+                                <NavDropdown.Item href="#action/3.1" variant="dark">Asiática</NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.2">Brasileira</NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.3">Mexicana</NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.4">Pratos rápidas</NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.5">Low Carb</NavDropdown.Item>
                         </NavDropdown>
 
                     </Nav>
                     <Form inline>
-                        <Button href="/login" id="login" variant="flat">
+                        <Link>
+                            <Button href="/login" id="login" variant="flat">
                             Login
-                </Button>
-                        <Button href="/register" id="login" variant="flat">
+                            </Button>
+                        </Link>
+                        <Link>
+                            <Button href="/register" id="login" variant="flat">
                             Cadastro
-                </Button>
-
+                            </Button>
+                        </Link>
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
@@ -54,10 +59,11 @@ export default function NavBar(login) {
                     <Nav className="mr-auto">
 
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button id="search" variant="flat">
-                            <FaSearch size={20} color="#FF0000" fontWeight="bolder" />
-                        </Button>
-
+                        <Link>
+                            <Button id="search" variant="flat">
+                                <FaSearch size={20} color="#FF0000" fontWeight="bolder" />
+                            </Button>
+                        </Link>
                         <Nav.Link href="/" >Início</Nav.Link>
                         <NavDropdown title="Receitas" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1" variant="dark">Asiática</NavDropdown.Item>
@@ -66,19 +72,23 @@ export default function NavBar(login) {
                             <NavDropdown.Item href="#action/3.4">Pratos rápidas</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.5">Low Carb</NavDropdown.Item>
                         </NavDropdown>
-                        <Button id="submitnav" variant="flat">
-                            Submeter receita
+                        <Link>
+                            <Button id="submitnav" variant="flat">
+                                Submeter receita
                             </Button>
+                        </Link>
                     </Nav>
-                    <Form inline>
-                        <Image
+                    <Link>
+                        <Form inline>
+                            <Image
                             width={64}
                             height={64}
                             src={salmao}
                             roundedCircle
-                        />
+                            />
 
-                    </Form>
+                        </Form>
+                    </Link>
                 </Navbar.Collapse>
             </Navbar>
         )

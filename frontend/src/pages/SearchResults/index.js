@@ -14,7 +14,7 @@ import { FaClock } from 'react-icons/fa'
 import { FaPen } from 'react-icons/fa'
 import { FaEllipsisV } from 'react-icons/fa'
 import { FaTrash } from 'react-icons/fa'
-
+import Nbar from '../NavBar/NavBar'
 
 
 
@@ -23,34 +23,7 @@ export default function ProfileSubmited() {
     {
         return (
     <>
-                 <Navbar variant="dark" fixed = "top" expand="lg">
-                    <Navbar.Brand href="#home">
-                        <img src={logoImg} alt="" />
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto">
-
-                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                            <Button id="search" variant="flat">
-                                <FaSearch size={20} color="#FF0000" fontWeight="bolder" />
-                            </Button>
-
-                            <Nav.Link href="#home" >Início</Nav.Link>
-                            <NavDropdown title="Receitas" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1" variant="dark">Asiática</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Brasileira</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Mexicana</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.4">Pratos rápidas</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.5">Low Carb</NavDropdown.Item>
-                            </NavDropdown>
-                            <Button id="submitnav" variant="flat">
-                                Submeter receita
-                            </Button>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
-
+        {Nbar(false)}
 
     </>
 
