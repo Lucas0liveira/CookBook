@@ -10,6 +10,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa'
 import { FaPlusCircle } from 'react-icons/fa'
 import Nbar from '../NavBar/NavBar'
+import api from '../../services/api';
 
 
 
@@ -19,50 +20,57 @@ import Nbar from '../NavBar/NavBar'
 export default function SubmitRecipe() {
     var ingredientCount = 0
     const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
+    const [qtt, setQuantities ] = useState([])
+    const [msr, setMeasures ] = useState([])
+    const [ingr, setIngredients ] = useState([])
+    const [prepare, setPrepare] = useState('')
+    const [image, setImage] = useState('')
+    const [video, setVideo] = useState('')
+    const [category_id, setCategory] = useState('')
     const [prepTime, setPrepTime] = useState('')
     const [prepUnit, setPrepUnit] = useState('')
-    const [description, setDescription] = useState('')
-    const [ingredients, setIngredients] = useState([])
-    const [prepare, setPrepare] = useState('')
+    const [ingredientSlots, setIngredietSlots] = useState([])
 
-    function handleRecipe(e) {
+    const history = useHistory();
+
+    async function handleRecipe(e) {
         e.preventDefault()
 
-    }
+        try {
+            const response = await api.post('/recipes', { name, description, qtt, msr, ingr, prepare, image, video, category_id, prepTime, prepUnit});
+            console.log(response.data.id);
 
 
-    function addIngredient() {
+            history.push('/profile')
 
-        let aux = []
-        aux.push(<span>Clique em + para adicionar mais ingredientes.</span>)
-        for (var i = 0; i < ingredientCount; i++) {
-            aux.push(<Row>
-                <Col>
-                    <Form.Control placeholder="Escreva..." />
-                </Col>
-                <Col>
-                    <Form.Control as="select" size="sm" custom>
-                        <option>Colher</option>
-                        <option>Xícara</option>
-                        <option>Gramas</option>
-                        <option>Kilogramas</option>
-                        <option>Miligramas</option>
-                        <option>Litro</option>
-                        <option>Mililitros</option>
-                    </Form.Control>
-                </Col>
-                <Col>
-                    <Form.Control placeholder="Escreva..." />
-                </Col>
-            </Row>)
+        } catch (error) {
+            alert('Erro ao registrar uma nova receita:\n' +  error.message)
         }
-        console.log(aux)
-        return aux
     }
 
-    function increaseCount() {
-        ingredientCount++
-        console.log(ingredientCount)
+    function handleIngredients(e) {   
+        const item = <Row>
+                        <Col>
+                            <Form.Control placeholder="Escreva..." />
+                        </Col>
+                        <Col>
+                            <Form.Control as="select" size="sm" custom>
+                                <option>Colher</option>
+                                <option>Xícara</option>
+                                <option>Gramas</option>
+                                <option>Kilogramas</option>
+                                <option>Miligramas</option>
+                                <option>Litro</option>
+                                <option>Mililitros</option>
+                            </Form.Control>
+                        </Col>
+                        <Col>
+                            <Form.Control placeholder="Escreva..." />
+                        </Col>
+                    </Row>
+        setIngredietSlots(ingredientSlots => [...ingredientSlots, item])
+
     }
 
     {
@@ -129,33 +137,37 @@ export default function SubmitRecipe() {
                                 <h6 class="text-center">Ingredientes</h6>
                             </Col>
                         </Row>
+                        {ingredientSlots.map( item =>
+                            <div>
+                                <Row>
+                                    <Col>
+                                        <Form.Control placeholder="Escreva..." />
+                                    </Col>
+                                    <Col>
+                                        <Form.Control as="select" size="sm" custom>
+                                            <option>Colher</option>
+                                            <option>Xícara</option>
+                                            <option>Gramas</option>
+                                            <option>Kilogramas</option>
+                                            <option>Miligramas</option>
+                                            <option>Litro</option>
+                                            <option>Mililitros</option>
+                                        </Form.Control>
+                                    </Col>
+                                    <Col>
+                                        <Form.Control placeholder="Escreva..." />
+                                    </Col>
+                                </Row>
+                         </div>
+                        )}
+
                         <Row>
                             <Col>
-                                <Form.Control placeholder="Escreva..." />
-                            </Col>
-                            <Col>
-                                <Form.Control as="select" size="sm" custom>
-                                    <option>Colher</option>
-                                    <option>Xícara</option>
-                                    <option>Gramas</option>
-                                    <option>Kilogramas</option>
-                                    <option>Miligramas</option>
-                                    <option>Litro</option>
-                                    <option>Mililitros</option>
-                                </Form.Control>
-                            </Col>
-                            <Col>
-                                <Form.Control placeholder="Escreva..." />
-                            </Col>
-                        </Row>
-                        {}
-                        <Row>
-                            <Col>
                             </Col>
                             <Col>
                             </Col>
                             <Col>
-                                <Button variant="flat" id="add" onClick={increaseCount}>
+                                <Button variant="flat" id="add" onClick={handleIngredients}>
                                     <FaPlusCircle size={30} color="#FF0000" fontWeight="bolder" />
                                 </Button>
                             </Col>
