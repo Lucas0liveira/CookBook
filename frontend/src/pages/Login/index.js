@@ -20,7 +20,7 @@ export default function Login() {
         e.preventDefault();
 
         try {
-            const response = await api.post('login', { email }, { password });
+            const response = await api.post('/login', { email, password });
             console.log(response.data.id);
 
             // localStorage.setItem('name', name);
@@ -29,7 +29,7 @@ export default function Login() {
 
         } catch (error) {
             // alert('Falha no login, tente novamente.')
-            alert('Erro ao registrar a conta, tente novamente.' + '          ' + error.message)
+            alert('Erro ao registrar a conta, tente novamente:\n' + error.message)
         }
 
     }
