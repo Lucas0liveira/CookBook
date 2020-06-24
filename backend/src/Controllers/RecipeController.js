@@ -114,14 +114,25 @@ module.exports = {
 
     async rating(request, response) {
         const { id, nStars } = request.body
+        if (typeof nStars === 'number') {
+            let oldRating = await connection('recipes').select('rating').where('id', id)
+            oldRating = Object.values(oldRating[0])
 
-        let oldRating = await connection('recipes').select('rating').where('id', id)
-        oldRating = Object.values(oldRating[0])
-        const newRating = (Number(oldRating) + Number(nStars)) / 2
-        try {
-            await connection('recipes').where('id', id).update('rating', newRating)
-            return response.status(204).send()
-        } catch (e) {
+            var newRating
+            if (oldRating != 0) {
+                newRating = (Number(oldRating) + Number(nStars)) / 2
+            } else {
+                newRating = nStars
+            }
+            console.log(newRating)
+            console.log(oldRating)
+            try {
+                await connection('recipes').where('id', id).update('rating', newRating)
+                return response.status(204).send()
+            } catch (e) {
+                return response.json({ error: 'não foi possivel realizar essa operação' })
+            }
+        } else {
             return response.json({ error: 'não foi possivel realizar essa operação' })
         }
     }
