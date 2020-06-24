@@ -156,10 +156,29 @@ export default function SubmitRecipe() {
                                             as="select"
                                             size="sm"
                                             required
-                                            placeholder="Escolha uma categoria"
-                                            value={category_id}
-                                        />
-                                        <option></option>
+                                            placeholder="Escolha uma categoria">
+                                        
+                                            <option>Asiática</option>
+                                            <option>Brasileira</option>
+                                            <option>Coreana</option>
+                                            <option>Drinks</option>
+                                            <option>Francesa</option>
+                                            <option>Hamburguer</option>
+                                            <option>Indiana</option>
+                                            <option>Italiana</option>
+                                            <option>Japonesa</option>
+                                            <option>Low Carb</option>
+                                            <option>Mexicana</option>
+                                            <option>Saladas</option>
+                                            <option>Sem Glúten</option>
+                                            <option>Sopas</option>
+                                            <option>Sobremesas</option>
+                                            <option>Snacks</option>
+                                            <option>Tailandesa</option>
+                                            <option>Vegana</option>
+                                            <option>Vegetariana</option>
+                                            
+                                        </Form.Control>
                                     </Row>
                                     <Row>
                                         <Form.Label>Informe o tempo de preparo</Form.Label>
