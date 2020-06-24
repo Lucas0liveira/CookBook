@@ -1,19 +1,9 @@
 import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import { Navbar, NavDropdown, Brand, Nav, Form, FormControl, Button, Image, Card, Container, Row, Col, CardDeck, Media, Badge, FormGroup, FormLabel } from 'react-bootstrap/'
-import logoImg from '../../assets/img/logo-white.png'
-import sushi from '../../assets/img/sushi.jpg'
-import pizza from '../../assets/img/pizza.jpg'
-import hamburguer from '../../assets/img/hamburguer.jpg'
-import bg from '../../assets/img/food-background.jpg'
-import { BrowserRouter as Router } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa'
+import {useHistory } from 'react-router-dom'
+import {Form, FormControl, Button, Card, Row, Col, Badge, FormLabel } from 'react-bootstrap/'
 import { FaPlusCircle } from 'react-icons/fa'
 import Nbar from '../NavBar/NavBar'
 import api from '../../services/api';
-
-
-
 
 
 
@@ -67,11 +57,12 @@ export default function SubmitRecipe() {
                 <Col>
                     <Form.Control
                         as="select"
-                        size="sm"
+                        size="md"
                         custom
                         required
-                        defaultValue="Unidade"
+                        defaultValue=""
                         onBlur={handleMeasures} >
+                        <option></option>
                         <option>Unidade(s)</option>
                         <option>Colher(s)</option>
                         <option>Xícara(s)</option>
@@ -102,12 +93,19 @@ export default function SubmitRecipe() {
 
     function handleMeasures(e) {
         let item = e.target.value
+        console.log(item)
         setMeasures(msr => [...msr, item])
     }
 
     function handleIngredients(e) {
         let item = e.target.value
         setIngredients(ingr => [...ingr, item])
+    }
+
+    function handleCategory(e) {
+        var index = e.nativeEvent.target.selectedIndex;
+        console.log(index)
+        setCategory(index)
     }
 
 
@@ -156,8 +154,10 @@ export default function SubmitRecipe() {
                                             as="select"
                                             size="sm"
                                             required
-                                            placeholder="Escolha uma categoria">
-                                        
+                                            custom
+                                            placeholder="Escolha uma categoria"
+                                            onChange={handleCategory} >                                        
+                                            <option></option>                                    
                                             <option>Asiática</option>
                                             <option>Brasileira</option>
                                             <option>Coreana</option>
