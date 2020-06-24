@@ -12,6 +12,7 @@ routes.get('/startup', InitializeDatabase.databaseStart)
 
 //lista de rotas reacianoada a loguin e usuários
 routes.get('/users', UserController.index)
+routes.get('/users/:id', UserController.getUser)
 routes.get('/users/follow', UserController.followIndex)
 routes.get('/users/nFollowers/:follow_id', UserController.getNFolowers)
 routes.get('/users/nFollows/:followed_id', UserController.getNFolowed)
@@ -20,10 +21,11 @@ routes.get('/users/follows/:followed_id', UserController.getFollowed)
 routes.post('/singin', UserController.create)
 routes.post('/login', UserController.login)
 routes.post('/users/follow', UserController.follow)
-routes.delete('users/unfollow', UserController.unfollow)
+routes.delete('/users/unfollow/:followed_id', UserController.unfollow)
 
 //lista de rotas para receitas
 routes.get('/recipes', RecipeController.index)
+routes.get('/recipes/show/:id', RecipeController.getRecipe)
 routes.get('/recipes/:category', RecipeController.filtered)
 routes.get('/recipes/stars', RecipeController.recipesByStars)
 routes.post('/recipes', RecipeController.create)
@@ -48,7 +50,8 @@ routes.post('/categories', CategoryController.create)
 routes.delete('/categories/:id', CategoryController.delete)
 
 //lista de rotas para comentarios
-routes.get('/comments', CommentsController.getComments)
+routes.get('/comments/index', CommentsController.index)
+routes.get('/comments/:recipe_id', CommentsController.getComments)
 routes.post('/comments', CommentsController.newComment)
 routes.delete('/comments', CommentsController.delComment)
 

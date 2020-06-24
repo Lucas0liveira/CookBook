@@ -4,23 +4,20 @@ module.exports = {
 
     //função para criar uma nova receita
     async create(request, response) {
-        const { name, description, qtt, msr, ingr, prepare, prepTime, prepUnit, image, video, category_id } = request.body
-
-        const corte = "https://www.youtube.com/watch?v="
-        const videourl = "https://www.youtube.com/embed/" + video.substring(video.indexOf(corte) + corte.length)
+        const { name, description, qtt, msr, ingr, prepare, image, video, category_id, prepTime, prepUnit } = request.body
 
         try {
             //nova receita é adiciaonada ao banco
-            const rating = 0
+            const rating = 1
             const [id] = await connection('recipes').insert({
                 name,
                 description,
                 prepare,
+                image,
+                video,
+                category_id,
                 prepTime,
                 prepUnit,
-                image,
-                videourl,
-                category_id,
                 rating
             })
             const recipe_id = id
@@ -40,14 +37,14 @@ module.exports = {
             return response.json({ id })
 
         } catch (err) {
+            console.log(err)
             return response.json({ err: "Não foi possível adicionar receita" })
         }
     },
 
     //função que retorna todas as receitas do banco
     async index(request, response) {
-
-        let recipes = await connection('recipes').select('*').orderBy('name')
+        let recipes = await connection('recipes').select('*').orderBy("id", "desc")
         let aux = []
         for (i = 0; i < recipes.length; i++) {
             aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])
@@ -55,7 +52,7 @@ module.exports = {
         return response.json(aux)
     },
 
-    async getRecipe(request, response) {
+    async indexOne(request, response) {
         const id = request.params
         let recipes = await connection('recipes').select('*').where('id', id.id)
         let aux = []
@@ -103,8 +100,8 @@ module.exports = {
 
     },
 
-    async recipesByStars(request, response) {
-        let recipes = await connection('recipes').select('*').orderBy('rating')
+    async indexByStars(request, response) {
+        let recipes = await connection('recipes').select('*').orderBy("rating")
         let aux = []
         for (i = 0; i < recipes.length; i++) {
             aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])
@@ -114,25 +111,16 @@ module.exports = {
 
     async rating(request, response) {
         const { id, nStars } = request.body
-        if (typeof nStars === 'number') {
-            let oldRating = await connection('recipes').select('rating').where('id', id)
-            oldRating = Object.values(oldRating[0])
 
-            var newRating
-            if (oldRating != 0) {
-                newRating = (Number(oldRating) + Number(nStars)) / 2
-            } else {
-                newRating = nStars
-            }
-            console.log(newRating)
-            console.log(oldRating)
-            try {
-                await connection('recipes').where('id', id).update('rating', newRating)
-                return response.status(204).send()
-            } catch (e) {
-                return response.json({ error: 'não foi possivel realizar essa operação' })
-            }
-        } else {
+        let oldRating = await connection('recipes').select('rating').where('id', id)
+        oldRating = Object.values(oldRating[0])
+        const newRating = Number(oldRating) + Number(nStars)
+        console.log(oldRating)
+        console.log(newRating)
+        try {
+            await connection('recipes').where('id', id).update('rating', newRating)
+            return response.status(204).send()
+        } catch (e) {
             return response.json({ error: 'não foi possivel realizar essa operação' })
         }
     }

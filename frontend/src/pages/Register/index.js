@@ -10,26 +10,28 @@ import Nbar from '../NavBar/NavBar'
 
 import api from '../../services/api';
 
-export default function Login() {
+export default function Register() {
 
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
     const history = useHistory();
 
-    async function handleLogin(e) {
+    async function handleRegister(e) {
         e.preventDefault();
 
+        const data = {
+            name,
+            email,
+            password,
+        };
         try {
-            const response = await api.post('login', { email }, { password });
-            console.log(response.data.id);
-
-            // localStorage.setItem('name', name);
-
-            history.push('/profile')
-
+            const response = await api.post('singin', data)
+            alert (`Seu ID de acesso: ${response.data.id}`)
+            history.push('/login');
         } catch (error) {
-            // alert('Falha no login, tente novamente.')
-            alert('Erro ao registrar a conta, tente novamente.' + '          ' + error.message)
+            alert('Erro ao registrar a conta, tente novamente.'+ '          '+ error.message)
         }
 
     }
@@ -37,39 +39,48 @@ export default function Login() {
     {
         return (
             <>
-
                 {Nbar(false)}
 
                 <div class='container' id='submit'>
-                    <Form onSubmit={handleLogin}>
-                        <Form.Group controlId="formBasicEmail">
+
+                    <Form onSubmit={handleRegister}>
+
+                        <Form.Group controlId="formGroupNome">
+                            <Form.Label>Nome completo</Form.Label>
+                            <Form.Control
+                                type="Nome Completo"
+                                placeholder="Insira seu nome completo"
+                                value={name}
+                                onChange={e => setName(e.target.value)}
+                            />
+                        </Form.Group>
+
+                        <Form.Group controlId="formGroupemail">
                             <Form.Label>Email</Form.Label>
                             <Form.Control
-                                type="email"
-                                placeholder="Insira seu e-mail"
+                                type="Email"
+                                placeholder="Insira seu email"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
                             />
-                            <Form.Text className="text-muted">
-                                Nós nunca vamos compartilhar seu email com ninguém.
-                        </Form.Text>
                         </Form.Group>
-                        <Form.Group controlId="formBasicPassword">
+
+                        <Form.Group controlId="formGroupSenha">
                             <Form.Label>Senha</Form.Label>
                             <Form.Control
-                                type="password"
+                                type="Senha"
                                 placeholder="Insira sua senha"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
                             />
                         </Form.Group>
-                        <Form.Group controlId="formBasicCheckbox">
-                            <Form.Check type="checkbox" label="Mantenha-me logado" />
-                        </Form.Group>
+
                         <Button id="vermais" variant="flat" type="submit">
-                            Entrar
+                            Cadastrar
                         </Button>
+
                     </Form>
+
                 </div>
 
             </>

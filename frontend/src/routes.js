@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import SubmitRecipe from './pages/SubmitRecipe'
 import Template from './pages/Template'
 import Login from './pages/Login'
+import Register from './pages/Register'
 import ViewRecipe from './pages/ViewRecipe'
 
 //switch garante que apenas uma rota sera chamada por momento
@@ -18,7 +19,8 @@ export default function Routes() {
                 <Route path="/recipe/submit" component={SubmitRecipe}></Route>
                 <Route path="/template" component={Template}></Route>
                 <Route path="/login" component={Login}></Route>
-                <Route path="/recipe" component={ViewRecipe}></Route>
+                <Route path="/recipe/:id" component={ViewRecipe}></Route>
+                <Route path="/register" component={Register}></Route>
             </Switch>
         </BrowserRouter>
     )

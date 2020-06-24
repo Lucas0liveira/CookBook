@@ -15,8 +15,8 @@ import { FaSearch } from 'react-icons/fa'
 export default function Home() {
     {
         return (
-    <>
-                <Navbar variant="dark" fixed = "top" expand="lg">
+            <>
+                <Navbar variant="dark" fixed="top" expand="lg">
                     <Navbar.Brand href="#home">
                         <img src={logoImg} alt="" />
                     </Navbar.Brand>
@@ -53,143 +53,143 @@ export default function Home() {
 
 
                 {
-                <>
-                <h2 class = "title-section">As mais bem avaliadas</h2>
-             
-                    <CardDeck>
-                    <Card>
-                      <Card.Img variant="top" src={sushi} alt="" />
-                      <Card.Body>
-                      <Badge variant="secondary">45 MIN</Badge>{' '}
-                        <Card.Title>Sushi brasileiro</Card.Title>
-                        <Card.Text>
-                            Sem mimimi, recheio feito  com muita coisa.
-                        </Card.Text>
-                      </Card.Body>
-                      <Card.Footer>
-                        <Button id = "vermais" block variant = "flat"> Ver mais </Button>
-                      </Card.Footer>
-                    </Card>
-                    <Card>
-                      <Card.Img variant="top" src={pizza} alt="" />
-                      <Card.Body>
-                      <Badge variant="secondary">45 MIN</Badge>{' '}
-                        <Card.Title>Deliciosa pizza</Card.Title>
-                        <Card.Text>
-                            Pizza estilo italiana, sem frescura e com muito queijo.
-                        </Card.Text>
-                      </Card.Body>
-                      <Card.Footer>
-                        <Button id = "vermais" block variant = "flat"> Ver mais </Button>
-                      </Card.Footer>
-                    </Card>
-                    <Card>
-                      <Card.Img variant="top" src={hamburguer} alt="" />
-                      <Card.Body>
-                      <Badge variant="secondary">45 MIN</Badge>{' '}
-                        <Card.Title>Onion crispy burguer</Card.Title>
-                        <Card.Text>
-                          Hamburguer caseiro com cebola crispy no pão brioche amanteigado.
-                        </Card.Text>
-                      </Card.Body>
-                      <Card.Footer>
-                        <Button id = "vermais" block variant = "flat"> Ver mais </Button>
-                      </Card.Footer>
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src={sushi} alt="" />
-                        <Card.Body>
-                        <Badge variant="secondary">45 MIN</Badge>{' '}
-                            <Card.Title>Sushi</Card.Title>
-                            <Card.Text>
-                                Sushi muito bom
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <Button id = "vermais" block variant = "flat"> Ver mais </Button>
-                        </Card.Footer>
-                        </Card>
-                  </CardDeck>
+                    <>
+                        <h2 class="title-section">As mais bem avaliadas</h2>
 
-                  <h2 class = "title-section">Adicionadas recentemente</h2>
-             
-                    <CardDeck>
-                    <Card>
-                      <Card.Img variant="top" src={sushi} alt="" />
-                      <Card.Body>
-                      <Badge variant="secondary">45 MIN</Badge>{' '}
-                        <Card.Title>Sushi brasileiro</Card.Title>
-                        <Card.Text>
-                            Sem mimimi, recheio feito  com muita coisa.
+                        <CardDeck>
+                            <Card>
+                                <Card.Img variant="top" src={sushi} alt="" />
+                                <Card.Body>
+                                    <Badge variant="secondary">45 MIN</Badge>{' '}
+                                    <Card.Title>Sushi brasileiro</Card.Title>
+                                    <Card.Text>
+                                        Sem mimimi, recheio feito  com muita coisa.
                         </Card.Text>
-                      </Card.Body>
-                      <Card.Footer>
-                        <Button id = "vermais" block variant = "flat"> Ver mais </Button>
-                      </Card.Footer>
-                    </Card>
-                    <Card>
-                      <Card.Img variant="top" src={pizza} alt="" />
-                      <Card.Body>
-                      <Badge variant="secondary">45 MIN</Badge>{' '}
-                        <Card.Title>Deliciosa pizza</Card.Title>
-                        <Card.Text>
-                            Pizza estilo italiana, sem frescura e com muito queijo.
+                                </Card.Body>
+                                <Card.Footer>
+                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
+                                </Card.Footer>
+                            </Card>
+                            <Card>
+                                <Card.Img variant="top" src={pizza} alt="" />
+                                <Card.Body>
+                                    <Badge variant="secondary">45 MIN</Badge>{' '}
+                                    <Card.Title>Deliciosa pizza</Card.Title>
+                                    <Card.Text>
+                                        Pizza estilo italiana, sem frescura e com muito queijo.
                         </Card.Text>
-                      </Card.Body>
-                      <Card.Footer>
-                        <Button id = "vermais" block variant = "flat"> Ver mais </Button>
-                      </Card.Footer>
-                    </Card>
-                    <Card>
-                      <Card.Img variant="top" src={hamburguer} alt="" />
-                      <Card.Body>
-                      <Badge variant="secondary">45 MIN</Badge>{' '}
-                        <Card.Title>Onion crispy burguer</Card.Title>
-                        <Card.Text>
-                          Hamburguer caseiro com cebola crispy no pão brioche amanteigado.
+                                </Card.Body>
+                                <Card.Footer>
+                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
+                                </Card.Footer>
+                            </Card>
+                            <Card>
+                                <Card.Img variant="top" src={hamburguer} alt="" />
+                                <Card.Body>
+                                    <Badge variant="secondary">45 MIN</Badge>{' '}
+                                    <Card.Title>Onion crispy burguer</Card.Title>
+                                    <Card.Text>
+                                        Hamburguer caseiro com cebola crispy no pão brioche amanteigado.
                         </Card.Text>
-                      </Card.Body>
-                      <Card.Footer>
-                        <Button id = "vermais" block variant = "flat"> Ver mais </Button>
-                      </Card.Footer>
-                    </Card>
-                    <Card>
-                        <Card.Img variant="top" src={sushi} alt="" />
-                        <Card.Body>
-                        <Badge variant="secondary">45 MIN</Badge>{' '}
-                            <Card.Title>Sushi</Card.Title>
-                            <Card.Text>
-                                Sushi muito bom
+                                </Card.Body>
+                                <Card.Footer>
+                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
+                                </Card.Footer>
+                            </Card>
+                            <Card>
+                                <Card.Img variant="top" src={sushi} alt="" />
+                                <Card.Body>
+                                    <Badge variant="secondary">45 MIN</Badge>{' '}
+                                    <Card.Title>Sushi</Card.Title>
+                                    <Card.Text>
+                                        Sushi muito bom
                             </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <Button id = "vermais" block variant = "flat"> Ver mais </Button>
-                        </Card.Footer>
-                        </Card>
-                  </CardDeck>
+                                </Card.Body>
+                                <Card.Footer>
+                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
+                                </Card.Footer>
+                            </Card>
+                        </CardDeck>
 
-                  <h2 class = "title-section">Termos populares</h2>
+                        <h2 class="title-section">Adicionadas recentemente</h2>
+
+                        <CardDeck>
+                            <Card>
+                                <Card.Img variant="top" src={sushi} alt="" />
+                                <Card.Body>
+                                    <Badge variant="secondary">45 MIN</Badge>{' '}
+                                    <Card.Title>Sushi brasileiro</Card.Title>
+                                    <Card.Text>
+                                        Sem mimimi, recheio feito  com muita coisa.
+                        </Card.Text>
+                                </Card.Body>
+                                <Card.Footer>
+                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
+                                </Card.Footer>
+                            </Card>
+                            <Card>
+                                <Card.Img variant="top" src={pizza} alt="" />
+                                <Card.Body>
+                                    <Badge variant="secondary">45 MIN</Badge>{' '}
+                                    <Card.Title>Deliciosa pizza</Card.Title>
+                                    <Card.Text>
+                                        Pizza estilo italiana, sem frescura e com muito queijo.
+                        </Card.Text>
+                                </Card.Body>
+                                <Card.Footer>
+                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
+                                </Card.Footer>
+                            </Card>
+                            <Card>
+                                <Card.Img variant="top" src={hamburguer} alt="" />
+                                <Card.Body>
+                                    <Badge variant="secondary">45 MIN</Badge>{' '}
+                                    <Card.Title>Onion crispy burguer</Card.Title>
+                                    <Card.Text>
+                                        Hamburguer caseiro com cebola crispy no pão brioche amanteigado.
+                        </Card.Text>
+                                </Card.Body>
+                                <Card.Footer>
+                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
+                                </Card.Footer>
+                            </Card>
+                            <Card>
+                                <Card.Img variant="top" src={sushi} alt="" />
+                                <Card.Body>
+                                    <Badge variant="secondary">45 MIN</Badge>{' '}
+                                    <Card.Title>Sushi</Card.Title>
+                                    <Card.Text>
+                                        Sushi muito bom
+                            </Card.Text>
+                                </Card.Body>
+                                <Card.Footer>
+                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
+                                </Card.Footer>
+                            </Card>
+                        </CardDeck>
+
+                        <h2 class="title-section">Termos populares</h2>
 
                         <Row>
-                            <Col><Button id = "comidajaponesa" block variant = "flat"> Comida japonesa </Button></Col>
-                            <Col><Button id = "comidabrasileira" block variant = "flat"> Comida brasileira </Button></Col>
+                            <Col><Button id="comidajaponesa" block variant="flat"> Comida japonesa </Button></Col>
+                            <Col><Button id="comidabrasileira" block variant="flat"> Comida brasileira </Button></Col>
                         </Row>
                         <Row><p></p></Row>
                         <Row>
-                            <Col><Button id = "pizzacaseira" block variant = "flat"> Pizza caseira </Button></Col>
-                            <Col><Button id = "cachorroquente" block variant = "flat"> Cachorro quente </Button></Col>
-                            <Col><Button id = "receitadebolo" block variant = "flat"> Receita de bolo </Button></Col>
+                            <Col><Button id="pizzacaseira" block variant="flat"> Pizza caseira </Button></Col>
+                            <Col><Button id="cachorroquente" block variant="flat"> Cachorro quente </Button></Col>
+                            <Col><Button id="receitadebolo" block variant="flat"> Receita de bolo </Button></Col>
                         </Row>
-                    
 
-             </>
+
+                    </>
                 }
 
-    </>
+            </>
 
-            
+
         )
     }
 }
 
-      
+
