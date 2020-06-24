@@ -45,7 +45,9 @@ export default function Home() {
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            <Link id="vermais" block variant="flat" to={"/recipe/" + recipe[0].id}> Ver mais </Link>
+                            <Link to = {"/recipe/" + recipe[0].id}>
+                            <Button id="vermais" block variant="flat"> Ver mais </Button>
+                            </Link>
                         </Card.Footer>
                     </Card>)
                 ))
@@ -65,7 +67,10 @@ export default function Home() {
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            <Link id="vermais" block variant="flat" to={"/recipe/" + recipe[0].id}> Ver mais </Link>
+
+                            <Link to = {"/recipe/" + recipe[0].id}>
+                            <Button id="vermais" block variant="flat"> Ver mais </Button>
+                            </Link>
                         </Card.Footer>
                     </Card>
                 ))}
@@ -74,14 +79,34 @@ export default function Home() {
             <h2 class="title-section">Termos populares</h2>
 
             <Row>
-                <Col><Button id="comidajaponesa" block variant="flat"> Comida japonesa </Button></Col>
-                <Col><Button id="comidabrasileira" block variant="flat"> Comida brasileira </Button></Col>
+                <Col>
+                    <Link>
+                        <Button id="comidajaponesa" block variant="flat"> Comida japonesa </Button>
+                    </Link>
+                </Col>
+                <Col>
+                    <Link>
+                        <Button id="comidabrasileira" block variant="flat"> Comida brasileira </Button>
+                    </Link>
+                </Col>
             </Row>
             <Row><p></p></Row>
             <Row>
-                <Col><Button id="pizzacaseira" block variant="flat"> Pizza caseira </Button></Col>
-                <Col><Button id="cachorroquente" block variant="flat"> Cachorro quente </Button></Col>
-                <Col><Button id="receitadebolo" block variant="flat"> Receita de bolo </Button></Col>
+                <Col>
+                    <Link>
+                        <Button id="pizzacaseira" block variant="flat"> Pizza caseira </Button>
+                    </Link>
+                </Col>
+                <Col>
+                    <Link>
+                        <Button id="cachorroquente" block variant="flat"> Cachorro quente </Button>
+                    </Link>
+                </Col>
+                <Col>
+                    <Link>
+                        <Button id="receitadebolo" block variant="flat"> Receita de bolo </Button>
+                    </Link>
+                </Col>
             </Row>
 
         </>

@@ -11,6 +11,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa'
 import { FaPlusCircle } from 'react-icons/fa'
 import { FaPen } from 'react-icons/fa'
+import Nbar from '../NavBar/NavBar'
 
 
 
@@ -19,35 +20,7 @@ export default function Profile() {
     {
         return (
     <>
-                 <Navbar variant="dark" fixed = "top" expand="lg">
-                    <Navbar.Brand href="#home">
-                        <img src={logoImg} alt="" />
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto">
-
-                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                            <Button id="search" variant="flat">
-                                <FaSearch size={20} color="#FF0000" fontWeight="bolder" />
-                            </Button>
-
-                            <Nav.Link href="#home" >Início</Nav.Link>
-                            <NavDropdown title="Receitas" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1" variant="dark">Asiática</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Brasileira</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Mexicana</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.4">Pratos rápidas</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.5">Low Carb</NavDropdown.Item>
-                            </NavDropdown>
-                            <Button id="submitnav" variant="flat">
-                                Submeter receita
-                            </Button>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
-
-              
+    {Nbar(true)}          
                     <Row>
                         <Image className = "foto"
                               width={150}
@@ -62,9 +35,11 @@ export default function Profile() {
                             <h5 class = "title-section-profile">Nome Completo</h5>
                         </Col>
                         <Col>
-                            <Button variant = "flat" id = "Edit" >
-                                <FaPen size={20} color="#FF0000" fontWeight="bolder" />
-                            </Button>
+                            <Link>
+                                <Button variant = "flat" id = "Edit" >
+                                    <FaPen size={20} color="#FF0000" fontWeight="bolder" />
+                                </Button>
+                            </Link>
                         </Col>
                     </Row>
             
@@ -78,24 +53,48 @@ export default function Profile() {
                         </Nav>
 
 
-                        
+                        <Link>
                             <Button variant = "flat" id = "addFolder" >
                                 <FaPlusCircle size={30} color="#FF0000" fontWeight="bolder" />
                             </Button>
-
+                        </Link>
 
 
                             
                         <Row>
-                            <Col><Button id = " " block variant = "flat"> Comida japonesa </Button></Col>
-                            <Col><Button id = " " block variant = "flat"> Comida brasileira </Button></Col>
-                            <Col><Button id = " " block variant = "flat"> Doces </Button></Col>
+                            <Col>
+                                <Link>
+                                    <Button id = " " block variant = "flat"> Comida japonesa </Button>
+                                </Link>
+                            </Col>
+                            <Col>
+                                <Link>
+                                    <Button id = " " block variant = "flat"> Comida brasileira </Button>
+                                </Link>
+                            </Col>
+                            <Col>
+                                <Link>
+                                    <Button id = " " block variant = "flat"> Doces </Button>
+                                </Link>
+                            </Col>
                         </Row>
                         <Row><p></p></Row>
                         <Row>
-                            <Col><Button id = " " block variant = "flat"> Pizzas </Button></Col>
-                            <Col><Button id = " " block variant = "flat"> Comida coreana </Button></Col>
-                            <Col><Button id = " " block variant = "flat"> Ideias de lanches </Button></Col>
+                            <Col>
+                                <Link>
+                                    <Button id = " " block variant = "flat"> Pizzas </Button>
+                                </Link>
+                            </Col>
+                            <Col>
+                                <Link>
+                                    <Button id = " " block variant = "flat"> Comida coreana </Button>
+                                </Link>
+                            </Col>
+                            <Col>
+                                <Link>
+                                    <Button id = " " block variant = "flat"> Ideias de lanches </Button>
+                                </Link>
+                            </Col>
                         </Row>
        
                 

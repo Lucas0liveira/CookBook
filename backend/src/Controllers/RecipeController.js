@@ -21,6 +21,8 @@ module.exports = {
                 image,
                 videourl,
                 category_id,
+                prepTime, 
+                prepUnit,
                 rating
             })
             const recipe_id = id

@@ -59,114 +59,120 @@ body {
 	background-color: #ff0000;
 }
 a {
-	color: #000000;
-	text-decoration: none;
-	background-color: transparent;
+    color: #000000;
+    text-decoration: none;
+    background-color: transparent;
+}
+   
+.container#submit{
+    height: 55%;
+    width: 60%;
+    padding-top: 15px;
+    margin-top: 1%;
+    margin-bottom: 10%;
+    border-radius: 10px;
+    background-color: #ffffff;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+    box-shadow: 0 14px 28px rgba(255, 255, 255, 0.25), 0 10px 10px rgba(255, 255, 255, 0.22);
+}
+.container#login{
+    height: 55%;
+    width: 60%;
+    padding-top: 15px;
+    margin-top: 1%;
+    margin-bottom: 10%;
+    border-radius: 10px;
+    background-color: #ffa9a9;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+    box-shadow: 0 14px 28px rgba(255, 255, 255, 0.25), 0 10px 10px rgba(255, 255, 255, 0.22);
 }
 
-.container#submit {
-	height: 55%;
-	width: 60%;
-	padding-top: 15px;
-	margin-top: 1%;
-	margin-bottom: 10%;
-	border-radius: 10px;
-	background-color: #ffffff;
-	background-repeat: no-repeat;
-	background-position: top;
-	background-size: contain;
-	box-shadow: 0 14px 28px rgba(255, 255, 255, 0.25), 0 10px 10px rgba(255, 255, 255, 0.22);
+.container#textview{
+    height: 95px;
+    width: 80%;
+    background-color: whitesmoke;
+    box-shadow: 0 14px 28px rgba(255, 255, 255, 0.25), 0 10px 10px rgba(255, 255, 255, 0.22);
 }
 
-.container#login {
-	height: 55%;
-	width: 60%;
-	padding-top: 15px;
-	margin-top: 1%;
-	margin-bottom: 10%;
-	border-radius: 10px;
-	background-color: #ffa9a9;
-	background-repeat: no-repeat;
-	background-position: top;
-	background-size: contain;
-	box-shadow: 0 14px 28px rgba(255, 255, 255, 0.25), 0 10px 10px rgba(255, 255, 255, 0.22);
+.btn-flat{
+    background-color: red;
+    color: white;
 }
 
-.container#textview {
-	height: 95px;
-	width: 80%;
-	background-color: whitesmoke;
-	box-shadow: 0 14px 28px rgba(255, 255, 255, 0.25), 0 10px 10px rgba(255, 255, 255, 0.22);
+.btn-flat:hover{
+    background-color: rgb(206, 0, 0);
+    color: rgb(255, 255, 255);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
-.btn-flat {
-	background-color: red;
-	color: white;
+.btn-flat#login{
+    width: 100px;
+    margin-left: 50px;
+    border-radius: 30px;
 }
 
-.btn-flat:hover {
-	background-color: rgb(206, 0, 0);
-	color: rgb(255, 255, 255);
-	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+.btn-flat#cadastro{
+    width: 100px;
+    margin-left: 50px;
+    border-radius: 30px;
 }
 
-.btn-flat#login {
-	width: 100px;
-	margin-left: 50px;
-	border-radius: 30px;
-}
-.btn-flat#submitnav {
-	margin-left: 45vw;
-	width: 100%;
-	border-radius: 10px;
+.btn-flat#submitnav{
+    margin-left: 45vw;
+    width: 100%;
+    border-radius: 10px;
 }
 
-.btn-flat#search {
-	background-color: white;
+.btn-flat#search{
+    background-color: white;
 }
 
-.btn-flat#add {
-	background-color: white;
-	margin-left: 150px;
-	border-radius: 100px;
+.btn-flat#add{
+    background-color: white;
+    margin-left: 150px;
+    border-radius: 100px;
 }
 
-.btn-flat#addFolder {
-	background-color: white;
-	margin-left: 90%;
-	margin-bottom: 2%;
-	border-radius: 100px;
-	margin-right: 2%;
+.btn-flat#addFolder{
+    background-color: white;
+    margin-left: 90%;
+    margin-bottom: 2%;
+    border-radius: 100px;
+    margin-right: 2%;
 }
-.btn-flat#Edit {
-	background-color: white;
-	margin-left: 67%;
-	border-radius: 100px;
-	margin-right: 2%;
+.btn-flat#Edit{
+    background-color: white;
+    margin-left: 67%;
+    border-radius: 100px;
+    margin-right: 2%;
 }
-.btn-flat#subEdit {
-	color: black;
-	background-color: white;
-	border-radius: 10px;
+.btn-flat#subEdit{
+    color: black;
+    background-color: white;
+    border-radius: 10px;
 }
-.btn-flat#More {
-	background-color: white;
-	margin-left: 10%;
-	border-radius: 100px;
+.btn-flat#More{
+    background-color: white;
+    margin-left: 10%;
+    border-radius: 100px;
 }
-.btn-flat#save {
-	background-color: rgb(255, 8, 8);
-	margin-top: 8px;
-	margin-left: 210px;
-	border-radius: 10px;
+.btn-flat#save{
+    background-color: rgb(255, 8, 8);
+    margin-top: 8px;
+    margin-left: 210px;
+    border-radius: 10px;
 }
 
-.btn-flat#submit {
-	background-color: rgb(255, 8, 8);
-	width: 80%;
-	margin-top: 8px;
-	margin-left: 70px;
-	border-radius: 10px;
+.btn-flat#submit{
+    background-color: rgb(255, 8, 8);
+    width: 80%;
+    margin-top: 8px;
+    margin-left: 70px;
+    border-radius: 10px;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -219,6 +225,9 @@ a {
 	flex-direction: column;
 	align-items: center;
 	color: black;
+}
+.form-control {
+    color: #495057;
 }
 
 .card:hover {
