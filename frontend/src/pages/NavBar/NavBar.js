@@ -5,9 +5,16 @@ import { FaSearch } from 'react-icons/fa'
 import salmao from '../../assets/img/bg-salmao.png'
 import { Link } from 'react-router-dom'
 
+function handleLogin(){
+    if(localStorage.id == null){
+        return false
+    }
+    return true
+}
 
-export default function NavBar(login) {
-    if (login == false) {
+export default function NavBar() {
+    
+    if (!handleLogin()) {
         return (
             <Navbar variant="dark" fixed="top" expand="lg">
                 <Navbar.Brand href="/">
@@ -18,11 +25,11 @@ export default function NavBar(login) {
                     <Nav className="mr-auto">
 
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                            <Link>
+
                                 <Button id="search" variant="flat">
                                     <FaSearch size={20} color="#FF0000" fontWeight="bolder" />
                                 </Button>
-                            </Link>
+
                         <Nav.Link href="/" >Início</Nav.Link>
                             <NavDropdown title="Receitas" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1" variant="dark">Asiática</NavDropdown.Item>
@@ -34,16 +41,19 @@ export default function NavBar(login) {
 
                     </Nav>
                     <Form inline>
-                        <Link>
-                            <Button href="/login" id="login" variant="flat">
+
+                        <Link to="/login">
+                            <Button id="login" variant="flat">
                             Login
                             </Button>
                         </Link>
-                        <Link>
-                            <Button href="/register" id="login" variant="flat">
+
+                        <Link to="/register">
+                            <Button id="login" variant="flat">
                             Cadastro
                             </Button>
                         </Link>
+
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
@@ -59,11 +69,11 @@ export default function NavBar(login) {
                     <Nav className="mr-auto">
 
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Link>
+
                             <Button id="search" variant="flat">
                                 <FaSearch size={20} color="#FF0000" fontWeight="bolder" />
                             </Button>
-                        </Link>
+
                         <Nav.Link href="/" >Início</Nav.Link>
                         <NavDropdown title="Receitas" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1" variant="dark">Asiática</NavDropdown.Item>
@@ -72,13 +82,16 @@ export default function NavBar(login) {
                             <NavDropdown.Item href="#action/3.4">Pratos rápidas</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.5">Low Carb</NavDropdown.Item>
                         </NavDropdown>
-                        <Link>
+
+                        <Link to="/recipe/submit">
                             <Button id="submitnav" variant="flat">
                                 Submeter receita
                             </Button>
                         </Link>
+
                     </Nav>
-                    <Link>
+
+                    <Link to="/profile">
                         <Form inline>
                             <Image
                             width={64}
@@ -86,9 +99,9 @@ export default function NavBar(login) {
                             src={salmao}
                             roundedCircle
                             />
-
                         </Form>
                     </Link>
+
                 </Navbar.Collapse>
             </Navbar>
         )

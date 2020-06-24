@@ -3,29 +3,29 @@ import { Link, useHistory } from 'react-router-dom'
 import { Navbar, NavDropdown, Brand, Nav, Form, FormControl, Button, Image } from 'react-bootstrap/'
 import logoImg from '../../assets/img/logo-white.png'
 import bg from '../../assets/img/food-background.jpg'
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom'
 import { FaSearch } from 'react-icons/fa'
 import Nbar from '../NavBar/NavBar'
 
 
-import api from '../../services/api';
+import api from '../../services/api'
 
 export default function Register() {
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
-    const history = useHistory();
+    const history = useHistory()
 
     async function handleRegister(e) {
-        e.preventDefault();
+        e.preventDefault()
 
         const data = {
             name,
             email,
             password,
-        };
+        }
         try {
             const response = await api.post('/singin', data)
             alert (`Seu ID de acesso: ${response.data.id}`)
@@ -74,7 +74,7 @@ export default function Register() {
                                 onChange={e => setPassword(e.target.value)}
                             />
                         </Form.Group>
-                        <Link>
+                        <Link to="/login">
                             <Button id="vermais" variant="flat" type="submit">
                                 Cadastrar
                             </Button>

@@ -23,12 +23,11 @@ export default function Login() {
             const response = await api.post('/login', { email, password });
             console.log(response.data.id);
 
-            // localStorage.setItem('name', name);
+            localStorage.setItem('id', response.data.id);
 
             history.push('/profile')
 
         } catch (error) {
-            // alert('Falha no login, tente novamente.')
             alert('Erro ao registrar a conta, tente novamente:\n' + error.message)
         }
 
