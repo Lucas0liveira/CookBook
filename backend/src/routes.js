@@ -21,7 +21,7 @@ routes.get('/users/follows/:followed_id', UserController.getFollowed)
 routes.post('/singin', UserController.create)
 routes.post('/login', UserController.login)
 routes.post('/users/follow', UserController.follow)
-routes.delete('users/unfollow', UserController.unfollow)
+routes.delete('/users/unfollow/:followed_id', UserController.unfollow)
 
 //lista de rotas para receitas
 routes.get('/recipes', RecipeController.index)
@@ -50,7 +50,8 @@ routes.post('/categories', CategoryController.create)
 routes.delete('/categories/:id', CategoryController.delete)
 
 //lista de rotas para comentarios
-routes.get('/comments', CommentsController.getComments)
+routes.get('/comments/index', CommentsController.index)
+routes.get('/comments/:recipe_id', CommentsController.getComments)
 routes.post('/comments', CommentsController.newComment)
 routes.delete('/comments', CommentsController.delComment)
 

@@ -67,6 +67,7 @@ export default function Home() {
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
+
                             <Link to = {"/recipe/" + recipe[0].id}>
                             <Button id="vermais" block variant="flat"> Ver mais </Button>
                             </Link>

@@ -15,14 +15,16 @@ module.exports = {
         }
     },
 
-    async getComments(response, request) {
-        const { recipe_id } = request.body
+    async getComments(request, response) {
+        const { recipe_id } = request.params
 
-        const comments = await connection('comment_list').select('*').where('recipe_id', recipe_id)
+
+        const comments = await connection('comment_list').join('users', 'comment_list.user_id', 'users.id')
+            .where('comment_list.recipe_id', recipe_id).select('comment_list.comment', 'users.name')
         return response.json(comments)
     },
 
-    async delComment(response, request) {
+    async delComment(request, response) {
         const { recipe_id, user_id } = request.body
 
         await connection('comment_list').where({
@@ -31,5 +33,10 @@ module.exports = {
         }).del()
 
         return response.status(204).send()
+    },
+
+    async index(request, response) {
+        const comments = await connection('comment_list').select('*')
+        return response.json(comments)
     }
 }

@@ -6,8 +6,8 @@ exports.up = function (knex) {
         table.string('description').notNullable()
         table.string('prepare').notNullable()
 
-        table.string('image').notNullable()
-        table.string('video').notNullable()
+        table.blob('image').notNullable()
+        table.string('videourl').notNullable()
         table.integer('category_id').notNullable()
         table.integer('prepTime').notNullable()
         table.string('prepUnit').notNullable()

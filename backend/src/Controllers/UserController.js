@@ -119,7 +119,7 @@ module.exports = {
 
     async unfollow(request, response) {
         const user_id = request.headers.authorization
-        const { followed_id } = request.body
+        const { followed_id } = request.params
 
         await connection('follow_list').where({
             follow_id: user_id,
