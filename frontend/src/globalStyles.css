@@ -115,6 +115,13 @@ a {
     margin-left: 50px;
     border-radius: 30px;
 }
+
+.btn-flat#cadastro{
+    width: 100px;
+    margin-left: 50px;
+    border-radius: 30px;
+}
+
 .btn-flat#submitnav{
     margin-left: 45vw;
     width: 100%;

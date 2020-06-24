@@ -26,9 +26,10 @@ export default function Register() {
             email,
             password,
         }
+
         try {
             const response = await api.post('/singin', data)
-            alert (`Seu ID de acesso: ${response.data.id}`)
+            console.log(response.data.id)
             history.push('/login');
         } catch (error) {
             alert('Erro ao registrar a conta, tente novamente:\n' + error.message)
@@ -74,11 +75,9 @@ export default function Register() {
                                 onChange={e => setPassword(e.target.value)}
                             />
                         </Form.Group>
-                        <Link to="/login">
                             <Button id="vermais" variant="flat" type="submit">
                                 Cadastrar
                             </Button>
-                        </Link>
 
                     </Form>
 

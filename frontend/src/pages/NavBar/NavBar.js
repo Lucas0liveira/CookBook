@@ -49,7 +49,7 @@ export default function NavBar() {
                         </Link>
 
                         <Link to="/register">
-                            <Button id="login" variant="flat">
+                            <Button id="cadastro" variant="flat">
                             Cadastro
                             </Button>
                         </Link>
