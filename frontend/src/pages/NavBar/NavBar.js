@@ -115,7 +115,7 @@ export default function NavBar() {
                     </Nav>
 
                     <Link to="/profile">
-                        <Form inline>
+                        <Form inline id="profileImage">
                             <Image
                                 width={64}
                                 height={64}

@@ -120,10 +120,14 @@ a {
     margin-left: 50px;
     border-radius: 30px;
 }
+.form#profileImage {
+	margin-right: 5vw;
+}
 
 .btn-flat#submitnav{
-    margin-left: 45vw;
-    width: 100%;
+	margin-left: 40vw;
+	margin-right: 5vw;
+    width: 250px;
     border-radius: 10px;
 }
 
