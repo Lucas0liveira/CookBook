@@ -21,24 +21,25 @@ import api from '../../services/api'
 
 
 export default function ProfileSubmited() {
-    const [recipes] = useState([])
+    const [recipes, setRecipes] = useState([])
     
     useEffect(() => {
-            api.get('/searchresults').then(response => {
-                recipes(response.data)
+            api.get('/recipes/' + localStorage.getItem('categoryId')).then(response => {
+                setRecipes(response.data)
+                console.log(recipes)
             })
-
-    })
+    }, [])
 
     {
         return (
     <>
-        {Nbar(false)}
+        {Nbar()}
 
-        <h1 class="title-section">Receitas Regionais</h1> 
-        <h2 class="title-section"> Nacionalidade:  </h2> 
+
+        <h1 class="title-section">Receitas Encontradas</h1> 
+        <h2 class="title-section"> Categoria {localStorage.getItem("categoryName")}</h2> 
         <CardDeck>
-                {recipes.map(recipe => ( 
+                {recipes.map(recipe => (
                     (<Card>
                         <Card.Img variant="top" src={recipe[0].image} alt="" width="500px" height="200px" />
                         <Card.Body>
@@ -57,9 +58,7 @@ export default function ProfileSubmited() {
                 }
             </CardDeck>
 
-    </>
-
-            
+    </>    
         )
     }
 }
