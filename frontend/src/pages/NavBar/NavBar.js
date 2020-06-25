@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Navbar, NavDropdown, Nav, Form, FormControl, Button, Image} from 'react-bootstrap/'
 import logoImg from '../../assets/img/logo-white.png'
 import { FaSearch } from 'react-icons/fa'
-import salmao from '../../assets/img/bg-salmao.png'
+import user from '../../assets/img/user-icon.png'
 import { Link } from 'react-router-dom'
 import api from '../../services/api'
 
@@ -119,7 +119,7 @@ export default function NavBar() {
                             <Image
                                 width={64}
                                 height={64}
-                                src={salmao}
+                                src={user}
                                 roundedCircle
                             />
                         </Form>
