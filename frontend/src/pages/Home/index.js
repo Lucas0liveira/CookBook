@@ -34,9 +34,11 @@ export default function Home() {
             {Nbar(false)}
 
             <h2 class="title-section">As mais bem avaliadas</h2>
-            <CardDeck>
+            <Row className="justify-content-md-center">
                 {recipes.map(recipe => ( //resolver segundo acesso ao banco e trocar para indexbyrating
-                    (<Card>
+                    (
+                    <Col xs="auto">
+                    <Card style={{ width: '13rem' }}>
                         <Card.Img variant="top" src={recipe[0].image} alt="" width="500px" height="200px" />
                         <Card.Body>
                             <Badge variant="secondary">{recipe[0].prepTime} {recipe[0].prepUnit}</Badge>{' '}
@@ -49,15 +51,19 @@ export default function Home() {
                             <Button id="vermais" block variant="flat"> Ver mais </Button>
                             </Link>
                         </Card.Footer>
-                    </Card>)
+                    </Card>
+                    </Col>
+                    )
+                    
                 ))
                 }
-            </CardDeck>
+            </Row>
 
             <h2 class="title-section">Adicionadas recentemente</h2>
 
-            <CardDeck>
+            <Row className="justify-content-md-center">
                 {recipes.map(recipe => (
+                    <Col xs="auto">
                     <Card>
                         <Card.Img variant="top" src={recipe[0].image} alt="" width="500px" height="200px" />
                         <Card.Body>
@@ -67,16 +73,16 @@ export default function Home() {
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-
                             <Link to = {"/recipe/" + recipe[0].id}>
                             <Button id="vermais" block variant="flat"> Ver mais </Button>
                             </Link>
                         </Card.Footer>
                     </Card>
+                    </Col>
                 ))}
-            </CardDeck>
+            </Row>
 
-            <h2 class="title-section">Termos populares</h2>
+            <h2 class="title-section">Culinárias populares</h2>
 
             <Row>
                 <Col>
@@ -94,17 +100,17 @@ export default function Home() {
             <Row>
                 <Col>
                     <Link>
-                        <Button id="pizzacaseira" block variant="flat"> Pizza caseira </Button>
+                        <Button id="comidafrancesa" block variant="flat"> Comida Francesa </Button>
                     </Link>
                 </Col>
                 <Col>
                     <Link>
-                        <Button id="cachorroquente" block variant="flat"> Cachorro quente </Button>
+                        <Button id="sobremesa" block variant="flat"> Sobremesa </Button>
                     </Link>
                 </Col>
                 <Col>
                     <Link>
-                        <Button id="receitadebolo" block variant="flat"> Receita de bolo </Button>
+                        <Button id="comidaitaliana" block variant="flat"> Comida Italiana </Button>
                     </Link>
                 </Col>
             </Row>
