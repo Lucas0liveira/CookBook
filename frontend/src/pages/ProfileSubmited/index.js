@@ -5,7 +5,7 @@ import logoImg from '../../assets/img/logo-white.png'
 import sushi from '../../assets/img/sushi.jpg'
 import pizza from '../../assets/img/pizza.jpg'
 import hamburguer from '../../assets/img/hamburguer.jpg'
-import salmao from '../../assets/img/bg-salmao.png'
+import user from '../../assets/img/user-icon.png'
 import bg from '../../assets/img/food-background.jpg'
 import { BrowserRouter as Router } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa'
@@ -30,7 +30,7 @@ export default function ProfileSubmited() {
                         <Image className = "foto"
                               width={150}
                               height={150}
-                              src={hamburguer} 
+                              src={user} 
                               roundedCircle
                             />
                     </Row>
