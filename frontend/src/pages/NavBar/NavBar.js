@@ -1,15 +1,48 @@
 import React, { useState, useEffect } from 'react'
-import { Navbar, NavDropdown, Brand, Nav, Form, FormControl, Button, Image, Card, Container, Row, Col, CardDeck, Media, Badge } from 'react-bootstrap/'
+import { Navbar, NavDropdown, Nav, Form, FormControl, Button, Image} from 'react-bootstrap/'
 import logoImg from '../../assets/img/logo-white.png'
 import { FaSearch } from 'react-icons/fa'
-import salmao from '../../assets/img/bg-salmao.png'
+import user from '../../assets/img/user-icon.png'
+import { Link } from 'react-router-dom'
+import api from '../../services/api'
+
+function handleLogin() {
+    if (localStorage.id == null) {
+        return false
+    }
+    return true
+}
+
+export default function NavBar() {
 
 
-export default function NavBar(login) {
-    if (login == false) {
+    const [categories, setCategories] = useState([])
+
+    useEffect(() => {
+        api.get('/categories').then(response => {
+            setCategories(response.data)
+        })
+    }, [])
+
+    console.log(categories)
+
+    const handleCategories = (eventKey) => {
+        console.log(eventKey)
+        var id = -1
+        for(var c in categories){
+            if(categories[c].name == eventKey){
+                console.log(categories[c].id)
+                id = categories[c].id
+            }
+        }
+        localStorage.setItem("categoryId", id)
+        localStorage.setItem("categoryName", eventKey)
+    }
+
+    if (!handleLogin()) {
         return (
             <Navbar variant="dark" fixed="top" expand="lg">
-                <Navbar.Brand href="/">
+                <Navbar.Brand as={Link} to="/">
                     <img src={logoImg} alt="" />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -17,27 +50,33 @@ export default function NavBar(login) {
                     <Nav className="mr-auto">
 
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+
                         <Button id="search" variant="flat">
                             <FaSearch size={20} color="#FF0000" fontWeight="bolder" />
                         </Button>
 
-                        <Nav.Link href="/" >Início</Nav.Link>
-                        <NavDropdown title="Receitas" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1" variant="dark">Asiática</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Brasileira</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Mexicana</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.4">Pratos rápidas</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.5">Low Carb</NavDropdown.Item>
+                        <Nav.Link to="/" >Início</Nav.Link>
+
+                        <NavDropdown title="Receitas" id="basic-nav-dropdown" onSelect={handleCategories} >
+                            {categories.map(category => (
+                                <NavDropdown.Item as={Link} to={"/searchresults/" + category.id} eventKey={category.id, category.name}> {category.name} </NavDropdown.Item>
+                            ))}
                         </NavDropdown>
 
                     </Nav>
                     <Form inline>
-                        <Button href="/login" id="login" variant="flat">
-                            Login
-                </Button>
-                        <Button href="/register" id="login" variant="flat">
-                            Cadastro
-                </Button>
+
+                        <Link to="/login">
+                            <Button id="login" variant="flat">
+                                Login
+                            </Button>
+                        </Link>
+
+                        <Link to="/register">
+                            <Button id="cadastro" variant="flat">
+                                Cadastro
+                            </Button>
+                        </Link>
 
                     </Form>
                 </Navbar.Collapse>
@@ -46,7 +85,7 @@ export default function NavBar(login) {
     } else {
         return (
             <Navbar variant="dark" fixed="top" expand="lg">
-                <Navbar.Brand href="/">
+                <Navbar.Brand as={Link} to="/">
                     <img src={logoImg} alt="" />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -54,34 +93,40 @@ export default function NavBar(login) {
                     <Nav className="mr-auto">
 
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+
                         <Button id="search" variant="flat">
                             <FaSearch size={20} color="#FF0000" fontWeight="bolder" />
                         </Button>
 
                         <Nav.Link href="/" >Início</Nav.Link>
-                        <NavDropdown title="Receitas" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1" variant="dark">Asiática</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Brasileira</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Mexicana</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.4">Pratos rápidas</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.5">Low Carb</NavDropdown.Item>
-                        </NavDropdown>
-                        <Button id="submitnav" variant="flat">
-                            Submeter receita
-                            </Button>
-                    </Nav>
-                    <Form inline>
-                        <Image
-                            width={64}
-                            height={64}
-                            src={salmao}
-                            roundedCircle
-                        />
 
-                    </Form>
+                        <NavDropdown title="Receitas" id="basic-nav-dropdown" onSelect={handleCategories}>
+                        {categories.map(category => (
+                                <NavDropdown.Item as={Link} to={"/searchresults/" + category.id} eventKey={category.id, category.name}> {category.name} </NavDropdown.Item>
+                            ))}
+                        </NavDropdown>
+
+                        <Link to="/recipe/submit">
+                            <Button id="submitnav" variant="flat">
+                                Submeter receita
+                            </Button>
+                        </Link>
+
+                    </Nav>
+
+                    <Link to="/profile">
+                        <Form inline id="profileImage">
+                            <Image
+                                width={64}
+                                height={64}
+                                src={user}
+                                roundedCircle
+                            />
+                        </Form>
+                    </Link>
+
                 </Navbar.Collapse>
             </Navbar>
         )
     }
-
 }

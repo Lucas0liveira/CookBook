@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { Navbar, NavDropdown, Brand, Nav, Form, FormControl, Button, Image, Card, Container, Row, Col, CardDeck, Media, Badge } from 'react-bootstrap/'
 import logoImg from '../../assets/img/logo-white.png'
@@ -8,188 +8,116 @@ import hamburguer from '../../assets/img/hamburguer.jpg'
 import bg from '../../assets/img/food-background.jpg'
 import { BrowserRouter as Router } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa'
-
-
-
+import api from '../../services/api'
+import Nbar from '../NavBar/NavBar'
 
 export default function Home() {
-    {
-        return (
-            <>
-                <Navbar variant="dark" fixed="top" expand="lg">
-                    <Navbar.Brand href="#home">
-                        <img src={logoImg} alt="" />
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto">
+    const [recipes, setRecipes] = useState([])
+    const [recipeByStar, setRecipesByStar] = useState([])
 
-                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                            <Button id="search" variant="flat">
-                                <FaSearch size={20} color="#FF0000" fontWeight="bolder" />
-                            </Button>
-
-                            <Nav.Link href="#home" >Início</Nav.Link>
-                            <NavDropdown title="Receitas" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1" variant="dark">Asiática</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Brasileira</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Mexicana</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.4">Pratos rápidas</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.5">Low Carb</NavDropdown.Item>
-                            </NavDropdown>
-
-                        </Nav>
-                        <Form inline>
-                            <Button id="login" variant="flat">
-                                Login
-                            </Button>
-                            <Button id="login" variant="flat">
-                                Cadastro
-                            </Button>
-
-                        </Form>
-                    </Navbar.Collapse>
-                </Navbar>
+    useEffect(() => {
+        api.get('/recipes').then(response => {
+            setRecipes(response.data)
+        })
+    })
 
 
-                {
-                    <>
-                        <h2 class="title-section">As mais bem avaliadas</h2>
+    // useEffect(() => {
+    //     api.get('/recipesbystars').then(response => {
+    //         setRecipesByStar(response.data)
+    //     })
+    // })
 
-                        <CardDeck>
-                            <Card>
-                                <Card.Img variant="top" src={sushi} alt="" />
+
+    return (
+        <>
+            {Nbar(false)}
+
+            <h2 class="title-section">As mais bem avaliadas</h2>
+            <Row className="justify-content-md-center">
+                {recipes.map(recipe => ( //resolver segundo acesso ao banco e trocar para indexbyrating
+                    (
+                        <Col xs="auto">
+                            <Card style={{ width: '13rem' }}>
+                                <Card.Img variant="top" src={recipe[0].image} alt="" width="500px" height="200px" />
                                 <Card.Body>
-                                    <Badge variant="secondary">45 MIN</Badge>{' '}
-                                    <Card.Title>Sushi brasileiro</Card.Title>
-                                    <Card.Text>
-                                        Sem mimimi, recheio feito  com muita coisa.
-                        </Card.Text>
+                                    <Badge variant="secondary">{recipe[0].prepTime} {recipe[0].prepUnit}</Badge>{' '}
+                                    <Card.Title>{recipe[0].name}</Card.Title>
+                                    <Card.Text>{recipe[0].description}
+                                    </Card.Text>
                                 </Card.Body>
                                 <Card.Footer>
-                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
+                                    <Link to={"/recipe/" + recipe[0].id}>
+                                        <Button id="vermais" block variant="flat"> Ver mais </Button>
+                                    </Link>
                                 </Card.Footer>
                             </Card>
-                            <Card>
-                                <Card.Img variant="top" src={pizza} alt="" />
-                                <Card.Body>
-                                    <Badge variant="secondary">45 MIN</Badge>{' '}
-                                    <Card.Title>Deliciosa pizza</Card.Title>
-                                    <Card.Text>
-                                        Pizza estilo italiana, sem frescura e com muito queijo.
-                        </Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
-                                </Card.Footer>
-                            </Card>
-                            <Card>
-                                <Card.Img variant="top" src={hamburguer} alt="" />
-                                <Card.Body>
-                                    <Badge variant="secondary">45 MIN</Badge>{' '}
-                                    <Card.Title>Onion crispy burguer</Card.Title>
-                                    <Card.Text>
-                                        Hamburguer caseiro com cebola crispy no pão brioche amanteigado.
-                        </Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
-                                </Card.Footer>
-                            </Card>
-                            <Card>
-                                <Card.Img variant="top" src={sushi} alt="" />
-                                <Card.Body>
-                                    <Badge variant="secondary">45 MIN</Badge>{' '}
-                                    <Card.Title>Sushi</Card.Title>
-                                    <Card.Text>
-                                        Sushi muito bom
-                            </Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
-                                </Card.Footer>
-                            </Card>
-                        </CardDeck>
+                        </Col>
+                    )
 
-                        <h2 class="title-section">Adicionadas recentemente</h2>
-
-                        <CardDeck>
-                            <Card>
-                                <Card.Img variant="top" src={sushi} alt="" />
-                                <Card.Body>
-                                    <Badge variant="secondary">45 MIN</Badge>{' '}
-                                    <Card.Title>Sushi brasileiro</Card.Title>
-                                    <Card.Text>
-                                        Sem mimimi, recheio feito  com muita coisa.
-                        </Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
-                                </Card.Footer>
-                            </Card>
-                            <Card>
-                                <Card.Img variant="top" src={pizza} alt="" />
-                                <Card.Body>
-                                    <Badge variant="secondary">45 MIN</Badge>{' '}
-                                    <Card.Title>Deliciosa pizza</Card.Title>
-                                    <Card.Text>
-                                        Pizza estilo italiana, sem frescura e com muito queijo.
-                        </Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
-                                </Card.Footer>
-                            </Card>
-                            <Card>
-                                <Card.Img variant="top" src={hamburguer} alt="" />
-                                <Card.Body>
-                                    <Badge variant="secondary">45 MIN</Badge>{' '}
-                                    <Card.Title>Onion crispy burguer</Card.Title>
-                                    <Card.Text>
-                                        Hamburguer caseiro com cebola crispy no pão brioche amanteigado.
-                        </Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
-                                </Card.Footer>
-                            </Card>
-                            <Card>
-                                <Card.Img variant="top" src={sushi} alt="" />
-                                <Card.Body>
-                                    <Badge variant="secondary">45 MIN</Badge>{' '}
-                                    <Card.Title>Sushi</Card.Title>
-                                    <Card.Text>
-                                        Sushi muito bom
-                            </Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
-                                </Card.Footer>
-                            </Card>
-                        </CardDeck>
-
-                        <h2 class="title-section">Termos populares</h2>
-
-                        <Row>
-                            <Col><Button id="comidajaponesa" block variant="flat"> Comida japonesa </Button></Col>
-                            <Col><Button id="comidabrasileira" block variant="flat"> Comida brasileira </Button></Col>
-                        </Row>
-                        <Row><p></p></Row>
-                        <Row>
-                            <Col><Button id="pizzacaseira" block variant="flat"> Pizza caseira </Button></Col>
-                            <Col><Button id="cachorroquente" block variant="flat"> Cachorro quente </Button></Col>
-                            <Col><Button id="receitadebolo" block variant="flat"> Receita de bolo </Button></Col>
-                        </Row>
-
-
-                    </>
+                ))
                 }
+            </Row>
 
-            </>
+            <h2 class="title-section">Adicionadas recentemente</h2>
+
+            <Row className="justify-content-md-center">
+                {recipes.map(recipe => (
+                    <Col xs="auto">
+                        <Card>
+                            <Card.Img variant="top" src={recipe[0].image} alt="" width="500px" height="200px" />
+                            <Card.Body>
+                                <Badge variant="secondary">{recipe[0].prepTime} {recipe[0].prepUnit}</Badge>{' '}
+                                <Card.Title>{recipe[0].name}</Card.Title>
+                                <Card.Text>{recipe[0].description}
+                                </Card.Text>
+                            </Card.Body>
+                            <Card.Footer>
+                                <Link to={"/recipe/" + recipe[0].id}>
+                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
+                                </Link>
+                            </Card.Footer>
+                        </Card>
+                    </Col>
+                ))}
+            </Row>
+
+            <h2 class="title-section">Culinárias populares</h2>
+
+            <Row>
+                <Col>
+                    <Link to={'/searchresults/9'}>
+                        <Button id="comidajaponesa" block variant="flat"> Comida japonesa </Button>
+                    </Link>
+                </Col>
+                <Col>
+                    <Link to={'/searchresults/2'}>
+                        <Button id="comidabrasileira" block variant="flat"> Comida brasileira </Button>
+                    </Link>
+                </Col>
+            </Row>
+            <Row><p></p></Row>
+            <Row>
+                <Col>
+                    <Link to={'/searchresults/5'}>
+                        <Button id="comidafrancesa" block variant="flat"> Comida Francesa </Button>
+                    </Link>
+                </Col>
+                <Col>
+                    <Link to={'/searchresults/15'}>
+                        <Button id="sobremesa" block variant="flat"> Sobremesa </Button>
+                    </Link>
+                </Col>
+                <Col>
+                    <Link to={'/searchresults/8'}>
+                        <Button id="comidaitaliana" block variant="flat"> Comida Italiana </Button>
+                    </Link>
+                </Col>
+            </Row>
+
+        </>
 
 
-        )
-    }
+    )
+
 }
-
-

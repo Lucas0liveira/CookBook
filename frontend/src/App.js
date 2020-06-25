@@ -1,7 +1,10 @@
 import React from 'react';
 import Routes from './routes'
+import api from './services/api';
 
 function App() {
+  api.get('/startup')
+
   return (
 
     <body>
@@ -12,6 +15,9 @@ function App() {
       </div>
       <div class="container">
         <Routes />
+        <br></br>
+        <br></br>
+        <br></br>
       </div>
       <footer>
         <h4 class="text-center">CookBook</h4>

@@ -142,7 +142,7 @@ export default function ViewRecipe() {
                                         </div>
                                     </Modal.Body>
                                     <Modal.Footer>
-                                        <Button variant="primary" type="submit" onClick={handleCloseRating}>
+                                        <Button variant="flat" type="submit" onClick={handleCloseRating}>
                                             Enviar
                                     </Button>
                                     </Modal.Footer>
