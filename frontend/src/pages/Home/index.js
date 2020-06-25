@@ -86,12 +86,12 @@ export default function Home() {
 
             <Row>
                 <Col>
-                    <Link>
+                    <Link to={'/searchresults/9'}>
                         <Button id="comidajaponesa" block variant="flat"> Comida japonesa </Button>
                     </Link>
                 </Col>
                 <Col>
-                    <Link>
+                    <Link to={'/searchresults/2'}>
                         <Button id="comidabrasileira" block variant="flat"> Comida brasileira </Button>
                     </Link>
                 </Col>
@@ -99,17 +99,17 @@ export default function Home() {
             <Row><p></p></Row>
             <Row>
                 <Col>
-                    <Link>
+                    <Link to={'/searchresults/5'}>
                         <Button id="comidafrancesa" block variant="flat"> Comida Francesa </Button>
                     </Link>
                 </Col>
                 <Col>
-                    <Link>
+                    <Link to={'/searchresults/15'}>
                         <Button id="sobremesa" block variant="flat"> Sobremesa </Button>
                     </Link>
                 </Col>
                 <Col>
-                    <Link>
+                    <Link to={'/searchresults/8'}>
                         <Button id="comidaitaliana" block variant="flat"> Comida Italiana </Button>
                     </Link>
                 </Col>
