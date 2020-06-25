@@ -21,6 +21,7 @@ import Nbar from '../NavBar/NavBar'
 
 
 export default function ProfileSubmited() {
+    var userName = localStorage.getItem("name");
     {
         return (
     <>
@@ -36,7 +37,7 @@ export default function ProfileSubmited() {
                     <Row>
                         <Col></Col>
                         <Col>
-                            <h5 class = "title-section-profile">Nome Completo</h5>
+                            <h5 class = "title-section-profile">{userName}</h5>
                         </Col>
                         <Col>
                             <Link>
