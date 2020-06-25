@@ -15,6 +15,9 @@ function App() {
       </div>
       <div class="container">
         <Routes />
+        <br></br>
+        <br></br>
+        <br></br>
       </div>
       <footer>
         <h4 class="text-center">CookBook</h4>
