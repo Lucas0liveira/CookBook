@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Navbar, NavDropdown, Nav, Form, FormControl, Button, Image} from 'react-bootstrap/'
+import { Navbar, NavDropdown, Nav, Form, FormControl, Button, Image, DropdownButton, Dropdown} from 'react-bootstrap/'
 import logoImg from '../../assets/img/logo-white.png'
-import { FaSearch } from 'react-icons/fa'
+import { FaSearch, FaDownload } from 'react-icons/fa'
 import user from '../../assets/img/user-icon.png'
 import { Link } from 'react-router-dom'
 import api from '../../services/api'
@@ -14,6 +14,7 @@ function handleLogin() {
 }
 
 export default function NavBar() {
+    
 
 
     const [categories, setCategories] = useState([])
@@ -37,6 +38,14 @@ export default function NavBar() {
         }
         localStorage.setItem("categoryId", id)
         localStorage.setItem("categoryName", eventKey)
+    }
+
+    const handleLogout = (eventKey) => {
+
+        if(eventKey=="2"){
+            localStorage.removeItem('id')
+
+        }
     }
 
     if (!handleLogin()) {
@@ -114,19 +123,17 @@ export default function NavBar() {
 
                     </Nav>
 
-                    <Link to="/profile">
-                        <Form inline id="profileImage">
-                            <Image
-                                width={64}
-                                height={64}
-                                src={user}
-                                roundedCircle
-                            />
-                        </Form>
-                    </Link>
+                            <DropdownButton title="Menu" variant="flat" onSelect={handleLogout} >
+                        
+                            <Dropdown.Item href="/profile" eventKey="1">Perfil</Dropdown.Item>
+                            <Dropdown.Item href="/" eventKey="2" >Logout</Dropdown.Item>
+                            
 
+                            </DropdownButton>
+                    
                 </Navbar.Collapse>
             </Navbar>
         )
     }
 }
+
