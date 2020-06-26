@@ -28,11 +28,13 @@ export default function SubmitRecipe() {
         e.preventDefault()
 
         try {
-            const response = await api.post('/recipes', { name, description, qtt, msr, ingr, prepare, image, video, category_id, prepTime, prepUnit });
-            console.log(response.data.id);
-
-
-            history.push('/profile')
+            if(localStorage.getItem('id')){
+                const response = await api.post('/recipes', { name, description, qtt, msr, ingr, prepare, image, video, category_id, prepTime, prepUnit });
+                history.push('/profilesubmited')
+            } else {
+                alert("Você precisa realizar login para poder submeter uma receita!")
+                history.push('/login')
+            }    
 
         } catch (error) {
             alert('Erro ao registrar uma nova receita:\n' + error.message)
@@ -112,9 +114,7 @@ export default function SubmitRecipe() {
     {
         return (
             <>
-
-                {Nbar(true)}
-
+                {Nbar()}
                 <>
                     <div class="container" id="submit">
                         <Form onSubmit={handleRecipe}>
