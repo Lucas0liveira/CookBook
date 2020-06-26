@@ -21,10 +21,17 @@ export default function Login() {
 
             const user = await api.get("/users/" + id)
             console.log(user.data.name)
-            localStorage.setItem('name', user.data.name)
-            localStorage.setItem('id', response.data.id)
 
-            history.push('/profile')
+            if(id == undefined){
+                alert("Falha no login, combinação de email e senha inválida.")
+                history.push('/login')
+            }else{
+                localStorage.setItem('name', user.data.name)
+                localStorage.setItem('id', response.data.id)
+                
+                history.push('/profile')
+            }
+
 
         } catch (error) {
             alert('Erro ao registrar a conta, tente novamente:\n' + error.message)
