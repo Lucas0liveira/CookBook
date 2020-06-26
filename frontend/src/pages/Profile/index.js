@@ -28,13 +28,15 @@ export default function Profile() {
         return (
     <>
     {Nbar(true)}          
-                    <Row>
+                    <Row className="justify-content-md-start">
+                        <Col xs="auto">
                         <Image className = "foto"
                               width={150}
                               height={150}
                               src={user} 
                               roundedCircle
                             />
+                            </Col>
                     </Row>
                     <Row>
                         <Col></Col>
