@@ -9,6 +9,8 @@ import api from '../../services/api';
 
 export default function SubmitRecipe() {
     var ingredientCount = 0
+    const [user_id, setuserId] = useState('')
+    const [author, setAuthor] = useState('')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [qtt, setQuantities] = useState([])
@@ -27,14 +29,19 @@ export default function SubmitRecipe() {
     async function handleRecipe(e) {
         e.preventDefault()
 
+
         try {
-            if(localStorage.getItem('id')){
-                const response = await api.post('/recipes', { name, description, qtt, msr, ingr, prepare, image, video, category_id, prepTime, prepUnit });
+            setuserId(localStorage.getItem('id'))
+            setAuthor(localStorage.getItem('name'))
+
+            if (localStorage.getItem('id')) {
+                const response = await api.post('/recipes', { name, description, qtt, msr, ingr, prepare, prepTime, prepUnit, image, video, category_id, user_id, author });
+                console.log(response)
                 history.push('/profilesubmited')
             } else {
                 alert("Você precisa realizar login para poder submeter uma receita!")
                 history.push('/login')
-            }    
+            }
 
         } catch (error) {
             alert('Erro ao registrar uma nova receita:\n' + error.message)
