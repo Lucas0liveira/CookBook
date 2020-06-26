@@ -48,8 +48,7 @@ module.exports = {
 
     //função que retorna todas as receitas do banco
     async index(request, response) {
-
-        let recipes = await connection('recipes').select('*').orderBy('name')
+        let recipes = await connection('recipes').select('*').orderBy("id", "desc")
         let aux = []
         for (i = 0; i < recipes.length; i++) {
             aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])
@@ -106,7 +105,7 @@ module.exports = {
     },
 
     async recipesByStars(request, response) {
-        let recipes = await connection('recipes').select('*').orderBy('rating')
+        let recipes = await connection('recipes').select('*').orderBy('rating', "desc")
         let aux = []
         for (i = 0; i < recipes.length; i++) {
             aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])

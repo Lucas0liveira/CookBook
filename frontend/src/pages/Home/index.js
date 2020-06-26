@@ -19,19 +19,23 @@ export default function Home() {
         api.get('/recipes').then(response => {
             setRecipes(response.data)
         })
-    })
+    },[])
 
+    useEffect(() => {
+        api.get('/filter/rating').then(response => {
+            setRecipesByStar(response.data)
+        })
+    }, [])
 
-    // useEffect(() => {
-    //     api.get('/recipesbystars').then(response => {
-    //         setRecipesByStar(response.data)
-    //     })
-    // })
-
+    if(recipes.loading  || recipeByStar.loading){
+        return (
+            <span>Loading</span>
+        )
+    }
 
     return (
         <>
-            {Nbar(false)}
+            {Nbar()}
 
             <h2 class="title-section">As mais bem avaliadas</h2>
             <Row className="justify-content-md-center">
@@ -54,32 +58,34 @@ export default function Home() {
                             </Card>
                         </Col>
                     )
-
                 ))
                 }
             </Row>
 
             <h2 class="title-section">Adicionadas recentemente</h2>
-
             <Row className="justify-content-md-center">
-                {recipes.map(recipe => (
-                    <Col xs="auto">
-                        <Card>
-                            <Card.Img variant="top" src={recipe[0].image} alt="" width="500px" height="200px" />
-                            <Card.Body>
-                                <Badge variant="secondary">{recipe[0].prepTime} {recipe[0].prepUnit}</Badge>{' '}
-                                <Card.Title>{recipe[0].name}</Card.Title>
-                                <Card.Text>{recipe[0].description}
-                                </Card.Text>
-                            </Card.Body>
-                            <Card.Footer>
-                                <Link to={"/recipe/" + recipe[0].id}>
-                                    <Button id="vermais" block variant="flat"> Ver mais </Button>
-                                </Link>
-                            </Card.Footer>
-                        </Card>
-                    </Col>
-                ))}
+                {recipeByStar.map(recipe => ( //resolver segundo acesso ao banco e trocar para indexbyrating
+                    (
+                        <Col xs="auto">
+                            <Card style={{ width: '13rem' }}>
+                                <Card.Img variant="top" src={recipe[0].image} alt="" width="500px" height="200px" />
+                                <Card.Body>
+                                    <Badge variant="secondary">{recipe[0].prepTime} {recipe[0].prepUnit}</Badge>{' '}
+                                    <Card.Title>{recipe[0].name}</Card.Title>
+                                    <Card.Text>{recipe[0].description}
+                                    </Card.Text>
+                                </Card.Body>
+                                <Card.Footer>
+                                    <Link to={"/recipe/" + recipe[0].id}>
+                                        <Button id="vermais" block variant="flat"> Ver mais </Button>
+                                    </Link>
+                                </Card.Footer>
+                            </Card>
+                        </Col>
+                    )
+
+                ))
+                }
             </Row>
 
             <h2 class="title-section">Culinárias populares</h2>
