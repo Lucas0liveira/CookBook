@@ -18,6 +18,12 @@ import Nbar from '../NavBar/NavBar'
 
 export default function Profile() {
     var userName = localStorage.getItem('name');
+    const history = useHistory();
+
+    if(!localStorage.getItem('id')){
+        alert("Você precisa estar logado para ter acesso ao perfil!")
+        history.push('/login')
+    }
     {
         return (
     <>
