@@ -76,11 +76,14 @@ export default function ViewRecipe() {
         setNStars(nextValue)
     }
 
-    function handleCloseRating() {
+    function handleCloseRatingButton() {
         if (changeStars) {
             handleRate()
             setChangeStars(false)
         }
+        setShowRating(false)
+    }
+    function handleCloseRating() {
         setShowRating(false)
     }
 
@@ -142,7 +145,7 @@ export default function ViewRecipe() {
                                         </div>
                                     </Modal.Body>
                                     <Modal.Footer>
-                                        <Button variant="flat" type="submit" onClick={handleCloseRating}>
+                                        <Button variant="flat" type="submit" onClick={handleCloseRatingButton}>
                                             Enviar
                                     </Button>
                                     </Modal.Footer>
