@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Navbar, NavDropdown, Nav, Form, FormControl, Button, Image, DropdownButton, Dropdown} from 'react-bootstrap/'
+import { Navbar, NavDropdown, Nav, Form, FormControl, Button, Image, DropdownButton, Dropdown } from 'react-bootstrap/'
 import logoImg from '../../assets/img/logo-white.png'
 import { FaSearch, FaDownload } from 'react-icons/fa'
 import user from '../../assets/img/user-icon.png'
@@ -15,24 +15,19 @@ function handleLogin() {
 
 export default function NavBar() {
     
+    const catNames = ["Asiática", "Brasileira", "Coreana", "Drinks", "Francesa", "Hamburguer", "Indiana", "Italiana",
+        "Japonesa", "Low Carb", "Mexicana", "Saladas", "Sem Glúten", "Sopas", "Sobremesas", "Snacks", "Tailandesa", "Vegana",
+        "Vegetariana"]
 
-
-    const [categories, setCategories] = useState([])
-
-    useEffect(() => {
-        api.get('/categories').then(response => {
-            setCategories(response.data)
-        })
-    }, [])
-
-    console.log(categories)
+    let categories = []
+    for (var i = 1; i < 20; i++) {
+        categories.push({ "name": catNames[i - 1], "id": i })
+    }
 
     const handleCategories = (eventKey) => {
-        console.log(eventKey)
         var id = -1
-        for(var c in categories){
-            if(categories[c].name == eventKey){
-                console.log(categories[c].id)
+        for (var c in categories) {
+            if (categories[c].name == eventKey) {
                 id = categories[c].id
             }
         }
@@ -41,10 +36,9 @@ export default function NavBar() {
     }
 
     const handleLogout = (eventKey) => {
-
-        if(eventKey=="2"){
+        if (eventKey == "2") {
             localStorage.removeItem('id')
-
+            localStorage.removeItem('name')
         }
     }
 
@@ -68,7 +62,7 @@ export default function NavBar() {
 
                         <NavDropdown title="Receitas" id="basic-nav-dropdown" onSelect={handleCategories} >
                             {categories.map(category => (
-                                <NavDropdown.Item as={Link} to={"/searchresults/" + category.id} eventKey={category.id, category.name}> {category.name} </NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to={"/searchresults/" + category.id} eventKey={category.name}> {category.name} </NavDropdown.Item>
                             ))}
                         </NavDropdown>
 
@@ -110,8 +104,8 @@ export default function NavBar() {
                         <Nav.Link href="/" >Início</Nav.Link>
 
                         <NavDropdown title="Receitas" id="basic-nav-dropdown" onSelect={handleCategories}>
-                        {categories.map(category => (
-                                <NavDropdown.Item as={Link} to={"/searchresults/" + category.id} eventKey={category.id, category.name}> {category.name} </NavDropdown.Item>
+                            {categories.map(category => (
+                                <NavDropdown.Item as={Link} to={"/searchresults/" + category.id} eventKey={category.name}> {category.name} </NavDropdown.Item>
                             ))}
                         </NavDropdown>
 
@@ -122,15 +116,11 @@ export default function NavBar() {
                         </Link>
 
                     </Nav>
+                    <DropdownButton title="Menu" variant="flat" onSelect={handleLogout} >
+                        <Dropdown.Item href="/profile" eventKey="1">Perfil</Dropdown.Item>
+                        <Dropdown.Item href="/" eventKey="2" >Logout</Dropdown.Item>
+                    </DropdownButton>
 
-                            <DropdownButton title="Menu" variant="flat" onSelect={handleLogout} >
-                        
-                            <Dropdown.Item href="/profile" eventKey="1">Perfil</Dropdown.Item>
-                            <Dropdown.Item href="/" eventKey="2" >Logout</Dropdown.Item>
-                            
-
-                            </DropdownButton>
-                    
                 </Navbar.Collapse>
             </Navbar>
         )
