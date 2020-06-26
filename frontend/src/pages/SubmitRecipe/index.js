@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import {useHistory } from 'react-router-dom'
-import {Form, FormControl, Button, Card, Row, Col, Badge, FormLabel } from 'react-bootstrap/'
+import { useHistory } from 'react-router-dom'
+import { Form, FormControl, Button, Card, Row, Col, Badge, FormLabel } from 'react-bootstrap/'
 import { FaPlusCircle } from 'react-icons/fa'
 import Nbar from '../NavBar/NavBar'
 import api from '../../services/api';
@@ -150,14 +150,14 @@ export default function SubmitRecipe() {
                                     </Row>
                                     <Row>
                                         <Form.Label>Informe a categoria da sua receita</Form.Label>
-                                        <Form.Control 
+                                        <Form.Control
                                             as="select"
                                             size="sm"
                                             required
                                             custom
                                             placeholder="Escolha uma categoria"
-                                            onChange={handleCategory} >                                        
-                                            <option></option>                                    
+                                            onChange={handleCategory} >
+                                            <option></option>
                                             <option>Asiática</option>
                                             <option>Brasileira</option>
                                             <option>Coreana</option>
@@ -177,7 +177,7 @@ export default function SubmitRecipe() {
                                             <option>Tailandesa</option>
                                             <option>Vegana</option>
                                             <option>Vegetariana</option>
-                                            
+
                                         </Form.Control>
                                     </Row>
                                     <Row>

@@ -5,7 +5,7 @@ import logoImg from '../../assets/img/logo-white.png'
 import sushi from '../../assets/img/sushi.jpg'
 import pizza from '../../assets/img/pizza.jpg'
 import hamburguer from '../../assets/img/hamburguer.jpg'
-import salmao from '../../assets/img/bg-salmao.png'
+import user from '../../assets/img/user-icon.png'
 import bg from '../../assets/img/food-background.jpg'
 import { BrowserRouter as Router } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa'
@@ -21,6 +21,7 @@ import Nbar from '../NavBar/NavBar'
 
 
 export default function ProfileSubmited() {
+    var userName = localStorage.getItem("name");
     {
         return (
     <>
@@ -29,14 +30,14 @@ export default function ProfileSubmited() {
                         <Image className = "foto"
                               width={150}
                               height={150}
-                              src={hamburguer} 
+                              src={user} 
                               roundedCircle
                             />
                     </Row>
                     <Row>
                         <Col></Col>
                         <Col>
-                            <h5 class = "title-section-profile">Nome Completo</h5>
+                            <h5 class = "title-section-profile">{userName}</h5>
                         </Col>
                         <Col>
                             <Link>

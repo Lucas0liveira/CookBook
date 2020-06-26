@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Navbar, NavDropdown, Brand, Nav, Form, FormControl, Button, Image, Card, Container, Row, Col, CardDeck, Media, Badge } from 'react-bootstrap/'
+import { Navbar, NavDropdown, Nav, Form, FormControl, Button, Image, DropdownButton, Dropdown } from 'react-bootstrap/'
 import logoImg from '../../assets/img/logo-white.png'
-import { FaSearch } from 'react-icons/fa'
-import salmao from '../../assets/img/bg-salmao.png'
+import { FaSearch, FaDownload } from 'react-icons/fa'
+import user from '../../assets/img/user-icon.png'
 import { Link } from 'react-router-dom'
+import api from '../../services/api'
 
 function handleLogin() {
     if (localStorage.id == null) {
@@ -13,6 +14,33 @@ function handleLogin() {
 }
 
 export default function NavBar() {
+    
+    const catNames = ["Asiática", "Brasileira", "Coreana", "Drinks", "Francesa", "Hamburguer", "Indiana", "Italiana",
+        "Japonesa", "Low Carb", "Mexicana", "Saladas", "Sem Glúten", "Sopas", "Sobremesas", "Snacks", "Tailandesa", "Vegana",
+        "Vegetariana"]
+
+    let categories = []
+    for (var i = 1; i < 20; i++) {
+        categories.push({ "name": catNames[i - 1], "id": i })
+    }
+
+    const handleCategories = (eventKey) => {
+        var id = -1
+        for (var c in categories) {
+            if (categories[c].name == eventKey) {
+                id = categories[c].id
+            }
+        }
+        localStorage.setItem("categoryId", id)
+        localStorage.setItem("categoryName", eventKey)
+    }
+
+    const handleLogout = (eventKey) => {
+        if (eventKey == "2") {
+            localStorage.removeItem('id')
+            localStorage.removeItem('name')
+        }
+    }
 
     if (!handleLogin()) {
         return (
@@ -32,26 +60,10 @@ export default function NavBar() {
 
                         <Nav.Link to="/" >Início</Nav.Link>
 
-                        <NavDropdown title="Receitas" id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="/searchresults/1" >Asiática</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/2" >Brasileira</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/3" >Coreana</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/4" >Drinks</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/5" >Francesa</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/6" >Hamburguer</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/7" >Indiana</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/8" >Italiana</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/9" >Japonesa</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/10" >Low Carb</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/11" >Mexicana</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/12" >Saladas</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/13" >Sem Glúten</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/14" >Sopas</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/15" >Sobremesas</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/16" >Snacks</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/17" >Tailandesa</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/18" >Vegana</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/19" >Vegetariana</NavDropdown.Item>
+                        <NavDropdown title="Receitas" id="basic-nav-dropdown" onSelect={handleCategories} >
+                            {categories.map(category => (
+                                <NavDropdown.Item as={Link} to={"/searchresults/" + category.id} eventKey={category.name}> {category.name} </NavDropdown.Item>
+                            ))}
                         </NavDropdown>
 
                     </Nav>
@@ -91,26 +103,10 @@ export default function NavBar() {
 
                         <Nav.Link href="/" >Início</Nav.Link>
 
-                        <NavDropdown title="Receitas" id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="/searchresults/1" >Asiática</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/2" >Brasileira</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/3" >Coreana</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/4" >Drinks</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/5" >Francesa</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/6" >Hamburguer</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/7" >Indiana</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/8" >Italiana</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/9" >Japonesa</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/10" >Low Carb</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/11" >Mexicana</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/12" >Saladas</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/13" >Sem Glúten</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/14" >Sopas</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/15" >Sobremesas</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/16" >Snacks</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/17" >Tailandesa</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/18" >Vegana</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/searchresults/19" >Vegetariana</NavDropdown.Item>
+                        <NavDropdown title="Receitas" id="basic-nav-dropdown" onSelect={handleCategories}>
+                            {categories.map(category => (
+                                <NavDropdown.Item as={Link} to={"/searchresults/" + category.id} eventKey={category.name}> {category.name} </NavDropdown.Item>
+                            ))}
                         </NavDropdown>
 
                         <Link to="/recipe/submit">
@@ -120,21 +116,14 @@ export default function NavBar() {
                         </Link>
 
                     </Nav>
-
-                    <Link to="/profile">
-                        <Form inline>
-                            <Image
-                                width={64}
-                                height={64}
-                                src={salmao}
-                                roundedCircle
-                            />
-                        </Form>
-                    </Link>
+                    <DropdownButton title="Menu" variant="flat" onSelect={handleLogout} >
+                        <Dropdown.Item href="/profile" eventKey="1">Perfil</Dropdown.Item>
+                        <Dropdown.Item href="/" eventKey="2" >Logout</Dropdown.Item>
+                    </DropdownButton>
 
                 </Navbar.Collapse>
             </Navbar>
         )
     }
-
 }
+
