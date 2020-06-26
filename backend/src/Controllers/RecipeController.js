@@ -4,7 +4,7 @@ module.exports = {
 
     //função para criar uma nova receita
     async create(request, response) {
-        const { name, description, qtt, msr, ingr, prepare, prepTime, prepUnit, image, video, category_id } = request.body
+        const { name, description, qtt, msr, ingr, prepare, prepTime, prepUnit, image, video, category_id, user_id } = request.body
 
         const corte = "https://www.youtube.com/watch?v="
         const videourl = "https://www.youtube.com/embed/" + video.substring(video.indexOf(corte) + corte.length)
@@ -21,8 +21,9 @@ module.exports = {
                 image,
                 videourl,
                 category_id,
-                prepTime, 
+                prepTime,
                 prepUnit,
+                user_id,
                 rating
             })
             const recipe_id = id
@@ -49,7 +50,9 @@ module.exports = {
     //função que retorna todas as receitas do banco
     async index(request, response) {
 
-        let recipes = await connection('recipes').select('*').orderBy('name')
+        let recipes = await connection('recipes').join('users', 'recipes.user_id', 'users.id')
+            .select('recipes.id', 'recipes.name', 'recipes.description', 'recipes.prepare', 'recipes.image', 'recipes.videourl', 'recipes.category_id', 'recipes.prepTime', 'recipes.prepUnit', 'recipes.rating', 'users.name', 'recipes.user_id')
+            .orderBy('recipes.name')
         let aux = []
         for (i = 0; i < recipes.length; i++) {
             aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])
@@ -58,11 +61,13 @@ module.exports = {
     },
 
     async getRecipe(request, response) {
-        const id = request.params
-        let recipes = await connection('recipes').select('*').where('id', id.id)
+        const { id } = request.params
+        let recipes = await connection('recipes').join('users', 'recipes.user_id', 'users.id')
+            .select('recipes.id', 'recipes.name', 'recipes.description', 'recipes.prepare', 'recipes.image', 'recipes.videourl', 'recipes.category_id', 'recipes.prepTime', 'recipes.prepUnit', 'recipes.rating', 'users.name', 'recipes.user_id')
+            .where('recipes.id', id)
         let aux = []
         aux.push(recipes)
-        aux.push(await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', id.id))
+        aux.push(await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', id))
         return response.json(aux)
     },
 
@@ -70,7 +75,10 @@ module.exports = {
     async filtered(request, response) {
         const { category } = request.params
 
-        let recipes = await connection('recipes').select('*').orderBy('name').where('category_id', category)
+        let recipes = await connection('recipes').join('users', 'recipes.user_id', 'users.id')
+            .select('recipes.id', 'recipes.name', 'recipes.description', 'recipes.prepare', 'recipes.image', 'recipes.videourl', 'recipes.category_id', 'recipes.prepTime', 'recipes.prepUnit', 'recipes.rating', 'users.name', 'recipes.user_id')
+            .orderBy('recipes.name')
+            .where('recipes.category_id', category)
         let aux = []
         for (i = 0; i < recipes.length; i++) {
             aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])
@@ -106,7 +114,9 @@ module.exports = {
     },
 
     async recipesByStars(request, response) {
-        let recipes = await connection('recipes').select('*').orderBy('rating')
+        let recipes = await connection('recipes').join('users', 'recipes.user_id', 'users.id')
+            .select('recipes.id', 'recipes.name', 'recipes.description', 'recipes.prepare', 'recipes.image', 'recipes.videourl', 'recipes.category_id', 'recipes.prepTime', 'recipes.prepUnit', 'recipes.rating', 'users.name', 'recipes.user_id')
+            .orderBy('recipes.rating')
         let aux = []
         for (i = 0; i < recipes.length; i++) {
             aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])
@@ -126,8 +136,6 @@ module.exports = {
             } else {
                 newRating = nStars
             }
-            console.log(newRating)
-            console.log(oldRating)
             try {
                 await connection('recipes').where('id', id).update('rating', newRating)
                 return response.status(204).send()
