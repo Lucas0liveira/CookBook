@@ -15,17 +15,16 @@ export default function Home() {
     const [recipes, setRecipes] = useState([])
     const [recipeByStar, setRecipesByStar] = useState([])
 
-    useEffect(() => {
-        api.get('/recipes').then(response => {
-            setRecipes(response.data)
-        })
-    },[])
 
     useEffect(() => {
-        api.get('/filter/rating').then(response => {
-            setRecipesByStar(response.data)
-        })
-    }, [])
+        async function fetchData() {
+          const response1 = await api.get('/recipes')
+          const response2 = await api.get('/filter/rating')
+          setRecipes(response1.data)
+          setRecipesByStar(response2.data)
+        }
+        fetchData();
+      }, []);
 
     if(recipes.loading  || recipeByStar.loading){
         return (
