@@ -38,7 +38,7 @@ export default function Home() {
 
             <h2 class="title-section">As mais bem avaliadas</h2>
             <Row className="justify-content-md-center">
-                {recipes.map(recipe => ( //resolver segundo acesso ao banco e trocar para indexbyrating
+                {recipeByStar.map(recipe => ( //resolver segundo acesso ao banco e trocar para indexbyrating
                     (
                         <Col xs="auto">
                             <Card style={{ width: '13rem' }}>
@@ -63,7 +63,7 @@ export default function Home() {
 
             <h2 class="title-section">Adicionadas recentemente</h2>
             <Row className="justify-content-md-center">
-                {recipeByStar.map(recipe => ( //resolver segundo acesso ao banco e trocar para indexbyrating
+             {recipes.map(recipe => ( //resolver segundo acesso ao banco e trocar para indexbyrating
                     (
                         <Col xs="auto">
                             <Card style={{ width: '13rem' }}>
