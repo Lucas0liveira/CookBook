@@ -101,9 +101,7 @@ export default function ViewRecipe() {
                             <Card >
                                 <Card.Img src={recipe[0][0].image} />
                             </Card>
-                            <iframe width="560" height="315" src={recipe[0][0].videourl} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             <Button variant="flat" id="save">Salvar <FaBookmark size={20} color="#FFF" fontWeight="bolder" /> </Button>
-
                         </Col>
                         <Col>
                             <Row>
@@ -123,20 +121,24 @@ export default function ViewRecipe() {
                                     {recipe[0][0].prepUnit}
                                 </Badge>{' '}
 
-                                <FaClock size={20} color="#FF0000" fontWeight="bolder" />
+                                <FaClock size={20} color="#FF0000" fontWeight="bolder" />                           
+                            </Row>
 
-                                <Badge pill variant="secondary">
+                            <br></br>
+
+                            <Row>
+
+                            <Badge pill variant="secondary">
                                     Avaliação: {recipe[0][0].rating.toFixed(1)}/5
                                 </Badge>
-
                                 <Button variant="flat" onClick={handleShowRating} size="sm">Avaliar</Button>
                                 <Modal show={showRating} onHide={handleCloseRating}>
                                     <Modal.Header closeButton>
-                                        <Modal.Title>Avaliar e Comentar</Modal.Title>
+                                        <Modal.Title>Nos dê seu feedback</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
                                         <div>
-                                            <h5>Avalie essa receita!</h5>
+                                            <h5>Avalie esta receita!</h5>
                                             <StarRatingComponent
                                                 name="Avaliar"
                                                 onStarClick={onStarClick.bind(this)}
@@ -156,6 +158,7 @@ export default function ViewRecipe() {
                                 </Modal>
 
                             </Row>
+
                             <Row>
                                 <div>
                                     <br></br>
@@ -213,7 +216,8 @@ export default function ViewRecipe() {
                         <p> {recipe[0][0].prepare} </p>
                     </Row>
 
-                    <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+                    <h4 class="title-section">Video Referência</h4>
+                    <iframe width="560" height="315" src={recipe[0][0].videourl} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
                     <h4 class="title-section">Comentários</h4>
