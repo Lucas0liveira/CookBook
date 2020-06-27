@@ -120,7 +120,7 @@ module.exports = {
     },
 
     async recipesByStars(request, response) {
-        let recipes = await connection('recipes').select('*').orderBy('recipes.rating')
+        let recipes = await connection('recipes').select('*').orderBy('recipes.rating', 'desc')
         let aux = []
         for (i = 0; i < recipes.length; i++) {
             aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])
