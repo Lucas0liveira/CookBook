@@ -23,8 +23,8 @@ export default function Home() {
           setRecipes(response1.data)
           setRecipesByStar(response2.data)
         }
-        fetchData();
-      }, []);
+        fetchData()
+      }, [])
 
     if(recipes.loading  || recipeByStar.loading){
         return (

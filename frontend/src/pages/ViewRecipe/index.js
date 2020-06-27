@@ -36,14 +36,18 @@ export default function ViewRecipe() {
     const [recipe_id, setrecipeId] = useState(id)
     const [user_id, setUserId] = useState(1)
 
+
     useEffect(() => {
-        api.get('/recipes/show/' + id).then(response => {
-            setRecipe(response.data)
-        })
-        api.get('/comments/' + id).then(response => {
-            setComments(response.data)
-        })
-    }, [])
+        async function fetchData() {
+            const response1 = await api.get('/recipes/show/' + id)
+            const response2 = await api.get('/comments/' + id)
+            setRecipe(response1.data)
+            setComments(response2.data)
+        }
+        fetchData()
+    }, [comments])
+
+
     if (!recipe[0]) {
         return (<span>Loading...</span>)
     } else {
