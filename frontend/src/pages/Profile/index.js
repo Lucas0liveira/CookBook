@@ -12,109 +12,123 @@ import { FaSearch } from 'react-icons/fa'
 import { FaPlusCircle } from 'react-icons/fa'
 import { FaPen } from 'react-icons/fa'
 import Nbar from '../NavBar/NavBar'
+import api from '../../services/api'
 
 
 
 
 export default function Profile() {
+
+
     var userName = localStorage.getItem('name');
     const history = useHistory();
 
-    if(!localStorage.getItem('id')){
+    if (!localStorage.getItem('id')) {
         alert("Você precisa estar logado para ter acesso ao perfil!")
         history.push('/login')
     }
+
+
+    async function handleDelete(e){
+        e.preventDefault()
+        try{
+            api.delete('/recipe/') //TO DO
+        }catch(error){
+            alert("Erro ao excluir receita")
+        }
+    }
+
+
     {
         return (
-    <>
-    {Nbar(true)}          
-                    <Row className="justify-content-md-start">
-                        <Col xs="auto">
-                        <Image className = "foto"
-                              width={150}
-                              height={150}
-                              src={user} 
-                              roundedCircle
-                            />
-                            </Col>
-                    </Row>
-                    <Row>
-                        <Col></Col>
-                        <Col>
-                            <h5 class = "title-section-profile">{userName}</h5>
-                        </Col>
-                        <Col>
-                            <Link>
-                                <Button variant = "flat" id = "Edit" >
-                                    <FaPen size={20} color="#FF0000" fontWeight="bolder" />
-                                </Button>
-                            </Link>
-                        </Col>
-                    </Row>
-            
-                        <Nav className = "navPill" variant="pills" defaultActiveKey="/profile">
-                            <Nav.Item>
-                                <Nav.Link href="/profile">Receitas salvas</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link href="/profilesubmited">Receitas submetidas</Nav.Link>
-                            </Nav.Item>
-                        </Nav>
-
-
+            <>
+                {Nbar(true)}
+                <Row className="justify-content-md-start">
+                    <Col xs="auto">
+                        <Image className="foto"
+                            width={150}
+                            height={150}
+                            src={user}
+                            roundedCircle
+                        />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col></Col>
+                    <Col>
+                        <h5 class="title-section-profile">{userName}</h5>
+                    </Col>
+                    <Col>
                         <Link>
-                            <Button variant = "flat" id = "addFolder" >
-                                <FaPlusCircle size={30} color="#FF0000" fontWeight="bolder" />
+                            <Button variant="flat" id="Edit" >
+                                <FaPen size={20} color="#FF0000" fontWeight="bolder" />
                             </Button>
                         </Link>
+                    </Col>
+                </Row>
+
+                <Nav className="navPill" variant="pills" defaultActiveKey="/profile">
+                    <Nav.Item>
+                        <Nav.Link href="/profile">Receitas salvas</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link href="/profilesubmited">Receitas submetidas</Nav.Link>
+                    </Nav.Item>
+                </Nav>
 
 
-                            
-                        <Row>
-                            <Col>
-                                <Link>
-                                    <Button id = " " block variant = "flat"> Comida japonesa </Button>
-                                </Link>
-                            </Col>
-                            <Col>
-                                <Link>
-                                    <Button id = " " block variant = "flat"> Comida brasileira </Button>
-                                </Link>
-                            </Col>
-                            <Col>
-                                <Link>
-                                    <Button id = " " block variant = "flat"> Doces </Button>
-                                </Link>
-                            </Col>
-                        </Row>
-                        <Row><p></p></Row>
-                        <Row>
-                            <Col>
-                                <Link>
-                                    <Button id = " " block variant = "flat"> Pizzas </Button>
-                                </Link>
-                            </Col>
-                            <Col>
-                                <Link>
-                                    <Button id = " " block variant = "flat"> Comida coreana </Button>
-                                </Link>
-                            </Col>
-                            <Col>
-                                <Link>
-                                    <Button id = " " block variant = "flat"> Ideias de lanches </Button>
-                                </Link>
-                            </Col>
-                        </Row>
-       
-                
-                
+                <Link>
+                    <Button variant="flat" id="addFolder" >
+                        <FaPlusCircle size={30} color="#FF0000" fontWeight="bolder" />
+                    </Button>
+                </Link>
 
-    </>
 
-            
+
+                <Row>
+                    <Col>
+                        <Link>
+                            <Button id=" " block variant="flat"> Comida japonesa </Button>
+                        </Link>
+                    </Col>
+                    <Col>
+                        <Link>
+                            <Button id=" " block variant="flat"> Comida brasileira </Button>
+                        </Link>
+                    </Col>
+                    <Col>
+                        <Link>
+                            <Button id=" " block variant="flat"> Doces </Button>
+                        </Link>
+                    </Col>
+                </Row>
+                <Row><p></p></Row>
+                <Row>
+                    <Col>
+                        <Link>
+                            <Button id=" " block variant="flat"> Pizzas </Button>
+                        </Link>
+                    </Col>
+                    <Col>
+                        <Link>
+                            <Button id=" " block variant="flat"> Comida coreana </Button>
+                        </Link>
+                    </Col>
+                    <Col>
+                        <Link>
+                            <Button id=" " block variant="flat"> Ideias de lanches </Button>
+                        </Link>
+                    </Col>
+                </Row>
+
+
+
+
+            </>
+
+
         )
     }
 }
 
 
-      

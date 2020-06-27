@@ -10,6 +10,7 @@ import ViewRecipe from './pages/ViewRecipe'
 import Profile from './pages/Profile'
 import ProfileSubmited from './pages/ProfileSubmited'
 import SearchResults from './pages/SearchResults'
+import EditRecipe from './pages/EditRecipe'
 
 //switch garante que apenas uma rota sera chamada por momento
 //exact faz com que entre no rota só se for exatamente essa a url
@@ -27,6 +28,7 @@ export default function Routes() {
                 <Route path="/profile" component={Profile}></Route>
                 <Route path="/profilesubmited" component={ProfileSubmited}></Route>
                 <Route path="/searchresults" component={SearchResults}></Route>
+                <Route path="/edit/:id" component={EditRecipe}></Route>
             </Switch>
         </BrowserRouter>
     )
