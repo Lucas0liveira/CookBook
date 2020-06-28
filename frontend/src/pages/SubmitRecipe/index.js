@@ -8,9 +8,6 @@ import api from '../../services/api';
 
 
 export default function SubmitRecipe() {
-    var ingredientCount = 0
-    const [user_id, setuserId] = useState('')
-    const [author, setAuthor] = useState('')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [qtt, setQuantities] = useState([])
@@ -23,19 +20,18 @@ export default function SubmitRecipe() {
     const [prepTime, setPrepTime] = useState('15')
     const [prepUnit, setPrepUnit] = useState('Minuto(s)')
     const [ingredientSlots, setIngredietSlots] = useState([])
+    const user_id = localStorage.getItem('id')
+    const author = localStorage.getItem('name')
 
     const history = useHistory();
 
     async function handleRecipe(e) {
         e.preventDefault()
 
-
         try {
-            setuserId(localStorage.getItem('id'))
-            setAuthor(localStorage.getItem('name'))
 
             if (localStorage.getItem('id')) {
-                const response = await api.post('/recipes', { name, description, qtt, msr, ingr, prepare, prepTime, prepUnit, image, video, category_id, user_id, author });
+                const response = await api.post('/recipes', {name, description, qtt, msr, ingr, prepare, prepTime, prepUnit, image, video, category_id, user_id, author})
                 console.log(response)
                 history.push('/profilesubmited')
             } else {
@@ -50,7 +46,7 @@ export default function SubmitRecipe() {
 
     function handleImage(e) {
         const img = e.target.files[0]
-        setImage(URL.createObjectURL(e.target.files[0])
+        setImage(URL.createObjectURL(img)
         )
     }
 
