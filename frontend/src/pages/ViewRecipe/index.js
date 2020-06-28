@@ -126,7 +126,6 @@ export default function ViewRecipe() {
                             <Card >
                                 <Card.Img src={recipe[0][0].image} />
                             </Card>
-                            <iframe width="560" height="315" src={recipe[0][0].videourl} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             <Button variant="flat" id="save" onClick={handleShowSave}>Salvar <FaBookmark size={20} color="#FFF" fontWeight="bolder" /> </Button>
 
                             <Modal show={showSave} onHide={handleCloseSave}>
@@ -146,7 +145,7 @@ export default function ViewRecipe() {
                                                     < option value={folder.id} > {folder.folder_name}</option>
                                                 ))}
                                             </Form.Control>
-                                            <Button variant="primary" type="submit" onClick={handleCloseSave}>
+                                            <Button variant="flat" type="submit" onClick={handleCloseSave}>
                                                 Save Changes
                                     </Button>
                                         </Form.Group>
