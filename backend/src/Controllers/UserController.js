@@ -28,7 +28,7 @@ module.exports = {
         try {
             //cria a pasta read later para o usuario
             const user_id = id.id
-            const folder_name = "read later"
+            const folder_name = "Ler Mais Tarde"
             await connection('folders').insert({
                 folder_name,
                 user_id
