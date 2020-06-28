@@ -99,7 +99,7 @@ export default function ProfileSubmited() {
                                                     <Popover id={`popover-positioned-${placement}`}>
                                                         <Popover.Title as="h3">{}</Popover.Title>
                                                         <Popover.Content>
-                                                            <Link>
+                                                            <Link to={"/edit/"+ recipe[0].id}>
                                                                 <Button variant="flat" id="subEdit" >
                                                                     Editar
                                                             <FaPen size={10} color="#FF0000" fontWeight="bolder" />

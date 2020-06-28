@@ -118,7 +118,7 @@ export default function ViewRecipe() {
 
     return (
         <>
-            {Nbar(false)}
+            {Nbar()}
             <>
                 <div class="container" id="submit">
                     <Row>

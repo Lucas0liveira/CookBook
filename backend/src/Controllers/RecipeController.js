@@ -102,15 +102,23 @@ module.exports = {
     },
 
     async edit(request, response) {
-        const { id, name, description, prepare, image, video } = request.body
+        const { name, description, qtt, msr, ingr, prepare, prepTime, prepUnit, image, video, category_id, user_id, author } = request.body
 
         try {
             await connection('recipe').where('id', id).update({
                 name: name,
                 description: description,
+                qtt: qtt,
+                msr: msr,
+                ingr: ingr,
                 prepare: prepare,
+                prepTime: prepTime,
+                prepUnit: prepUnit,
                 image: image,
-                video: video
+                video: video,
+                category_id: category_id,
+                user_id: user_id,
+                author: author
             })
         } catch (e) {
             return response.json({ erro: 'não foi possível editar a receita' })
