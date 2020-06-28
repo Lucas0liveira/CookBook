@@ -41,9 +41,10 @@ body {
 	position: absolute;
 }
 .foto {
-	margin-left: 43%;
+	margin-left: 50px;
 	position: absolute;
-	margin-top: -10%;
+	margin-top: 20px;
+
 }
 .navPill {
 	margin-top: 5%;
