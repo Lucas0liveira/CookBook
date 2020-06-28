@@ -34,6 +34,10 @@ export default function ProfileSubmited() {
         fetchData()
     }, [recipes])
 
+    async function handleDelete(id){
+        await api.delete('/recipes/'+id)
+    }
+
 
     {
         return (
@@ -108,7 +112,7 @@ export default function ProfileSubmited() {
                                                         </Popover.Content>
                                                         <Popover.Content>
                                                             <Link>
-                                                                <Button variant="flat" id="subEdit" >
+                                                                <Button variant="flat" id="subEdit" onClick={() => handleDelete(recipe[0].id)} >
                                                                     Excluir
                                                             <FaTrash size={10} color="#FF0000" fontWeight="bolder" />
                                                                 </Button>
