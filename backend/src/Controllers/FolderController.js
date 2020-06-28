@@ -2,8 +2,7 @@ const connection = require('../Database/conection')
 
 module.exports = {
     async create(request, response) {
-        const user_id = request.headers.authorization
-        const { folder_name } = request.body
+        const { user_id, folder_name } = request.body
 
         const verifica = await connection('folders').select('*').where({
             user_id: user_id,

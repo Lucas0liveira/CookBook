@@ -27,7 +27,7 @@ export default function Routes() {
                 <Route path="/recipe/:id" component={ViewRecipe}></Route>
                 <Route path="/register" component={Register}></Route>
                 <Route path="/profile" component={Profile}></Route>
-                <Route path="/profilefolder" component={ProfileFolder}></Route>
+                <Route path="/folder/:id" component={ProfileFolder}></Route>
                 <Route path="/profilesubmited" component={ProfileSubmited}></Route>
                 <Route path="/searchresults" component={SearchResults}></Route>
                 <Route path="/edit/:id" component={EditRecipe}></Route>
