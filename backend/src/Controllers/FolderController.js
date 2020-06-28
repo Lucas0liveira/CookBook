@@ -77,9 +77,9 @@ module.exports = {
     },
 
     async getUsersFolders(request, response) {
-        const { id } = request.parms
+        const { user_id } = request.params
 
-        const folders = await connection('folders').select('*').where('user_id', id)
+        const folders = await connection('folders').select('*').where('user_id', user_id)
         return response.json(folders)
     },
 

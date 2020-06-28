@@ -33,21 +33,26 @@ export default function ViewRecipe() {
     const [showComments, setShowComments] = useState(false)
     const handleCloseComments = () => setShowComments(false)
     const handleShowComments = () => setShowComments(true)
+    const [showSave, setShowSave] = useState(false)
+    const [showSaveError, setShowSaveError] = useState(false)
+    const [folder_id, setFolder_id] = useState(null)
+    const [folders, setFolders] = useState([])
     const [recipe_id, setrecipeId] = useState(id)
-    const [user_id, setUserId] = useState(1)
+    const user_id = localStorage.getItem('id')
 
 
     useEffect(() => {
-        async function fetchData() {
-            const response1 = await api.get('/recipes/show/' + id)
-            const response2 = await api.get('/comments/' + id)
-            setRecipe(response1.data)
-            setComments(response2.data)
-        }
-        fetchData()
-    }, [comments])
-
-
+        api.get('/recipes/show/' + id).then(response => {
+            setRecipe(response.data)
+        })
+        api.get('/comments/' + id).then(response => {
+            setComments(response.data)
+        })
+        api.get('/folders/' + user_id).then(response => {
+            setFolders(response.data)
+        })
+    }, [id, user_id])
+  
     if (!recipe[0]) {
         return (<span>Loading...</span>)
     } else {
@@ -56,19 +61,25 @@ export default function ViewRecipe() {
 
     async function handleComment(e) {
         e.preventDefault()
-        console.log(comment)
         try {
             const response = await api.post('/comments', { recipe_id, user_id, comment })
-            console.log(response)
         } catch (e) {
             alert('Error')
         }
     }
 
+    async function handleSave(e) {
+        e.preventDefault()
+        console.log(folder_id)
+        try {
+            const response = await api.post('/folders/add', { folder_id, recipe_id })
+        } catch (err) {
+            alert(err.message)
+        }
+    }
+
     async function handleRate() {
         try {
-            console.log(id)
-            console.log(nStars)
             const response = await api.post('/recipes/rating', { id, nStars })
             alert('avaliação enviada com sucesso')
         } catch (err) {
@@ -90,6 +101,20 @@ export default function ViewRecipe() {
     function handleCloseRating() {
         setShowRating(false)
     }
+    function handleShowSave() {
+        if (user_id != null) {
+            setShowSave(true)
+        } else {
+            setShowSaveError(true)
+        }
+    }
+    function handleCloseSave() {
+        if (user_id != null) {
+            setShowSave(false)
+        } else {
+            setShowSaveError(false)
+        }
+    }
 
     return (
         <>
@@ -101,7 +126,56 @@ export default function ViewRecipe() {
                             <Card >
                                 <Card.Img src={recipe[0][0].image} />
                             </Card>
-                            <Button variant="flat" id="save">Salvar <FaBookmark size={20} color="#FFF" fontWeight="bolder" /> </Button>
+                            <iframe width="560" height="315" src={recipe[0][0].videourl} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <Button variant="flat" id="save" onClick={handleShowSave}>Salvar <FaBookmark size={20} color="#FFF" fontWeight="bolder" /> </Button>
+
+                            <Modal show={showSave} onHide={handleCloseSave}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Salvar</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <Form onSubmit={handleSave}>
+                                        <Form.Label>Escolha uma pasta para salvar</Form.Label>
+                                        <Form.Group>
+                                            <Form.Control as="select"
+                                                onChange={e => setFolder_id(e.target.value)}
+                                                value={folder_id}
+                                            >
+                                                <option value="">Nenhum </option>
+                                                {folders.map(folder => (
+                                                    < option value={folder.id} > {folder.folder_name}</option>
+                                                ))}
+                                            </Form.Control>
+                                            <Button variant="primary" type="submit" onClick={handleCloseSave}>
+                                                Save Changes
+                                    </Button>
+                                        </Form.Group>
+
+                                    </Form>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button variant="secondary" onClick={handleCloseSave}>
+                                        Close
+                                    </Button>
+                                </Modal.Footer>
+                            </Modal>
+
+                            <Modal show={showSaveError} onHide={handleCloseSave}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Salvar</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    Para salvar receitas é preciso estar logado.
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button variant="secondary" onClick={handleCloseSave}>
+                                        Close
+                                    </Button>
+                                    <Button variant="primary" onClick={handleCloseSave}>
+                                        Efetuar login
+                                    </Button>
+                                </Modal.Footer>
+                            </Modal>
                         </Col>
                         <Col>
                             <Row>
