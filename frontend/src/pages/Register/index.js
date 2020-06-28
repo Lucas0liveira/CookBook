@@ -20,7 +20,7 @@ export default function Register() {
         const data = {
             name,
             email,
-            password,
+            password
         }
 
         try {
@@ -32,8 +32,6 @@ export default function Register() {
         }
 
     }
-
-    {
         return (
             <>
                 {Nbar(false)}
@@ -81,5 +79,4 @@ export default function Register() {
 
             </>
         )
-    }
 }

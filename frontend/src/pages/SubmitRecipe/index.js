@@ -9,6 +9,8 @@ import api from '../../services/api';
 
 export default function SubmitRecipe() {
     var ingredientCount = 0
+    const [user_id, setuserId] = useState('')
+    const [author, setAuthor] = useState('')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [qtt, setQuantities] = useState([])
@@ -27,14 +29,19 @@ export default function SubmitRecipe() {
     async function handleRecipe(e) {
         e.preventDefault()
 
+
         try {
-            if(localStorage.getItem('id')){
-                const response = await api.post('/recipes', { name, description, qtt, msr, ingr, prepare, image, video, category_id, prepTime, prepUnit });
+            setuserId(localStorage.getItem('id'))
+            setAuthor(localStorage.getItem('name'))
+
+            if (localStorage.getItem('id')) {
+                const response = await api.post('/recipes', { name, description, qtt, msr, ingr, prepare, prepTime, prepUnit, image, video, category_id, user_id, author });
+                console.log(response)
                 history.push('/profilesubmited')
             } else {
                 alert("Você precisa realizar login para poder submeter uma receita!")
                 history.push('/login')
-            }    
+            }
 
         } catch (error) {
             alert('Erro ao registrar uma nova receita:\n' + error.message)
@@ -198,14 +205,18 @@ export default function SubmitRecipe() {
                                                 <option>45</option>
                                                 <option>60</option>
                                                 <option>75</option>
+                                                <option>90</option>
+                                                <option>105</option>
+                                                <option>120</option>
+                                                <option>135</option>
                                             </Form.Control>
                                         </Col>
                                         <Col>
-                                            <Badge variant="secondary">Min</Badge>{' '}
+                                            <Badge variant="secondary">Minutos</Badge>{' '}
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <Form.Label>Descreva sobre sua receita, seja criativo!</Form.Label>
+                                        <Form.Label>Descreva sua receita, seja criativo!</Form.Label>
                                         <Form.Control
                                             as="textarea"
                                             rows="2"
@@ -216,14 +227,7 @@ export default function SubmitRecipe() {
                                     </Row>
                                 </Col>
                             </Row>
-                            <Row>
-                                <FormLabel>Vídeo</FormLabel>
-                                <FormControl
-                                    placeholder="Insira um link para seu vídeo"
-                                    value={video}
-                                    onChange={e => setVideo(e.target.value)} />
-                            </Row>
-
+                            
                             <h4 class="title-section"> Informe os ingredientes necessários</h4>
                             <Row>
                                 <Col>
@@ -253,7 +257,14 @@ export default function SubmitRecipe() {
                                     </Button>
                                 </Col>
                             </Row>
-                            <h4 class="title-section">Escreva o passo a passo necessário para preparar a receita</h4>
+                            <Row>
+                                <FormLabel>Vídeo</FormLabel>
+                                <FormControl
+                                    placeholder="Insira um link para seu vídeo"
+                                    value={video}
+                                    onChange={e => setVideo(e.target.value)} />
+                            </Row>
+                            <h4 class="title-section">Escreva o modo de preparo para a receita</h4>
                             <Row>
                                 <Form.Control
                                     as="textarea"
@@ -263,6 +274,7 @@ export default function SubmitRecipe() {
                                     value={prepare}
                                     onChange={e => setPrepare(e.target.value)} />
                             </Row>
+                            
                             <Row>
                                 <Button variant="flat" id="submit" type="submit">
                                     Submeter receita

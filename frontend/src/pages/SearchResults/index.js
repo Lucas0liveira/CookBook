@@ -38,6 +38,8 @@ export default function ProfileSubmited() {
 
         <h1 class="title-section">Receitas Encontradas</h1> 
         <h2 class="title-section"> Categoria {localStorage.getItem("categoryName")}</h2> 
+        
+        <Row className="justify-content-md-center">
         <CardDeck>
                 {recipes.map(recipe => (
                     (<Card>
@@ -57,6 +59,7 @@ export default function ProfileSubmited() {
                 ))
                 }
             </CardDeck>
+            </Row>
 
     </>    
         )

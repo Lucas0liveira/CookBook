@@ -59,6 +59,16 @@ module.exports = {
         return response.json(aux)
     },
 
+    async indexByUser(request, response) {
+        const{ user_id } = request.params
+        let recipes = await connection('recipes').select('*').where('user_id', user_id)
+        let aux = []
+        for (i = 0; i < recipes.length; i++) {
+            aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])
+        }
+        return response.json(aux)
+    },
+
     async getRecipe(request, response) {
         const { id } = request.params
         let recipes = await connection('recipes')
@@ -110,7 +120,7 @@ module.exports = {
     },
 
     async recipesByStars(request, response) {
-        let recipes = await connection('recipes').select('*').orderBy('recipes.rating')
+        let recipes = await connection('recipes').select('*').orderBy('recipes.rating', 'desc')
         let aux = []
         for (i = 0; i < recipes.length; i++) {
             aux.push([recipes[i], await connection('ingredients').select('quantity', 'measure', 'ingredient').where('recipe_id', recipes[i].id)])
