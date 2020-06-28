@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { Navbar, NavDropdown, Brand, Nav, Form, FormControl, Button, Image, Card, Container, Row, Col, CardDeck, Media, Badge } from 'react-bootstrap/'
+import { Navbar, NavDropdown, Brand, Nav, Form, FormControl, Button, Image, Card, Container, Row, Col, CardDeck, Media, Badge, Modal } from 'react-bootstrap/'
 import logoImg from '../../assets/img/logo-white.png'
 import sushi from '../../assets/img/sushi.jpg'
 import pizza from '../../assets/img/pizza.jpg'
@@ -22,6 +22,8 @@ export default function Profile() {
 
     var userName = localStorage.getItem('name');
     const history = useHistory();
+    const [showAdd, setShowAdd] = useState(false)
+    const handleShowAdd = () => setShowAdd(true)
 
     if (!localStorage.getItem('id')) {
         alert("Você precisa estar logado para ter acesso ao perfil!")
@@ -38,16 +40,23 @@ export default function Profile() {
         }
     }
 
+    function handleCloseAdd() {
+        setShowAdd(false)
+    }
+    function handleCloseAddButton() {
+        setShowAdd(false)
+    }
+
 
     {
         return (
             <>
                 {Nbar(true)}
-                <Row className="justify-content-md-start">
+                <Row className="justify-md-center">
                     <Col xs="auto">
                         <Image className="foto"
-                            width={150}
-                            height={150}
+                            width={120}
+                            height={120}
                             src={user}
                             roundedCircle
                         />
@@ -76,13 +85,28 @@ export default function Profile() {
                     </Nav.Item>
                 </Nav>
 
-
-                <Link>
-                    <Button variant="flat" id="addFolder" >
-                        <FaPlusCircle size={30} color="#FF0000" fontWeight="bolder" />
-                    </Button>
-                </Link>
-
+                <Button variant="flat" id="addFolder" onClick={handleShowAdd} size="sm"><FaPlusCircle size={30} color="#FF0000" fontWeight="bolder" /></Button>
+                                <Modal show={showAdd} onHide={handleCloseAdd}>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>Digite um nome para a sua nova pasta:</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <div>
+                                        <Form>
+                                            <Row>
+                                                <Col>
+                                                <Form.Control placeholder="Escreva aqui..." />
+                                                </Col>
+                                            </Row>
+                                        </Form>
+                                        </div>
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                        <Button variant="flat" block type="submit" onClick={handleCloseAddButton}>
+                                            Criar pasta
+                                    </Button>
+                                    </Modal.Footer>
+                                </Modal>
 
 
                 <Row>
