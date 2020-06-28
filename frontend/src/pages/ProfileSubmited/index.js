@@ -130,7 +130,11 @@ export default function ProfileSubmited() {
                                 </Row>
 
                                 <Row>
-                                    <h5>Tempo de preparo</h5>
+                                    <h5>{recipe[0].name}</h5>
+                                </Row>
+                                
+                                <Row>
+                                            <h7>Tempo de preparo</h7>
                                 </Row>
                                 <Row>
                                     <Badge pill variant="secondary">
@@ -141,9 +145,7 @@ export default function ProfileSubmited() {
                                     </Badge>{' '}
                                     <FaClock size={20} color="#FF0000" fontWeight="bolder" />
                                 </Row>
-                                <Row>
-                                            <h7>{recipe[0].description}</h7>
-                                </Row>
+                                <br></br>
                                 <Row>
                                     <Link to={'/recipe/' + recipe[0].id}>
                                         <Button block variant="flat">
