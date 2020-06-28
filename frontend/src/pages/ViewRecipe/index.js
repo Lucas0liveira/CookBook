@@ -7,7 +7,7 @@ import sushi from '../../assets/img/sushi.jpg'
 import pizza from '../../assets/img/pizza.jpg'
 import hamburguer from '../../assets/img/hamburguer.jpg'
 import bg from '../../assets/img/food-background.jpg'
-import salmao from '../../assets/img/bg-salmao.png'
+import salmao from '../../assets/img/user-icon.png'
 import { BrowserRouter as Router } from 'react-router-dom';
 import { FaSearch, FaRegCreditCard } from 'react-icons/fa'
 import { FaClock, FaBookmark } from 'react-icons/fa'
@@ -40,22 +40,23 @@ export default function ViewRecipe() {
     const [recipe_id, setrecipeId] = useState(id)
     const user_id = localStorage.getItem('id')
 
-
     useEffect(() => {
-        api.get('/recipes/show/' + id).then(response => {
-            setRecipe(response.data)
-        })
-        api.get('/comments/' + id).then(response => {
-            setComments(response.data)
-        })
-        api.get('/folders/' + user_id).then(response => {
-            setFolders(response.data)
-        })
-    }, [id, user_id])
-  
-    if (!recipe[0]) {
-        return (<span>Loading...</span>)
-    } else {
+        async function fetchData() {
+            const response1 = await api.get('/recipes/show/' + id)
+            const response2 = await api.get('/comments/' + id)
+            const response3 = await api.get('/folders/' + user_id)
+            setRecipe(response1.data)
+            setComments(response2.data)
+            setFolders(response3.data)
+        }
+        fetchData()
+    },[recipe])
+
+    if(!recipe[0]){
+        return <span>Loading...</span>
+    }else if(!recipe[0][0]){
+        return <span>Loading...</span>
+    }else{
         console.log(recipe)
     }
 
@@ -98,9 +99,11 @@ export default function ViewRecipe() {
         }
         setShowRating(false)
     }
+
     function handleCloseRating() {
         setShowRating(false)
     }
+
     function handleShowSave() {
         if (user_id != null) {
             setShowSave(true)
@@ -108,6 +111,7 @@ export default function ViewRecipe() {
             setShowSaveError(true)
         }
     }
+
     function handleCloseSave() {
         if (user_id != null) {
             setShowSave(false)
@@ -123,7 +127,7 @@ export default function ViewRecipe() {
                 <div class="container" id="submit">
                     <Row>
                         <Col>
-                            <Card >
+                            <Card>
                                 <Card.Img src={recipe[0][0].image} />
                             </Card>
                             <Button variant="flat" id="save" onClick={handleShowSave}>Salvar <FaBookmark size={20} color="#FFF" fontWeight="bolder" /> </Button>
@@ -194,14 +198,14 @@ export default function ViewRecipe() {
                                     {recipe[0][0].prepUnit}
                                 </Badge>{' '}
 
-                                <FaClock size={20} color="#FF0000" fontWeight="bolder" />                           
+                                <FaClock size={20} color="#FF0000" fontWeight="bolder" />
                             </Row>
 
                             <br></br>
 
                             <Row>
 
-                            <Badge pill variant="secondary">
+                                <Badge pill variant="secondary">
                                     Avaliação: {recipe[0][0].rating.toFixed(1)}/5
                                 </Badge>
                                 <Button variant="flat" onClick={handleShowRating} size="sm">Avaliar</Button>

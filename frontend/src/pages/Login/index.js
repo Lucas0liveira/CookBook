@@ -29,7 +29,7 @@ export default function Login() {
                 localStorage.setItem('name', user.data.name)
                 localStorage.setItem('id', response.data.id)
                 
-                history.push('/profile')
+                history.push('/')
             }
 
 
