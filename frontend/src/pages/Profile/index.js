@@ -102,9 +102,9 @@ export default function Profile() {
                                         </div>
                                     </Modal.Body>
                                     <Modal.Footer>
-                                        <Button variant="flat" block type="submit" onClick={handleCloseAddButton}>
-                                            Criar pasta
-                                    </Button>
+                                            <Button variant="flat" block type="submit" onClick={handleCloseAddButton}>
+                                                 Criar pasta
+                                            </Button>
                                     </Modal.Footer>
                                 </Modal>
 
