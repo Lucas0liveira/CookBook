@@ -9,7 +9,7 @@ import user from '../../assets/img/user-icon.png'
 import bg from '../../assets/img/food-background.jpg'
 import { BrowserRouter as Router } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa'
-import { FaPlusCircle } from 'react-icons/fa'
+import { FaPlusCircle} from 'react-icons/fa'
 import { FaPen } from 'react-icons/fa'
 import Nbar from '../NavBar/NavBar'
 import api from '../../services/api'
