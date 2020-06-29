@@ -31,7 +31,7 @@ export default function SubmitRecipe() {
         try {
 
             if (localStorage.getItem('id')) {
-                const response = await api.post('/recipes', {name, description, qtt, msr, ingr, prepare, prepTime, prepUnit, image, video, category_id, user_id, author})
+                const response = await api.post('/recipes', { name, description, qtt, msr, ingr, prepare, prepTime, prepUnit, image, video, category_id, user_id, author })
                 console.log(response)
                 history.push('/profilesubmited')
             } else {
@@ -223,7 +223,7 @@ export default function SubmitRecipe() {
                                     </Row>
                                 </Col>
                             </Row>
-                            
+
                             <h4 class="title-section"> Informe os ingredientes necessários</h4>
                             <Row>
                                 <Col>
@@ -270,7 +270,7 @@ export default function SubmitRecipe() {
                                     value={prepare}
                                     onChange={e => setPrepare(e.target.value)} />
                             </Row>
-                            
+
                             <Row>
                                 <Button variant="flat" id="submit" type="submit">
                                     Submeter receita

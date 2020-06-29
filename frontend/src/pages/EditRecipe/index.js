@@ -33,7 +33,7 @@ export default function SubmitRecipe() {
             setRecipe(response.data)
         })
     })
-  
+
     if (!recipe[0]) {
         return (<span>Loading...</span>)
     } else {

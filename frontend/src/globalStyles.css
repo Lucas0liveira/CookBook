@@ -51,6 +51,7 @@ body {
 	margin-top: 20px;
 
 }
+
 .logo-footer {
 	display: flex;
 	margin-left: auto;
@@ -135,7 +136,7 @@ a {
 }
 
 .btn-flat#submitnav {
-	margin-left: 40vw;
+	margin-left: 51vw;
 	margin-right: 5vw;
 	width: 250px;
 	border-radius: 10px;

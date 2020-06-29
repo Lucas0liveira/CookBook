@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useHistory, useParams } from 'react-router-dom'
-import { Navbar, NavDropdown, Brand, Nav, Form, FormControl, Button, Image, Card, Container, Row, Col, CardDeck, Media, Badge, Modal } from 'react-bootstrap/'
-import user from '../../assets/img/user-icon.png'
-import bg from '../../assets/img/food-background.jpg'
-import { BrowserRouter as Router } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa'
+import { Link, useParams } from 'react-router-dom'
+import { Button, Card, Row, CardDeck, Badge, Modal } from 'react-bootstrap/'
 import { FaTrash } from 'react-icons/fa'
-import { FaPen } from 'react-icons/fa'
 import Nbar from '../NavBar/NavBar'
 import api from '../../services/api'
 
@@ -22,27 +17,17 @@ export default function ProfileFolder() {
     var db = 'oi'
 
 
-
-    useEffect(() => {
-        async function fetchData() {
-            const response1 = await api.get('/folders/recipes/' + folder_id)
-            setRecipes(response1.data)
-            console.log(recipes)
-            console.log(response1.data)
-
-        }
-        fetchData()
-    }, [])
-    async function handleShowAdd() {
-        setShowAdd(true)
-        try {
-            const response = await api.get('/folders/recipes/' + folder_id)
-            console.log(response.data)
-        } catch (err) {
-
-        }
+    useEffect(async () => {
+        const response = await api.get('/folder/recipes', { folder_id })
+        setRecipes(response.data)
+        console.log(recipes)
+    }, [recipes])
 
 
+    if (!recipes) {
+        return <span>Loading...</span>
+    } else {
+        console.log(recipes)
     }
 
     function handleCloseAdd() {

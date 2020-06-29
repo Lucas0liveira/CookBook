@@ -1,24 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useHistory, useParams } from 'react-router-dom'
-import { Navbar, NavDropdown, Brand, Nav, Form, FormControl, Button, Image, Card, Container, Row, Col, CardDeck, Media, Badge, Modal } from 'react-bootstrap/'
+import { useParams } from 'react-router-dom'
+import { Form, Button, Card, Row, Col, Media, Badge, Modal } from 'react-bootstrap/'
 import StarRatingComponent from 'react-star-rating-component'
-import logoImg from '../../assets/img/logo-white.png'
-import sushi from '../../assets/img/sushi.jpg'
-import pizza from '../../assets/img/pizza.jpg'
-import hamburguer from '../../assets/img/hamburguer.jpg'
-import bg from '../../assets/img/food-background.jpg'
 import salmao from '../../assets/img/user-icon.png'
-import { BrowserRouter as Router } from 'react-router-dom';
-import { FaSearch, FaRegCreditCard } from 'react-icons/fa'
 import { FaClock, FaBookmark } from 'react-icons/fa'
-import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
+import { BsStarFill } from 'react-icons/bs';
 import Nbar from '../NavBar/NavBar'
 import api from '../../services/api'
-
-
-
-
-
 
 export default function ViewRecipe() {
 
@@ -50,13 +38,13 @@ export default function ViewRecipe() {
             setFolders(response3.data)
         }
         fetchData()
-    },[recipe])
+    }, [recipe])
 
-    if(!recipe[0]){
+    if (!recipe[0]) {
         return <span>Loading...</span>
-    }else if(!recipe[0][0]){
+    } else if (!recipe[0][0]) {
         return <span>Loading...</span>
-    }else{
+    } else {
         console.log(recipe)
     }
 
