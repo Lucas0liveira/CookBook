@@ -25,7 +25,7 @@ routes.delete('/users/unfollow/:followed_id', UserController.unfollow)
 
 //lista de rotas para receitas
 routes.get('/recipes', RecipeController.index)
-routes.get('/recipeByUser/:user_id', RecipeController.indexByUser )
+routes.get('/recipeByUser/:user_id', RecipeController.indexByUser)
 routes.get('/recipes/show/:id', RecipeController.getRecipe)
 routes.get('/recipes/:category', RecipeController.filtered)
 routes.get('/filter/rating', RecipeController.recipesByStars)
@@ -36,7 +36,7 @@ routes.delete('/recipes/:id', RecipeController.delete)
 
 //lista de rotas para pastas
 routes.get('/folders', FolderController.index)
-routes.get('/folders/recipes', FolderController.recipeOfFolder)
+routes.get('/folders/recipes/:folder_id', FolderController.recipeOfFolder)
 routes.get('/folders/:user_id', FolderController.getUsersFolders)
 routes.post('/folders/add', FolderController.recipeOnFolder)
 routes.post('/folders', FolderController.create)

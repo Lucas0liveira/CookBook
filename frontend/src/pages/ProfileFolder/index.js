@@ -19,17 +19,36 @@ export default function ProfileFolder() {
     const folder_id = useParams().id
     const [recipes, setRecipes] = useState([])
     const [showAdd, setShowAdd] = useState(false)
-    const handleShowAdd = () => setShowAdd(true)
+    var db = 'oi'
 
 
     useEffect(() => {
-        api.get('/folders/recipes', {folder_id} ).then(response => {
-            setRecipes(response.data)
+        async function fetchData() {
+            const response1 = await api.get('/folders/recipes/' + folder_id)
+            setRecipes(response1.data)
             console.log(recipes)
-        })
+            console.log(response1.data)
+
+        }
+        fetchData()
     }, [])
 
+    async function handleShowAdd() {
+        setShowAdd(true)
+        try {
+            const response = await api.get('/folders/recipes/' + folder_id)
+            console.log(response.data)
+        } catch (err) {
+
+        }
+
+
+    }
+
     function handleCloseAdd() {
+        console.log(folder_id)
+        console.log(db)
+        console.log(recipes)
         setShowAdd(false)
     }
 
@@ -57,33 +76,20 @@ export default function ProfileFolder() {
                     </Button>
 
                     </Modal.Footer>
-                </Modal> 
+                </Modal>
 
 
 
                 <Row className="justify-content-md-center">
                     <CardDeck>
                         {recipes.map(recipe => (
-                            (<Card>
-                                <Card.Img variant="top" src={recipe[0].image} alt="" width="500px" height="200px" />
-                                <Card.Body>
-                                    <Badge variant="secondary">{recipe[0].prepTime} {recipe[0].prepUnit}</Badge>{' '}
-                                    <Card.Title>{recipe[0].name}</Card.Title>
-                                    <Card.Text>{recipe[0].description}
-                                    </Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <Link to={"/searchresults/" + recipe[0].id}>
-                                        <Button id="vermais" block variant="flat"> Ver mais </Button>
-                                    </Link>
-                                </Card.Footer>
-                            </Card>)
+                            (<p>{recipe.name}</p>)
                         ))
                         }
                     </CardDeck>
                 </Row>
 
-              
+
             </>
         )
     }

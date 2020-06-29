@@ -34,9 +34,9 @@ module.exports = {
     //função que deleta uma pasta do banco
     async delete(request, response) {
         //precisa do id da pasta a ser deletada
-        const { id } = request.parms
+        const { id } = request.params
 
-        await connection('folder_content').where('folder_id').del()
+        await connection('folder_content').where('folder_id', id).del()
         await connection('folders').where('id', id).del()
         return response.status(204).send()
     },
@@ -63,13 +63,15 @@ module.exports = {
     //função que busca todas as receitas que estão em uma pasta
     async recipeOfFolder(request, response) {
         //necessita do id da pasta
-        const { folder_id } = request.body
+        const { folder_id } = request.params
 
         // busca no banco pelas receitas em uma pasta
+
         const recepies = await connection('folder_content')
+            .join('recipes', 'recipes.id', '=', 'folder_content.recipe_id')
             .select('recipes.id')
             .where('folder_id', folder_id)
-            .join('recipes', 'recipes.id', '=', 'folder_content.recipe_id')
+
 
         //retorna uma lista de receitas da pasta
         return response.json(recepies)
