@@ -53,15 +53,10 @@ Para ter acesso as receitas submetidas por você, clique no botão "Receitas sub
 #### Excluindo uma receita submetida
 Dentro de receitas submetidas, escolha qual receita você deseja excluir e clique no símbolo de menu dessa receita (Três pontinhos vermelhos empilhados).
 * Selecione a opção "Excluir".
-#### Editando uma receita submetida
-Dentro de receitas submetidas, escolha qual receita você deseja excluir e clique no símbolo de menu dessa receita (Três pontinhos vermelhos empilhados).
-* Selecione a opção "Editar".
 ### Encontrando uma receita
 Para encontrar uma receita, você pode navegar pela página principal e visualizar algumas receitas. Entretanto, se deseja encontrar uma receita de uma categoria específica, clique na opção "Receitas" localizado no topo do site, em seguida clique na categoria de receita que deseja acessar.
 ### Visualizando informações sobre receita
 Para visualizar informações sobre uma receita você precisa clicar no botão vermelho "Ver mais" localizados nos cards das receitas. 
-#### Salvando uma receita
-Dentro da página da receita que você deseja salvar, clique no botão vermelho "Salvar", localizado abaixo da foto da receita, em seguida selecione em que pasta você deseja salvar essa receita e depois clique em "Salvar".
 #### Avaliando uma receita
 Para avaliar uma receita, navegue até a receita que deseja avaliar e clique no botão vermelho "Avaliar essa receita", em seguida uma nova janela será aberta.
 * Selecione a quantidade de estrelas que deseja agregar a uma receita (a avaliação é representada por símbolos de estrelas, sendo uma estrela equivalente a "Muito ruim" e cinco estrelas equivalentes a "Muito bom").
