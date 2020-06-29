@@ -22,6 +22,7 @@ export default function ProfileFolder() {
     var db = 'oi'
 
 
+
     useEffect(() => {
         async function fetchData() {
             const response1 = await api.get('/folders/recipes/' + folder_id)
@@ -32,7 +33,6 @@ export default function ProfileFolder() {
         }
         fetchData()
     }, [])
-
     async function handleShowAdd() {
         setShowAdd(true)
         try {
@@ -67,7 +67,7 @@ export default function ProfileFolder() {
                     </Modal.Header>
                     <Modal.Body>Tem certeza que deseja deletar esta pasta?</Modal.Body>
                     <Modal.Footer>
-                        <Button variant="flat" /*onClick={}*/>
+                        <Button variant="flat" F>
                             Sim
                     </Button>
 
