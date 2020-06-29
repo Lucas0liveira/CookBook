@@ -34,6 +34,10 @@ export default function ProfileSubmited() {
         fetchData()
     }, [recipes])
 
+    async function handleDelete(id){
+        await api.delete('/recipes/'+id)
+    }
+
 
     {
         return (
@@ -99,7 +103,7 @@ export default function ProfileSubmited() {
                                                     <Popover id={`popover-positioned-${placement}`}>
                                                         <Popover.Title as="h3">{}</Popover.Title>
                                                         <Popover.Content>
-                                                            <Link>
+                                                            <Link to={"/edit/"+ recipe[0].id}>
                                                                 <Button variant="flat" id="subEdit" >
                                                                     Editar
                                                             <FaPen size={10} color="#FF0000" fontWeight="bolder" />
@@ -108,7 +112,7 @@ export default function ProfileSubmited() {
                                                         </Popover.Content>
                                                         <Popover.Content>
                                                             <Link>
-                                                                <Button variant="flat" id="subEdit" >
+                                                                <Button variant="flat" id="subEdit" onClick={() => handleDelete(recipe[0].id)} >
                                                                     Excluir
                                                             <FaTrash size={10} color="#FF0000" fontWeight="bolder" />
                                                                 </Button>
@@ -126,7 +130,11 @@ export default function ProfileSubmited() {
                                 </Row>
 
                                 <Row>
-                                    <h5>Tempo de preparo</h5>
+                                    <h5>{recipe[0].name}</h5>
+                                </Row>
+                                
+                                <Row>
+                                            <h7>Tempo de preparo</h7>
                                 </Row>
                                 <Row>
                                     <Badge pill variant="secondary">
@@ -137,9 +145,7 @@ export default function ProfileSubmited() {
                                     </Badge>{' '}
                                     <FaClock size={20} color="#FF0000" fontWeight="bolder" />
                                 </Row>
-                                <Row>
-                                            <h7>{recipe[0].description}</h7>
-                                </Row>
+                                <br></br>
                                 <Row>
                                     <Link to={'/recipe/' + recipe[0].id}>
                                         <Button block variant="flat">
