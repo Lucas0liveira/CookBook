@@ -2,8 +2,6 @@
 
 CookBook é um catálogo de receitas com aspectos de rede social. A ideia é que pessoas que têm a culinária como hobbie possam colecionar e compartilhar suas próprias receitas.
 
-No CookBook é possível publicar e encontrar receitas publicadas por outros usuários e salvá-las em seu próprio Livro de Receitas.
-
 ## Pré-requisitos
 * Última versão do Node.js instalado.
 * Máquina com Windows, Linux ou MacOS.
