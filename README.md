@@ -46,8 +46,6 @@ Para realizar o login no site você precisará de um cadastro, caso não tenha, 
 Para ter acesso a página principal, basta clicar na opção "Início", localizada na parte superior do site, ou clicar na logo "CookBook" do site, localizada no canto superior esquerdo.
 ### Acessando seu perfil
 Para navegar até o seu perfil, clique no menu localizado no canto superior direito e em seguida clique em "Perfil". Lá você encontrará informações sobre o seu perfil, suas pastas e receitas submetidas por você.
-#### Editando seu perfil
-Para editar seu perfil, clique no ícone de editar perfil (Círculo branco com um símbolo de lápis vermelho).
 #### Criando uma pasta
 * Dentro do seu perfil, clique no ícone de adicionar uma pasta (Círculo vermelho com um símbolo "+" em branco). Uma pequena janela será aberta
 * Nessa nova janela aberta, digite o nome que deseja para sua nova pasta
