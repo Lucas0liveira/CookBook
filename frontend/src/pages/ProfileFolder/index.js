@@ -22,12 +22,18 @@ export default function ProfileFolder() {
     const handleShowAdd = () => setShowAdd(true)
 
 
-    useEffect(() => {
-        api.get('/folders/recipes', {folder_id} ).then(response => {
-            setRecipes(response.data)
+    useEffect(async () => {
+        const response = await api.get('/folder/recipes', { folder_id })
+        setRecipes(response.data)
             console.log(recipes)
-        })
-    }, [])
+        }, [recipes])
+
+        
+    if (!recipes) {
+        return <span>Loading...</span>
+    } else {
+        console.log(recipes)
+    }
 
     function handleCloseAdd() {
         setShowAdd(false)
@@ -48,7 +54,7 @@ export default function ProfileFolder() {
                     </Modal.Header>
                     <Modal.Body>Tem certeza que deseja deletar esta pasta?</Modal.Body>
                     <Modal.Footer>
-                        <Button variant="flat" /*onClick={}*/>
+                        <Button variant="flat" F>
                             Sim
                     </Button>
 
@@ -57,7 +63,7 @@ export default function ProfileFolder() {
                     </Button>
 
                     </Modal.Footer>
-                </Modal> 
+                </Modal>
 
 
 
@@ -83,7 +89,7 @@ export default function ProfileFolder() {
                     </CardDeck>
                 </Row>
 
-              
+
             </>
         )
     }

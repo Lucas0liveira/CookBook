@@ -36,7 +36,7 @@ routes.delete('/recipes/:id', RecipeController.delete)
 
 //lista de rotas para pastas
 routes.get('/folders', FolderController.index)
-routes.get('/folders/recipes', FolderController.recipeOfFolder)
+routes.get('/recipesOnfolder', FolderController.recipeOfFolder)
 routes.get('/folders/:user_id', FolderController.getUsersFolders)
 routes.post('/folders/add', FolderController.recipeOnFolder)
 routes.post('/folders', FolderController.create)
