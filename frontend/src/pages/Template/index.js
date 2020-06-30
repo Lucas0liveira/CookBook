@@ -1,12 +1,7 @@
-import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import { Navbar, NavDropdown, Brand, Nav, Form, FormControl, Button, Image } from 'react-bootstrap/'
+import React from 'react'
+import { Navbar, NavDropdown, Nav, FormControl, Button } from 'react-bootstrap/'
 import logoImg from '../../assets/img/logo-white.png'
-import bg from '../../assets/img/food-background.jpg'
-import { BrowserRouter as Router } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa'
-
-
 
 
 export default function Template() {

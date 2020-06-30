@@ -1,24 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import { Navbar, NavDropdown, Brand, Nav, Form, FormControl, Button, Image, Card, Container, Row, Col, CardDeck, Media, Badge, OverlayTrigger, Popover } from 'react-bootstrap/'
-import logoImg from '../../assets/img/logo-white.png'
-import sushi from '../../assets/img/sushi.jpg'
-import pizza from '../../assets/img/pizza.jpg'
-import hamburguer from '../../assets/img/hamburguer.jpg'
+import { Link } from 'react-router-dom'
+import { Nav, Button, Image, Card, Row, Col, Badge, OverlayTrigger, Popover } from 'react-bootstrap/'
 import user from '../../assets/img/user-icon.png'
-import bg from '../../assets/img/food-background.jpg'
-import { BrowserRouter as Router } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa'
-import { FaPlusCircle } from 'react-icons/fa'
 import { FaClock } from 'react-icons/fa'
 import { FaPen } from 'react-icons/fa'
 import { FaEllipsisV } from 'react-icons/fa'
 import { FaTrash } from 'react-icons/fa'
 import Nbar from '../NavBar/NavBar'
 import api from '../../services/api'
-
-
-
 
 
 export default function ProfileSubmited() {
@@ -34,10 +23,9 @@ export default function ProfileSubmited() {
         fetchData()
     }, [recipes])
 
-    async function handleDelete(id){
-        await api.delete('/recipes/'+id)
+    async function handleDelete(id) {
+        await api.delete('/recipes/' + id)
     }
-
 
     {
         return (
@@ -103,7 +91,7 @@ export default function ProfileSubmited() {
                                                     <Popover id={`popover-positioned-${placement}`}>
                                                         <Popover.Title as="h3">{}</Popover.Title>
                                                         <Popover.Content>
-                                                            <Link to={"/edit/"+ recipe[0].id}>
+                                                            <Link to={"/edit/" + recipe[0].id}>
                                                                 <Button variant="flat" id="subEdit" >
                                                                     Editar
                                                             <FaPen size={10} color="#FF0000" fontWeight="bolder" />
@@ -132,9 +120,9 @@ export default function ProfileSubmited() {
                                 <Row>
                                     <h5>{recipe[0].name}</h5>
                                 </Row>
-                                
+
                                 <Row>
-                                            <h7>Tempo de preparo</h7>
+                                    <h7>Tempo de preparo</h7>
                                 </Row>
                                 <Row>
                                     <Badge pill variant="secondary">

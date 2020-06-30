@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Navbar, NavDropdown, Nav, Form, FormControl, Button, Image, DropdownButton, Dropdown } from 'react-bootstrap/'
 import logoImg from '../../assets/img/logo-white.png'
-import { FaSearch, FaDownload } from 'react-icons/fa'
-import user from '../../assets/img/user-icon.png'
 import { Link } from 'react-router-dom'
 import api from '../../services/api'
 
@@ -14,7 +12,7 @@ function handleLogin() {
 }
 
 export default function NavBar() {
-    
+
     const catNames = ["Asiática", "Brasileira", "Coreana", "Drinks", "Francesa", "Hamburguer", "Indiana", "Italiana",
         "Japonesa", "Low Carb", "Mexicana", "Saladas", "Sem Glúten", "Sopas", "Sobremesas", "Snacks", "Tailandesa", "Vegana",
         "Vegetariana"]
@@ -52,12 +50,6 @@ export default function NavBar() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
 
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-
-                        <Button id="search" variant="flat">
-                            <FaSearch size={20} color="#FF0000" fontWeight="bolder" />
-                        </Button>
-
                         <Nav.Link to="/" >Início</Nav.Link>
 
                         <NavDropdown title="Receitas" id="basic-nav-dropdown" onSelect={handleCategories} >
@@ -94,12 +86,6 @@ export default function NavBar() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-
-                        <Button id="search" variant="flat">
-                            <FaSearch size={20} color="#FF0000" fontWeight="bolder" />
-                        </Button>
 
                         <Nav.Link href="/" >Início</Nav.Link>
 

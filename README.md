@@ -2,8 +2,6 @@
 
 CookBook é um catálogo de receitas com aspectos de rede social. A ideia é que pessoas que têm a culinária como hobbie possam colecionar e compartilhar suas próprias receitas.
 
-No CookBook é possível publicar e encontrar receitas publicadas por outros usuários e salvá-las em seu próprio Livro de Receitas.
-
 ## Pré-requisitos
 * Última versão do Node.js instalado.
 * Máquina com Windows, Linux ou MacOS.
@@ -46,8 +44,6 @@ Para realizar o login no site você precisará de um cadastro, caso não tenha, 
 Para ter acesso a página principal, basta clicar na opção "Início", localizada na parte superior do site, ou clicar na logo "CookBook" do site, localizada no canto superior esquerdo.
 ### Acessando seu perfil
 Para navegar até o seu perfil, clique no menu localizado no canto superior direito e em seguida clique em "Perfil". Lá você encontrará informações sobre o seu perfil, suas pastas e receitas submetidas por você.
-#### Editando seu perfil
-Para editar seu perfil, clique no ícone de editar perfil (Círculo branco com um símbolo de lápis vermelho).
 #### Criando uma pasta
 * Dentro do seu perfil, clique no ícone de adicionar uma pasta (Círculo vermelho com um símbolo "+" em branco). Uma pequena janela será aberta
 * Nessa nova janela aberta, digite o nome que deseja para sua nova pasta
@@ -57,15 +53,10 @@ Para ter acesso as receitas submetidas por você, clique no botão "Receitas sub
 #### Excluindo uma receita submetida
 Dentro de receitas submetidas, escolha qual receita você deseja excluir e clique no símbolo de menu dessa receita (Três pontinhos vermelhos empilhados).
 * Selecione a opção "Excluir".
-#### Editando uma receita submetida
-Dentro de receitas submetidas, escolha qual receita você deseja excluir e clique no símbolo de menu dessa receita (Três pontinhos vermelhos empilhados).
-* Selecione a opção "Editar".
 ### Encontrando uma receita
 Para encontrar uma receita, você pode navegar pela página principal e visualizar algumas receitas. Entretanto, se deseja encontrar uma receita de uma categoria específica, clique na opção "Receitas" localizado no topo do site, em seguida clique na categoria de receita que deseja acessar.
 ### Visualizando informações sobre receita
 Para visualizar informações sobre uma receita você precisa clicar no botão vermelho "Ver mais" localizados nos cards das receitas. 
-#### Salvando uma receita
-Dentro da página da receita que você deseja salvar, clique no botão vermelho "Salvar", localizado abaixo da foto da receita, em seguida selecione em que pasta você deseja salvar essa receita e depois clique em "Salvar".
 #### Avaliando uma receita
 Para avaliar uma receita, navegue até a receita que deseja avaliar e clique no botão vermelho "Avaliar essa receita", em seguida uma nova janela será aberta.
 * Selecione a quantidade de estrelas que deseja agregar a uma receita (a avaliação é representada por símbolos de estrelas, sendo uma estrela equivalente a "Muito ruim" e cinco estrelas equivalentes a "Muito bom").
