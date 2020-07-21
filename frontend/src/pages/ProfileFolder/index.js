@@ -31,10 +31,11 @@ export default function ProfileFolder() {
     }
 
     function handleCloseAdd() {
-        console.log(folder_id)
-        console.log(db)
-        console.log(recipes)
         setShowAdd(false)
+    }
+
+    function handleShowAdd() {
+        setShowAdd(true)
     }
 
     {
