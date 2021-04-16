@@ -70,7 +70,6 @@ Para comentar sobre uma receita, navegue até a receita que deseja comentar.
 Para submeter uma receita, clique no botão vermelho "Submeter receita", localizado no canto superior direito do site. Em seguida, preencha a página de acordo com as instruções necessárias para a realização da sua receita. Lembre-se sempre de deixá-la simples para facilitar a compreensão das outras pessoas. ;)
 
 
-
 ## Contribuidores
 * [Lucas Oliveira](https://github.com/Lucas0liveira)
 * [Leonardo Oliveira](https://github.com/Leozaru)
