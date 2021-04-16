@@ -27,6 +27,7 @@ npm start
 ```
 
 ## Usando o CookBook
+
 ### Cadastro
 Para realizar o cadastro no site, clique no botão "Cadastrar" localizado no canto superior direito do site.
 Em seguida:
